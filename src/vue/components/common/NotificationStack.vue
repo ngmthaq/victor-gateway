@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { ToastConfigs } from "@/configs/types/components";
+import type { ToastConfigs } from "@/types/components";
 import { onBeforeMount, onUnmounted, onUpdated, ref, watch } from "vue";
 import { Toast } from "bootstrap";
-import { APP_EVENTS } from "@/configs/constants/app.const";
-import { useEventBus } from "@/hooks/common/useEventBus";
-import { randomStr } from "@/plugins/str.plugin";
-import { getCurrentMilliseconds } from "@/plugins/datetime.plugin";
+import { APP_EVENTS } from "@/vue/configs/constants/app.const";
+import { useEventBus } from "@/vue/hooks/common/useEventBus";
+import { randomStr } from "@/vue/plugins/str.plugin";
+import { getCurrentMilliseconds } from "@/vue/plugins/datetime.plugin";
 
 const TOAST_DELAY = 6000;
 const TOAST_MAX = 5;

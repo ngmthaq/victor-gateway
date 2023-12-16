@@ -1,4 +1,4 @@
-import type { EventBusCallback } from "@/configs/types/plugins";
+import type { EventBusCallback } from "@/types/plugins";
 
 export class EventBus {
   private events: Record<string, EventBusCallback<any>[]> = {};

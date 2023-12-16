@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onBeforeMount, onUnmounted, ref } from "vue";
-import { APP_EVENTS } from "@/configs/constants/app.const";
-import { useEventBus } from "@/hooks/common/useEventBus";
+import { APP_EVENTS } from "@/vue/configs/constants/app.const";
+import { useEventBus } from "@/vue/hooks/common/useEventBus";
 
 const eventBus = useEventBus();
 const isLoading = ref<boolean>(false);

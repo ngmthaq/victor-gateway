@@ -2,7 +2,7 @@
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
 
 import { contextBridge, ipcRenderer } from "electron";
-import { ElectronEventCallbackType, ElectronEventNameType } from "./types/windows";
+import { ElectronEventCallbackType, ElectronEventNameType } from "@/types/window";
 
 contextBridge.exposeInMainWorld("electron", {
   versions: {

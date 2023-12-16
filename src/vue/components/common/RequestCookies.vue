@@ -1,15 +1,8 @@
-<template>
-  <section id="request-cookies" class="request-cookies" v-show="isOpen">
-    <p>{{ t("TXT_REQUEST_COOKIES_CONTENT") }}</p>
-    <button type="button" class="btn btn-light" @click="handleClick">{{ t("TXT_UNDERSTAND") }}</button>
-  </section>
-</template>
-
 <script setup lang="ts">
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { COOKIES_STORAGE_KEYS } from "@/configs/constants/app.const";
-import { getCookieStorage, setCookieStorage } from "@/plugins/storage.plugin";
+import { COOKIES_STORAGE_KEYS } from "@/vue/configs/constants/app.const";
+import { getCookieStorage, setCookieStorage } from "@/vue/plugins/storage.plugin";
 
 const { t } = useI18n();
 const COOKIE_PERMISSION_KEY = COOKIES_STORAGE_KEYS.cookiesPermission;
@@ -20,6 +13,13 @@ const handleClick = () => {
   setCookieStorage(COOKIE_PERMISSION_KEY, true);
 };
 </script>
+
+<template>
+  <section id="request-cookies" class="request-cookies" v-show="isOpen">
+    <p>{{ t("TXT_REQUEST_COOKIES_CONTENT") }}</p>
+    <button type="button" class="btn btn-light" @click="handleClick">{{ t("TXT_UNDERSTAND") }}</button>
+  </section>
+</template>
 
 <style scoped lang="scss">
 .request-cookies {

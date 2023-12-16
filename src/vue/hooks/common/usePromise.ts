@@ -1,5 +1,5 @@
 import type { AxiosRequestConfig } from "axios";
-import type { UsePromiseCallback, UsePromiseResponse, UsePromiseStatus } from "@/configs/types/hooks";
+import type { UsePromiseCallback, UsePromiseResponse, UsePromiseStatus } from "@/types/hooks";
 import { ref } from "vue";
 import { CanceledError } from "axios";
 

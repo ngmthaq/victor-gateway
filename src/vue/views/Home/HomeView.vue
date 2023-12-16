@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import type { Todo } from "@/services/models/todo.model";
+import type { Todo } from "@/vue/services/models/todo.model";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { RouterLink } from "vue-router";
-import { useNotification } from "@/hooks/common/useNotification";
-import { usePromise } from "@/hooks/common/usePromise";
-import { getTodo } from "@/services/remotes/todo.remote";
-import { randomNumber } from "@/plugins/number.plugins";
-import { PATH_ABOUT } from "@/configs/constants/path.const";
-import BaseLayout from "@/components/layouts/BaseLayout.vue";
+import { useNotification } from "@/vue/hooks/common/useNotification";
+import { usePromise } from "@/vue/hooks/common/usePromise";
+import { getTodo } from "@/vue/services/remotes/todo.remote";
+import { randomNumber } from "@/vue/plugins/number.plugins";
+import { PATH_ABOUT } from "@/vue/configs/constants/path.const";
+import BaseLayout from "@/vue/components/layouts/BaseLayout.vue";
 
 const { t } = useI18n();
 const notification = useNotification();

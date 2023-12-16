@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import type { NotificationPermissionType } from "@/configs/types/components";
+import type { NotificationPermissionType } from "@/types/components";
 import { ref, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { Modal } from "bootstrap";
-import { COOKIES_STORAGE_KEYS } from "@/configs/constants/app.const";
-import { getCookieStorage, removeCookieStorage, setCookieStorage } from "@/plugins/storage.plugin";
+import { COOKIES_STORAGE_KEYS } from "@/vue/configs/constants/app.const";
+import { getCookieStorage, removeCookieStorage, setCookieStorage } from "@/vue/plugins/storage.plugin";
 
 const { t } = useI18n();
 const ID = "request-notification";
@@ -64,7 +64,11 @@ onMounted(() => {
         <div class="modal-body">
           <div class="d-flex align-items-center justify-content-start">
             <div>
-              <img alt="logo" src="@/assets/img/favicon.ico" style="width: 40px; height: auto; margin: 0 24px 0 8px" />
+              <img
+                alt="logo"
+                src="@/vue/assets/img/favicon.ico"
+                style="width: 40px; height: auto; margin: 0 24px 0 8px"
+              />
             </div>
             <div>
               <h4>{{ t("TXT_REQUEST_NOTIFICATION_TITLE") }}</h4>

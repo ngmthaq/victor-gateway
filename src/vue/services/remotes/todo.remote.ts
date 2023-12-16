@@ -1,7 +1,7 @@
 import type { AxiosRequestConfig } from "axios";
-import type { GetTodoPayload } from "@/configs/types/services";
-import { API_TODO_ENDPOINTS } from "@/configs/constants/api.const";
-import { api } from "@/plugins/axios.plugin";
+import type { GetTodoPayload } from "@/types/services";
+import { API_TODO_ENDPOINTS } from "@/vue/configs/constants/api.const";
+import { api } from "@/vue/plugins/axios.plugin";
 import { Todo } from "../models/todo.model";
 
 export async function getAllTodoList(_: any, configs: AxiosRequestConfig = {}): Promise<Todo[]> {

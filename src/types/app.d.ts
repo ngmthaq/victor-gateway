@@ -3,7 +3,8 @@
 // whether you're running in development or production).
 declare const MAIN_WINDOW_VITE_DEV_SERVER_URL: string;
 declare const MAIN_WINDOW_VITE_NAME: string;
-declare module "*.vue";
 declare module "*.png";
 declare module "*.ico";
 declare module "*.svg";
+declare module "*.jpg";
+declare module "*.jpeg";
