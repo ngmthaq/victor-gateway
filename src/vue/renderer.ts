@@ -32,3 +32,14 @@ window.electron.addEventListener("electron:quit", async (event) => {
     event.sender.send("electron:quit");
   }
 });
+
+if (window.electron.env.mode() === "development") {
+  console.log(
+    [
+      `This app is running with`,
+      `Chrome (v${window.electron.versions.chrome()}),`,
+      `Node.js (v${window.electron.versions.node()}) and`,
+      `Electron (v${window.electron.versions.electron()})`,
+    ].join(" "),
+  );
+}

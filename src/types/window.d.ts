@@ -17,9 +17,18 @@ export type ElectronEventNameType = "electron:quit";
 
 export type ElectronEventListenerType = (eventName: ElectronEventNameType, callback: ElectronEventCallbackType) => void;
 
+export type ElectronFrameType = {
+  isMaximized: () => boolean;
+  minimize: () => void;
+  maximize: () => void;
+  unmaximize: () => void;
+  close: () => void;
+};
+
 export type ElectronType = {
   versions: VersionsType;
   env: EnvType;
+  frame: ElectronFrameType;
   addEventListener: ElectronEventListenerType;
 };
 

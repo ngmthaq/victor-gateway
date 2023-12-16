@@ -23,9 +23,12 @@ if (require("electron-squirrel-startup")) {
 function createWindow() {
   const mainWindow = new BrowserWindow({
     icon: getLogo(32, 32),
+    minWidth: 1366,
+    minHeight: 768,
     width: 1366,
     height: 768,
     autoHideMenuBar: true,
+    frame: false,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
@@ -33,9 +36,8 @@ function createWindow() {
 
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
   else mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
-
+  if (process.env.NODE_ENV === "development") mainWindow.webContents.openDevTools({ mode: "undocked" });
   mainWindow.maximize();
-  mainWindow.webContents.openDevTools({ mode: "undocked" });
   mainWindow.on("close", (event) => {
     if (mainWindowConfigs.isForgeQuit === false) {
       event.preventDefault();
@@ -52,11 +54,31 @@ function handleOpenMainWindow(mainWindow: BrowserWindow) {
   createWindowTray(mainWindow);
 }
 
-function ipcMainListener() {
-  // ipcMain listen events from preload/renderer
+// ipcMain listen events from preload/renderer
+function ipcMainListener(mainWindow: BrowserWindow) {
   ipcMain.on("electron:quit", () => {
     mainWindowConfigs.isForgeQuit = true;
     app.quit();
+  });
+
+  ipcMain.on("electron:minimize", () => {
+    mainWindow.minimize();
+  });
+
+  ipcMain.on("electron:maximize", () => {
+    mainWindow.maximize();
+  });
+
+  ipcMain.on("electron:unmaximize", () => {
+    mainWindow.unmaximize();
+  });
+
+  ipcMain.on("electron:close", () => {
+    mainWindow.close();
+  });
+
+  ipcMain.handle("electron:isMaximized", () => {
+    return mainWindow.isMaximized();
   });
 }
 
@@ -66,7 +88,7 @@ function ipcMainListener() {
 app.on("ready", () => {
   const mainWindow = createWindow();
   handleOpenMainWindow(mainWindow);
-  ipcMainListener();
+  ipcMainListener(mainWindow);
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common

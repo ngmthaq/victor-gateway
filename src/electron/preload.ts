@@ -27,6 +27,28 @@ contextBridge.exposeInMainWorld("electron", {
     },
   },
 
+  frame: {
+    isMaximized: () => {
+      return ipcRenderer.invoke("electron:isMaximized");
+    },
+
+    minimize: () => {
+      ipcRenderer.send("electron:minimize");
+    },
+
+    maximize: () => {
+      ipcRenderer.send("electron:maximize");
+    },
+
+    unmaximize: () => {
+      ipcRenderer.send("electron:unmaximize");
+    },
+
+    close: () => {
+      ipcRenderer.send("electron:close");
+    },
+  },
+
   addEventListener: (eventName: ElectronEventNameType, callback: ElectronEventCallbackType) => {
     ipcRenderer.on(eventName, callback);
   },

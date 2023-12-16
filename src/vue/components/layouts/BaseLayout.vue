@@ -1,6 +1,13 @@
+<script setup lang="ts">
+import BaseTitleBar from "./BaseTitleBar.vue";
+</script>
+
 <template>
   <section id="base-layout">
-    <slot />
+    <BaseTitleBar />
+    <section id="base-layout-content">
+      <slot></slot>
+    </section>
   </section>
 </template>
 

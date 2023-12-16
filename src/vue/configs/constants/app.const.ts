@@ -22,3 +22,7 @@ export const COOKIES_STORAGE_KEYS = {
   notificationPermission: "cookies:notificationPermission",
   cookiesPermission: "cookies:cookiesPermission",
 };
+
+export const ELEMENT_SIZES = {
+  titleBarHeight: 32,
+};

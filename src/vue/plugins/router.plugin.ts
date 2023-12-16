@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from "vue-router";
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 import * as PATH_CONST from "@/vue/configs/constants/path.const";
 import NotFoundView from "@/vue/views/NotFound/NotFoundView.vue";
 
@@ -9,7 +9,7 @@ const PATH_NOT_FOUND: RouteRecordRaw = {
 };
 
 const router = createRouter({
-  history: createWebHistory("/"),
+  history: createWebHashHistory("/"),
   routes: [...Object.values(PATH_CONST), PATH_NOT_FOUND],
 });
 

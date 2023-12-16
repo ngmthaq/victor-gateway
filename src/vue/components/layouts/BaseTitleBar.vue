@@ -1,0 +1,185 @@
+<script setup lang="ts">
+import type { TitleBarMenuType } from "@/types/components";
+import { ref } from "vue";
+import { ELEMENT_SIZES } from "@/vue/configs/constants/app.const";
+import { useI18n } from "vue-i18n";
+import pkg from "../../../../package.json";
+
+const { t } = useI18n();
+
+const SETTING_MENU_ID = 1;
+const SETTING_HELP_ID = 2;
+const SETTING_EXIT_ID = 3;
+
+const handleClickMenuItem = (id: number) => {
+  console.log(id);
+};
+
+const isMaximized = ref<boolean>(window.electron.frame.isMaximized());
+
+const menu = ref<TitleBarMenuType[]>([
+  { id: SETTING_MENU_ID, title: t("TXT_SETTING"), handleClick: handleClickMenuItem },
+  { id: SETTING_HELP_ID, title: t("TXT_HELP"), handleClick: handleClickMenuItem },
+  { id: SETTING_EXIT_ID, title: t("TXT_EXIT"), handleClick: handleClickMenuItem },
+]);
+
+const handleMinimize = () => {
+  window.electron.frame.minimize();
+};
+
+const handleMaximize = () => {
+  window.electron.frame.maximize();
+  isMaximized.value = true;
+};
+
+const handleUnmaximize = () => {
+  window.electron.frame.unmaximize();
+  isMaximized.value = false;
+};
+
+const handleClose = () => {
+  window.electron.frame.close();
+};
+</script>
+
+<template>
+  <section id="custom-window-title-bar" :style="{ height: `${ELEMENT_SIZES.titleBarHeight}px` }">
+    <div class="left-bar">
+      <div class="logo">
+        <img src="@/vue/assets/img/icon.png" alt="title-bar-logo" />
+      </div>
+      <div class="menu">
+        <div class="menu-item" v-for="item in menu" :key="item.id" @click="() => item.handleClick(item.id)">
+          {{ item.title }}
+        </div>
+      </div>
+    </div>
+    <div class="middle-bar">
+      {{ pkg.productName }}
+    </div>
+    <div class="right-bar">
+      <div class="action-button minimize" @click="handleMinimize">
+        <i class="bi bi-dash-lg"></i>
+      </div>
+      <div class="action-button maximize" v-if="isMaximized" @click="handleUnmaximize">
+        <i class="bi bi-square"></i>
+      </div>
+      <div class="action-button maximize" v-else @click="handleMaximize">
+        <i class="bi bi-square"></i>
+      </div>
+      <div class="action-button close" @click="handleClose">
+        <i class="bi bi-x-lg"></i>
+      </div>
+    </div>
+  </section>
+</template>
+
+<style scoped lang="scss">
+#custom-window-title-bar {
+  width: 100%;
+  background-color: $gray-900;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & .left-bar {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-shrink: 0;
+    gap: 8px;
+
+    & .logo {
+      height: 100%;
+      width: auto;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-left: 8px;
+
+      & img {
+        height: 50%;
+        width: auto;
+        object-fit: contain;
+        user-select: auto;
+        pointer-events: none;
+      }
+    }
+
+    & .menu {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 2px;
+
+      & .menu-item {
+        color: $gray-400;
+        font-size: 10px;
+        cursor: pointer;
+        background-color: transparent;
+        padding: 2px 8px;
+        border-radius: 4px;
+        user-select: none;
+
+        &:hover {
+          background-color: rgba($color: #fff, $alpha: 0.2);
+        }
+      }
+    }
+  }
+
+  & .middle-bar {
+    color: $gray-400;
+    font-size: 12px;
+    user-select: none;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
+  }
+
+  & .right-bar {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: flex-end;
+    height: inherit;
+    gap: 2px;
+
+    & .action-button {
+      color: $gray-400;
+      user-select: none;
+      height: inherit;
+      width: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgba($color: #fff, $alpha: 0.2);
+      }
+
+      &.minimize {
+        font-size: 14px;
+      }
+
+      &.maximize {
+        font-size: 10px;
+      }
+
+      &.close {
+        font-size: 14px;
+
+        &:hover {
+          background-color: rgba($color: red, $alpha: 0.8);
+        }
+      }
+    }
+  }
+}
+</style>

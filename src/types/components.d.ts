@@ -9,3 +9,9 @@ export type NotificationPermissionType = {
   time: number;
   granted: boolean;
 };
+
+export type TitleBarMenuType = {
+  id: number;
+  title: string;
+  handleClick: (id: number) => void;
+};
