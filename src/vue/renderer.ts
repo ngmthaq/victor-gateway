@@ -26,3 +26,9 @@ app.use(i18n);
 app.use(router);
 app.use(store);
 app.mount("#app");
+
+window.electron.addEventListener("electron:quit", async (event) => {
+  if (confirm(i18n.global.t("TXT_ACCEPT_QUIT_APP"))) {
+    event.sender.send("electron:quit");
+  }
+});

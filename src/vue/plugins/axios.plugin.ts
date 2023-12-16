@@ -7,8 +7,8 @@ export class Api {
 
   public constructor() {
     this.instance = axios.create({
-      baseURL: import.meta.env.VITE_API_BASE_URL || null,
-      timeout: import.meta.env.VITE_API_TIMEOUT || 30000,
+      baseURL: window.electron.env.get("ELECTRON_PUBLIC_API_BASE_URL") || null,
+      timeout: parseInt(window.electron.env.get("ELECTRON_PUBLIC_API_TIMEOUT ") || "30000"),
     });
   }
 

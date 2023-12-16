@@ -13,12 +13,12 @@ export function usePromise<R>(callback: UsePromiseCallback<R>): UsePromiseRespon
     try {
       status.value = "pending";
       const response: any = await callback(payloads, { ...configs, signal: abortController.value.signal });
-      if (import.meta.env.DEV) console.log(response);
+      if (window.electron.env.mode() === "development") console.log(response);
       data.value = response;
       error.value = null;
       status.value = "fulfilled";
     } catch (e: any) {
-      if (import.meta.env.DEV) console.error(e);
+      if (window.electron.env.mode() === "development") console.error(e);
       if (e instanceof CanceledError) {
         status.value = "idle";
       } else {

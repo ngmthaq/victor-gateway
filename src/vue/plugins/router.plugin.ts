@@ -9,7 +9,7 @@ const PATH_NOT_FOUND: RouteRecordRaw = {
 };
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory("/"),
   routes: [...Object.values(PATH_CONST), PATH_NOT_FOUND],
 });
 
