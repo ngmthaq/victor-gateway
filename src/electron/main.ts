@@ -1,7 +1,9 @@
 import path from "path";
-import { app, BrowserWindow, ipcMain } from "electron";
+import { app, BrowserWindow } from "electron";
+import { mainWindowConfigs } from "./configs";
 import { createWindowTray } from "./tray";
 import { getLogo } from "./logo";
+import { ipcMainListener } from "./ipcMain";
 import "dotenv/config";
 
 // Security warnings and recommendations are printed to the developer console.
@@ -9,10 +11,6 @@ import "dotenv/config";
 // indicating that a developer is currently looking at the console.
 // You can force-enable or force-disable these warnings by setting
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
-
-const mainWindowConfigs = {
-  isForgeQuit: false,
-};
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -46,50 +44,12 @@ function createWindow() {
   return mainWindow;
 }
 
-// You can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
-function handleOpenMainWindow(mainWindow: BrowserWindow) {
-  createWindowTray(mainWindow);
-}
-
-// ipcMain listen events from preload/renderer
-function ipcMainListener(mainWindow: BrowserWindow) {
-  ipcMain.on("electron:quit", () => {
-    mainWindowConfigs.isForgeQuit = true;
-    app.quit();
-  });
-
-  ipcMain.on("electron:minimize", () => {
-    mainWindow.minimize();
-  });
-
-  ipcMain.on("electron:maximize", () => {
-    mainWindow.maximize();
-  });
-
-  ipcMain.on("electron:unmaximize", () => {
-    mainWindow.unmaximize();
-  });
-
-  ipcMain.on("electron:close", () => {
-    mainWindow.close();
-  });
-
-  ipcMain.on("electron:openDevtools", () => {
-    mainWindow.webContents.openDevTools({ mode: "undocked" });
-  });
-
-  ipcMain.handle("electron:isMaximized", () => {
-    return mainWindow.isMaximized();
-  });
-}
-
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", () => {
   const mainWindow = createWindow();
-  handleOpenMainWindow(mainWindow);
+  createWindowTray(mainWindow);
   ipcMainListener(mainWindow);
 });
 
