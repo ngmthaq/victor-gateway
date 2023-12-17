@@ -44,6 +44,10 @@ contextBridge.exposeInMainWorld("electron", {
       ipcRenderer.send("electron:unmaximize");
     },
 
+    openDevtools: () => {
+      ipcRenderer.send("electron:openDevtools");
+    },
+
     close: () => {
       ipcRenderer.send("electron:close");
     },

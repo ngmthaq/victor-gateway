@@ -36,8 +36,6 @@ function createWindow() {
 
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
   else mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
-  if (process.env.NODE_ENV === "development") mainWindow.webContents.openDevTools({ mode: "undocked" });
-  mainWindow.maximize();
   mainWindow.on("close", (event) => {
     if (mainWindowConfigs.isForgeQuit === false) {
       event.preventDefault();
@@ -75,6 +73,10 @@ function ipcMainListener(mainWindow: BrowserWindow) {
 
   ipcMain.on("electron:close", () => {
     mainWindow.close();
+  });
+
+  ipcMain.on("electron:openDevtools", () => {
+    mainWindow.webContents.openDevTools({ mode: "undocked" });
   });
 
   ipcMain.handle("electron:isMaximized", () => {

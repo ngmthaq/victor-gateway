@@ -13,5 +13,6 @@ export type NotificationPermissionType = {
 export type TitleBarMenuType = {
   id: number;
   title: string;
+  onlyDev: boolean;
   handleClick: (id: number) => void;
 };

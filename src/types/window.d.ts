@@ -22,6 +22,7 @@ export type ElectronFrameType = {
   minimize: () => void;
   maximize: () => void;
   unmaximize: () => void;
+  openDevtools: () => void;
   close: () => void;
 };
 

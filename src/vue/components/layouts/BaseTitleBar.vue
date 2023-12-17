@@ -7,12 +7,17 @@ import pkg from "../../../../package.json";
 
 const { t } = useI18n();
 
-const SETTING_MENU_ID = 1;
-const SETTING_HELP_ID = 2;
-const SETTING_EXIT_ID = 3;
+const IS_DEV = window.electron.env.mode() === "development";
+
+const OPEN_DEVTOOLS = 1;
+const SETTING = 2;
+const HELP = 3;
+const EXIT = 4;
 
 const handleClickMenuItem = (id: number) => {
-  if (id === SETTING_EXIT_ID && confirm(t("TXT_ACCEPT_QUIT_APP"))) {
+  if (id === OPEN_DEVTOOLS) {
+    window.electron.frame.openDevtools();
+  } else if (id === EXIT && confirm(t("TXT_ACCEPT_QUIT_APP"))) {
     window.electron.frame.close();
   }
 };
@@ -23,9 +28,10 @@ const isAtDefaultZoom = screenPixelRatio > 0.92 && screenPixelRatio <= 1.1;
 const isMaximized = ref<boolean>(isAtMaxWidth && isAtDefaultZoom);
 
 const menu = ref<TitleBarMenuType[]>([
-  { id: SETTING_MENU_ID, title: t("TXT_SETTING"), handleClick: handleClickMenuItem },
-  { id: SETTING_HELP_ID, title: t("TXT_HELP"), handleClick: handleClickMenuItem },
-  { id: SETTING_EXIT_ID, title: t("TXT_EXIT"), handleClick: handleClickMenuItem },
+  { id: OPEN_DEVTOOLS, onlyDev: true, title: "Devtools", handleClick: handleClickMenuItem },
+  { id: SETTING, onlyDev: false, title: t("TXT_SETTING"), handleClick: handleClickMenuItem },
+  { id: HELP, onlyDev: false, title: t("TXT_HELP"), handleClick: handleClickMenuItem },
+  { id: EXIT, onlyDev: false, title: t("TXT_EXIT"), handleClick: handleClickMenuItem },
 ]);
 
 const handleMinimize = () => {
@@ -69,9 +75,15 @@ onUnmounted(() => {
         <img src="@/vue/assets/img/icon.png" alt="title-bar-logo" />
       </div>
       <div class="menu">
-        <div class="menu-item" v-for="item in menu" :key="item.id" @click="() => item.handleClick(item.id)">
-          {{ item.title }}
-        </div>
+        <template v-for="item in menu" :key="item.id">
+          <div
+            class="menu-item"
+            v-if="!item.onlyDev || (item.onlyDev && IS_DEV)"
+            @click="() => item.handleClick(item.id)"
+          >
+            {{ item.title }}
+          </div>
+        </template>
       </div>
     </div>
     <div class="middle-bar">
