@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { COOKIES_STORAGE_KEYS } from "@/vue/configs/constants/app.const";
+import { COOKIES_STORAGE_KEYS } from "@/configs/constants/app.const";
 import { getCookieStorage, setCookieStorage } from "@/vue/plugins/storage.plugin";
 
 const { t } = useI18n();

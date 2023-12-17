@@ -1,9 +1,9 @@
-import type { EventBusCallback } from "@/types/plugins";
+import type { EventBusCallbackType } from "@/configs/types/plugins";
 
 export class EventBus {
-  private events: Record<string, EventBusCallback<any>[]> = {};
+  private events: Record<string, EventBusCallbackType<any>[]> = {};
 
-  public on<T>(eventName: string, callback: EventBusCallback<T>) {
+  public on<T>(eventName: string, callback: EventBusCallbackType<T>) {
     if (this.events[eventName]) {
       this.events[eventName].push(callback);
     } else {
@@ -11,7 +11,7 @@ export class EventBus {
     }
   }
 
-  public off<T>(eventName: string, callback: EventBusCallback<T>) {
+  public off<T>(eventName: string, callback: EventBusCallbackType<T>) {
     if (this.events[eventName]) {
       this.events[eventName] = this.events[eventName].filter((cb) => cb !== callback);
     } else {
@@ -27,7 +27,7 @@ export class EventBus {
     }
   }
 
-  public once<T>(eventName: string, callback: EventBusCallback<T>) {
+  public once<T>(eventName: string, callback: EventBusCallbackType<T>) {
     const handler = (params: T) => {
       callback(params);
       this.off(eventName, callback);

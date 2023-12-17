@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ELEMENT_SIZES } from "@/vue/configs/constants/app.const";
+import { ELEMENT_SIZES } from "@/configs/constants/app.const";
 import BaseTitleBar from "./BaseTitleBar.vue";
 </script>
 

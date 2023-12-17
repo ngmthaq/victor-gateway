@@ -15,9 +15,9 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: `
-          @import './src/vue/assets/scss/_theme.scss';
-          @import './src/vue/assets/scss/_variables.scss';
-          @import './src/vue/assets/scss/_mixins.scss';
+          @import './src/vue/scss/_theme.scss';
+          @import './src/vue/scss/_variables.scss';
+          @import './src/vue/scss/_mixins.scss';
         `,
       },
     },

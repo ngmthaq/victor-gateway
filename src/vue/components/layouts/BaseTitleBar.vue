@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { TitleBarMenuType } from "@/types/components";
+import type { TitleBarMenuType } from "@/configs/types/components";
 import { ref, onMounted, onUnmounted } from "vue";
 import { useI18n } from "vue-i18n";
-import { ELEMENT_SIZES } from "@/vue/configs/constants/app.const";
+import { ELEMENT_SIZES } from "@/configs/constants/app.const";
 import pkg from "../../../../package.json";
 
 const { t } = useI18n();
@@ -72,7 +72,7 @@ onUnmounted(() => {
   <section id="custom-window-title-bar" :style="{ height: `${ELEMENT_SIZES.titleBarHeight}px` }">
     <div class="left-bar">
       <div class="logo">
-        <img src="@/vue/assets/img/icon.png" alt="title-bar-logo" />
+        <img src="@/assets/img/icon.png" alt="title-bar-logo" />
       </div>
       <div class="menu">
         <template v-for="item in menu" :key="item.id">

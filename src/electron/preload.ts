@@ -2,7 +2,8 @@
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
 
 import { contextBridge, ipcRenderer } from "electron";
-import { ElectronEventCallbackType, ElectronEventNameType } from "@/types/window";
+import { ELECTRON_EVENTS } from "@/configs/constants/event.const";
+import { ElectronEventCallbackType, ElectronEventNameType } from "@/configs/types/window";
 
 contextBridge.exposeInMainWorld("electron", {
   versions: {
@@ -29,27 +30,27 @@ contextBridge.exposeInMainWorld("electron", {
 
   frame: {
     isMaximized: () => {
-      return ipcRenderer.invoke("electron:isMaximized");
+      return ipcRenderer.invoke(ELECTRON_EVENTS.isMaximized);
     },
 
     minimize: () => {
-      ipcRenderer.send("electron:minimize");
+      ipcRenderer.send(ELECTRON_EVENTS.minimize);
     },
 
     maximize: () => {
-      ipcRenderer.send("electron:maximize");
+      ipcRenderer.send(ELECTRON_EVENTS.maximize);
     },
 
     unmaximize: () => {
-      ipcRenderer.send("electron:unmaximize");
+      ipcRenderer.send(ELECTRON_EVENTS.unmaximize);
     },
 
     openDevtools: () => {
-      ipcRenderer.send("electron:openDevtools");
+      ipcRenderer.send(ELECTRON_EVENTS.openDevtools);
     },
 
     close: () => {
-      ipcRenderer.send("electron:close");
+      ipcRenderer.send(ELECTRON_EVENTS.close);
     },
   },
 

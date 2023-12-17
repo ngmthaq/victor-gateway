@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { ToastConfigs } from "@/types/components";
+import type { ToastType } from "@/configs/types/components";
 import { onBeforeMount, onUnmounted, onUpdated, ref, watch } from "vue";
 import { Toast } from "bootstrap";
-import { APP_EVENTS } from "@/vue/configs/constants/app.const";
+import { EVENT_BUS_EVENTS } from "@/configs/constants/event.const";
 import { useEventBus } from "@/vue/hooks/common/useEventBus";
 import { randomStr } from "@/vue/plugins/str.plugin";
 import { getCurrentMilliseconds } from "@/vue/plugins/datetime.plugin";
@@ -10,10 +10,10 @@ import { getCurrentMilliseconds } from "@/vue/plugins/datetime.plugin";
 const TOAST_DELAY = 6000;
 const TOAST_MAX = 5;
 const eventBus = useEventBus();
-const newToast = ref<ToastConfigs>();
-const toasts = ref<ToastConfigs[]>([]);
+const newToast = ref<ToastType>();
+const toasts = ref<ToastType[]>([]);
 
-const handleAppendToast = (toast: ToastConfigs) => {
+const handleAppendToast = (toast: ToastType) => {
   newToast.value = toast;
 };
 
@@ -38,11 +38,11 @@ watch(
 );
 
 onBeforeMount(() => {
-  eventBus.on(APP_EVENTS.eventBus.appendToast, handleAppendToast);
+  eventBus.on(EVENT_BUS_EVENTS.appendToast, handleAppendToast);
 });
 
 onUnmounted(() => {
-  eventBus.off(APP_EVENTS.eventBus.appendToast, handleAppendToast);
+  eventBus.off(EVENT_BUS_EVENTS.appendToast, handleAppendToast);
 });
 
 onUpdated(() => {

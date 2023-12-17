@@ -1,4 +1,5 @@
 import { BrowserWindow, Menu, Tray } from "electron";
+import { ELECTRON_EVENTS } from "@/configs/constants/event.const";
 import { getLogo } from "./logo";
 
 export function createWindowTray(mainWindow: BrowserWindow) {
@@ -18,7 +19,7 @@ export function createWindowTray(mainWindow: BrowserWindow) {
       {
         label: "Exit Application",
         click: () => {
-          mainWindow.webContents.send("electron:quit");
+          mainWindow.webContents.send(ELECTRON_EVENTS.quit);
         },
       },
     ]),

@@ -1,4 +1,4 @@
-export type ToastConfigs = {
+export type ToastType = {
   id?: string;
   message: string;
   variant: "primary" | "warning" | "danger" | "success" | "info";

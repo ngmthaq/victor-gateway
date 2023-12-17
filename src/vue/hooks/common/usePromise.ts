@@ -1,13 +1,13 @@
 import type { AxiosRequestConfig } from "axios";
-import type { UsePromiseCallback, UsePromiseResponse, UsePromiseStatus } from "@/types/hooks";
+import type { UsePromiseCallbackType, UsePromiseResponseType, UsePromiseStatusType } from "@/configs/types/hooks";
 import { ref } from "vue";
 import { CanceledError } from "axios";
 
-export function usePromise<R>(callback: UsePromiseCallback<R>): UsePromiseResponse<R> {
+export function usePromise<R>(callback: UsePromiseCallbackType<R>): UsePromiseResponseType<R> {
   const abortController = ref<AbortController>(new AbortController());
   const data = ref<R | null>(null);
   const error = ref<any | null>(null);
-  const status = ref<UsePromiseStatus>("idle");
+  const status = ref<UsePromiseStatusType>("idle");
 
   async function fetch<P>(payloads: P, configs: AxiosRequestConfig = {}) {
     try {

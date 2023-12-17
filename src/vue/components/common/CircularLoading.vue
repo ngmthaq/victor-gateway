@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onBeforeMount, onUnmounted, ref } from "vue";
-import { APP_EVENTS } from "@/vue/configs/constants/app.const";
+import { EVENT_BUS_EVENTS } from "@/configs/constants/event.const";
 import { useEventBus } from "@/vue/hooks/common/useEventBus";
 
 const eventBus = useEventBus();
@@ -11,11 +11,11 @@ const handleOpenLoading = (open: boolean) => {
 };
 
 onBeforeMount(() => {
-  eventBus.on(APP_EVENTS.eventBus.openCircularLoading, handleOpenLoading);
+  eventBus.on(EVENT_BUS_EVENTS.openCircularLoading, handleOpenLoading);
 });
 
 onUnmounted(() => {
-  eventBus.off(APP_EVENTS.eventBus.openCircularLoading, handleOpenLoading);
+  eventBus.off(EVENT_BUS_EVENTS.openCircularLoading, handleOpenLoading);
 });
 </script>
 
