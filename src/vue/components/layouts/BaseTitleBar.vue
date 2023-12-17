@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { TitleBarMenuType } from "@/types/components";
-import { ref } from "vue";
-import { ELEMENT_SIZES } from "@/vue/configs/constants/app.const";
+import { ref, onMounted, onUnmounted } from "vue";
 import { useI18n } from "vue-i18n";
+import { ELEMENT_SIZES } from "@/vue/configs/constants/app.const";
 import pkg from "../../../../package.json";
 
 const { t } = useI18n();
@@ -12,10 +12,15 @@ const SETTING_HELP_ID = 2;
 const SETTING_EXIT_ID = 3;
 
 const handleClickMenuItem = (id: number) => {
-  console.log(id);
+  if (id === SETTING_EXIT_ID && confirm(t("TXT_ACCEPT_QUIT_APP"))) {
+    window.electron.frame.close();
+  }
 };
 
-const isMaximized = ref<boolean>(window.electron.frame.isMaximized());
+const isAtMaxWidth = screen.availWidth - window.innerWidth === 0;
+const screenPixelRatio = (window.outerWidth - 8) / window.innerWidth;
+const isAtDefaultZoom = screenPixelRatio > 0.92 && screenPixelRatio <= 1.1;
+const isMaximized = ref<boolean>(isAtMaxWidth && isAtDefaultZoom);
 
 const menu = ref<TitleBarMenuType[]>([
   { id: SETTING_MENU_ID, title: t("TXT_SETTING"), handleClick: handleClickMenuItem },
@@ -40,6 +45,21 @@ const handleUnmaximize = () => {
 const handleClose = () => {
   window.electron.frame.close();
 };
+
+const handleWindowResize = () => {
+  const isAtMaxWidth = screen.availWidth - window.innerWidth === 0;
+  const screenPixelRatio = (window.outerWidth - 8) / window.innerWidth;
+  const isAtDefaultZoom = screenPixelRatio > 0.92 && screenPixelRatio <= 1.1;
+  isMaximized.value = isAtMaxWidth && isAtDefaultZoom;
+};
+
+onMounted(() => {
+  window.addEventListener("resize", handleWindowResize);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", handleWindowResize);
+});
 </script>
 
 <template>
@@ -61,8 +81,9 @@ const handleClose = () => {
       <div class="action-button minimize" @click="handleMinimize">
         <i class="bi bi-dash-lg"></i>
       </div>
-      <div class="action-button maximize" v-if="isMaximized" @click="handleUnmaximize">
-        <i class="bi bi-square"></i>
+      <div class="action-button maximize unmaximize" v-if="isMaximized" @click="handleUnmaximize">
+        <span><i class="bi bi-square"></i></span>
+        <span><i class="bi bi-square-fill"></i></span>
       </div>
       <div class="action-button maximize" v-else @click="handleMaximize">
         <i class="bi bi-square"></i>
@@ -81,6 +102,10 @@ const handleClose = () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: $z-index-common-titlebar;
 
   & .left-bar {
     height: 100%;
@@ -170,6 +195,19 @@ const handleClose = () => {
 
       &.maximize {
         font-size: 10px;
+        position: relative;
+
+        &.unmaximize {
+          font-size: 8px;
+        }
+
+        & span {
+          position: absolute;
+
+          &:first-child {
+            transform: translate(2px, -2px);
+          }
+        }
       }
 
       &.close {
