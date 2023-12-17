@@ -121,6 +121,7 @@ onUnmounted(() => {
 
   & .left-bar {
     height: 100%;
+    width: 300px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -136,7 +137,7 @@ onUnmounted(() => {
       margin-left: 8px;
 
       & img {
-        height: 50%;
+        height: 60%;
         width: auto;
         object-fit: contain;
         user-select: auto;
@@ -152,12 +153,16 @@ onUnmounted(() => {
 
       & .menu-item {
         color: $gray-400;
-        font-size: 10px;
+        font-size: 12px;
         cursor: pointer;
         background-color: transparent;
-        padding: 2px 8px;
+        padding: 4px 8px;
         border-radius: 4px;
         user-select: none;
+        min-width: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         &:hover {
           background-color: rgba($color: #fff, $alpha: 0.2);
@@ -167,13 +172,15 @@ onUnmounted(() => {
   }
 
   & .middle-bar {
-    color: $gray-400;
-    font-size: 12px;
-    user-select: none;
-    width: 100%;
     display: flex;
+    flex: 1;
+    width: 100%;
+    color: $gray-400;
+    font-size: 14px;
+    user-select: none;
     align-items: center;
     justify-content: center;
+    width: 100%;
     -webkit-user-select: none;
     -webkit-app-region: drag;
   }
@@ -184,6 +191,7 @@ onUnmounted(() => {
     align-items: center;
     justify-content: flex-end;
     height: inherit;
+    width: 300px;
     gap: 2px;
 
     & .action-button {

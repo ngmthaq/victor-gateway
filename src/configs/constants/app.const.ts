@@ -17,5 +17,5 @@ export const COOKIES_STORAGE_KEYS = {
 };
 
 export const ELEMENT_SIZES = {
-  titleBarHeight: 32,
+  titleBarHeight: 40,
 };
