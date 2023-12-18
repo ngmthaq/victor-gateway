@@ -1,6 +1,6 @@
 import { BrowserWindow, Menu, Tray } from "electron";
-import { ELECTRON_EVENTS } from "@/configs/constants/event.const";
 import pkg from "~/package.json";
+import { ELECTRON_EVENTS } from "@/configs/constants/event.const";
 import { getLogo } from "./logo";
 
 /**
