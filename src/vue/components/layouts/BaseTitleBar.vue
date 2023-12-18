@@ -5,10 +5,13 @@ import { useI18n } from "vue-i18n";
 import { ELEMENT_SIZES } from "@/configs/constants/app.const";
 import pkg from "../../../../package.json";
 
+const emit = defineEmits<{
+  (event: "clickSetting"): void;
+  (event: "clickHelp"): void;
+}>();
+
 const { t } = useI18n();
-
 const IS_DEV = window.electron.env.mode() === "development";
-
 const OPEN_DEVTOOLS = 1;
 const SETTING = 2;
 const HELP = 3;
@@ -17,6 +20,10 @@ const EXIT = 4;
 const handleClickMenuItem = (id: number) => {
   if (id === OPEN_DEVTOOLS) {
     window.electron.frame.openDevtools();
+  } else if (id === SETTING) {
+    emit("clickSetting");
+  } else if (id === HELP) {
+    emit("clickHelp");
   } else if (id === EXIT && confirm(t("TXT_ACCEPT_QUIT_APP"))) {
     window.electron.frame.close();
   }
