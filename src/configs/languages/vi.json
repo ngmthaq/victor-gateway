@@ -1,14 +1,21 @@
 {
   "TXT_HELP": "Trợ giúp",
   "TXT_EXIT": "Thoát",
+  "TXT_CLOSE": "Đóng",
   "TXT_SETTING": "Cài đặt",
+  "TXT_SAVE_SETTING": "Lưu cài đặt",
   "TXT_ACCEPT": "Đồng ý",
   "TXT_DENY": "Từ chối",
   "TXT_LATER": "Để sau",
   "TXT_HELLO": "Xin chào",
   "TXT_UNDERSTAND": "Đã hiểu",
+  "TXT_SYSTEM_LANGUAGE": "Ngôn ngữ hệ thống",
+  "TXT_SYSTEM_THEME": "Chủ đề hệ thống",
+  "TXT_SYSTEM_THEME_LIGHT": "Chủ đề sáng",
+  "TXT_SYSTEM_THEME_DARK": "Chủ đề tối",
   "TXT_REQUEST_NOTIFICATION_TITLE": "Nhận thông báo từ chúng tôi",
   "TXT_REQUEST_NOTIFICATION_CONTENT": "Nhận thông báo từ chúng tôi để không bỏ lỡ những thông tin quan trọng. Thông báo có thể bao gồm âm thanh và các thông tin khác.",
-  "TXT_REQUEST_COOKIES_CONTENT": "Chúng tôi sẽ sử dụng các dữ liệu thiết yếu trong Cookies để làm cho ứng dụng của chúng tôi hoạt động. Với sự đồng ý của bạn, chúng tôi cũng có thể sử dụng các dữ liệu khác trong Cookies để cải thiện trải nghiệm người dùng và phân tích lưu lượng truy cập ứng dụng.",
-  "TXT_ACCEPT_QUIT_APP": "Bạn có chắc chắn muốn thoát ứng dụng không?"
+  "TXT_ACCEPT_QUIT_APP": "Bạn có chắc chắn muốn thoát ứng dụng không?",
+  "TXT_SYSTEM_SETTING": "Cài đặt hệ thống",
+  "TXT_DEVTOOLS": "DevTools"
 }

@@ -6,3 +6,7 @@
 body {
   overscroll-behavior-y: contain;
 }
+
+select {
+  cursor: pointer;
+}

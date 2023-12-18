@@ -35,10 +35,10 @@ const isAtDefaultZoom = screenPixelRatio > 0.92 && screenPixelRatio <= 1.1;
 const isMaximized = ref<boolean>(isAtMaxWidth && isAtDefaultZoom);
 
 const menu = ref<TitleBarMenuType[]>([
-  { id: OPEN_DEVTOOLS, onlyDev: true, title: "Devtools", handleClick: handleClickMenuItem },
-  { id: SETTING, onlyDev: false, title: t("TXT_SETTING"), handleClick: handleClickMenuItem },
-  { id: HELP, onlyDev: false, title: t("TXT_HELP"), handleClick: handleClickMenuItem },
-  { id: EXIT, onlyDev: false, title: t("TXT_EXIT"), handleClick: handleClickMenuItem },
+  { id: OPEN_DEVTOOLS, onlyDev: true, title: "TXT_DEVTOOLS", handleClick: handleClickMenuItem },
+  { id: SETTING, onlyDev: false, title: "TXT_SETTING", handleClick: handleClickMenuItem },
+  { id: HELP, onlyDev: false, title: "TXT_HELP", handleClick: handleClickMenuItem },
+  { id: EXIT, onlyDev: false, title: "TXT_EXIT", handleClick: handleClickMenuItem },
 ]);
 
 const handleMinimize = () => {
@@ -91,7 +91,7 @@ onUnmounted(() => {
             v-if="!item.onlyDev || (item.onlyDev && IS_DEV)"
             @click="() => item.handleClick(item.id)"
           >
-            {{ item.title }}
+            {{ t(item.title) }}
           </div>
         </template>
       </div>
@@ -118,7 +118,7 @@ onUnmounted(() => {
 <style scoped lang="scss">
 #custom-window-title-bar {
   width: 100%;
-  background-color: $gray-900;
+  background-color: $black;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -180,7 +180,6 @@ onUnmounted(() => {
         padding: 4px 8px;
         border-radius: 4px;
         user-select: none;
-        min-width: 60px;
         display: flex;
         align-items: center;
         justify-content: center;

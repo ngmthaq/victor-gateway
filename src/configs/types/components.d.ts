@@ -16,3 +16,5 @@ export type TitleBarMenuType = {
   onlyDev: boolean;
   handleClick: (id: number) => void;
 };
+
+export type SYSTEM_THEME_MODE_TYPE = "light" | "dark";

@@ -5,6 +5,10 @@
  */
 export const LANGUAGE_CONFIGS = {
   defaultLanguage: "vi",
+  availableLanguages: [
+    { code: "vi", title: "Tiếng Việt" },
+    { code: "en", title: "English" },
+  ],
 };
 
 /**
@@ -34,7 +38,7 @@ export const SESSION_STORAGE_KEYS = {
 export const COOKIES_STORAGE_KEYS = {
   language: "cookies:language",
   notificationPermission: "cookies:notificationPermission",
-  cookiesPermission: "cookies:cookiesPermission",
+  theme: "cookies:theme",
 };
 
 /**
