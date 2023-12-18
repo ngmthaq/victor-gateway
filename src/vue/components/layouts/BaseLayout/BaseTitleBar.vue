@@ -7,11 +7,11 @@ import pkg from "~/package.json";
 
 const emit = defineEmits<{
   (event: "clickSetting"): void;
-  (event: "clickHelp"): void;
 }>();
 
 const { t } = useI18n();
 const IS_DEV = window.electron.env.mode() === "development";
+const VIEW_POPOVER_ID = "title-bar-view-popover";
 const OPEN_DEVTOOLS = 1;
 const SETTING = 2;
 const HELP = 3;
@@ -35,7 +35,7 @@ function handleClickMenuItem(id: number) {
   } else if (id === SETTING) {
     emit("clickSetting");
   } else if (id === HELP) {
-    emit("clickHelp");
+    console.log("Go to help center page");
   } else if (id === VIEW) {
     console.log(VIEW);
   }
@@ -88,11 +88,20 @@ onUnmounted(() => {
         <template v-for="item in menu" :key="item.id">
           <div
             class="menu-item"
+            :class="{ dropdown: item.id === VIEW }"
             v-if="!item.onlyDev || (item.onlyDev && IS_DEV)"
             @click="() => item.handleClick(item.id)"
           >
-            {{ t(item.title) }}
+            <span v-if="item.id === VIEW" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ t(item.title) }}
+            </span>
+            <span v-else>{{ t(item.title) }}</span>
           </div>
+          <ul v-if="item.id === VIEW" class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
         </template>
       </div>
     </div>
@@ -112,6 +121,7 @@ onUnmounted(() => {
         <i class="bi bi-x-lg"></i>
       </div>
     </div>
+    <div :id="VIEW_POPOVER_ID"></div>
   </section>
 </template>
 
