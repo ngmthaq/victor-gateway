@@ -20,13 +20,13 @@ const modal = ref<Modal | null>(null);
 const language = ref<string>(locale.value);
 const theme = ref<SYSTEM_THEME_MODE_TYPE>(getCookieStorage(COOKIES_STORAGE_KEYS.theme) || "dark");
 
-const handleClose = () => {
+function handleClose() {
   language.value = locale.value;
   theme.value = getCookieStorage(COOKIES_STORAGE_KEYS.theme) || "dark";
   emit("close");
-};
+}
 
-const handleToggleOpenModal = (open: boolean) => {
+function handleToggleOpenModal(open: boolean) {
   if (modal.value) {
     if (open) {
       modal.value.show();
@@ -34,14 +34,14 @@ const handleToggleOpenModal = (open: boolean) => {
       modal.value.hide();
     }
   }
-};
+}
 
-const handleSubmit = () => {
+function handleSubmit() {
   setCookieStorage(COOKIES_STORAGE_KEYS.language, language.value);
   setCookieStorage(COOKIES_STORAGE_KEYS.theme, theme.value);
   locale.value = language.value;
   document.getElementById("body").setAttribute("data-bs-theme", theme.value);
-};
+}
 
 watch(
   () => props.open,

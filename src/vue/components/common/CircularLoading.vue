@@ -6,9 +6,9 @@ import { useEventBus } from "@/vue/hooks/common/useEventBus";
 const eventBus = useEventBus();
 const isLoading = ref<boolean>(false);
 
-const handleOpenLoading = (open: boolean) => {
+function handleOpenLoading(open: boolean) {
   isLoading.value = open;
-};
+}
 
 onBeforeMount(() => {
   eventBus.on(EVENT_BUS_EVENTS.openCircularLoading, handleOpenLoading);

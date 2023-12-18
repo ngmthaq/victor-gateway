@@ -6,13 +6,13 @@ import BaseSettingDialog from "./BaseSettingDialog.vue";
 
 const isOpenSettingDialog = ref<boolean>(false);
 
-const handleOpenSettingDialog = () => {
+function handleOpenSettingDialog() {
   isOpenSettingDialog.value = true;
-};
+}
 
-const handleCloseSettingDialog = () => {
+function handleCloseSettingDialog() {
   isOpenSettingDialog.value = false;
-};
+}
 </script>
 
 <template>

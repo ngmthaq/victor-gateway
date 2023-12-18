@@ -12,26 +12,26 @@ const NOTIFICATION_PERMISSION_KEY = COOKIES_STORAGE_KEYS.notificationPermission;
 const RECHECK_PERMISSION_TIME = 14 * 24 * 60 * 60 * 1000; // 14 days (milliseconds)
 const modal = ref<Modal | null>(null);
 
-const handleAccept = async () => {
+async function handleAccept() {
   const permission = await Notification.requestPermission();
   if (permission === "granted") {
     handleSetPermission(true);
   } else {
     handleDeny();
   }
-};
+}
 
-const handleDeny = () => {
+function handleDeny() {
   handleSetPermission(false);
-};
+}
 
-const handleSetPermission = (granted: boolean) => {
+function handleSetPermission(granted: boolean) {
   const newNotificationPermission: NotificationPermissionType = {
     time: Date.now(),
     granted: granted,
   };
   setCookieStorage(NOTIFICATION_PERMISSION_KEY, newNotificationPermission);
-};
+}
 
 onMounted(() => {
   if ("Notification" in window) {

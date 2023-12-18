@@ -13,9 +13,9 @@ const eventBus = useEventBus();
 const newToast = ref<ToastType>();
 const toasts = ref<ToastType[]>([]);
 
-const handleAppendToast = (toast: ToastType) => {
+function handleAppendToast(toast: ToastType) {
   newToast.value = toast;
-};
+}
 
 watch(
   () => newToast.value,

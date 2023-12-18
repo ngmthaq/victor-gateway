@@ -16,18 +16,18 @@ const [status, data, error, fetch, reset] = usePromise<Todo>(getTodo);
 
 const id = ref<number>(1);
 
-const handleClick = () => {
+function handleClick() {
   id.value = randomNumber(1, 100);
   fetch({ id: id.value });
-};
+}
 
-const handleReset = () => {
+function handleReset() {
   reset(true);
-};
+}
 
-const handleNotice = () => {
+function handleNotice() {
   notification.append({ message: "Test Test Test Test Test", variant: "warning" });
-};
+}
 </script>
 
 <template>
