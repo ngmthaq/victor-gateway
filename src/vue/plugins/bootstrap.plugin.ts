@@ -13,6 +13,9 @@ import {
   Tooltip,
 } from "bootstrap";
 
+/**
+ * Bootstrap Classes
+ */
 export const bootstrap = {
   Alert,
   Button,

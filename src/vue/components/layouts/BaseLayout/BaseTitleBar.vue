@@ -47,12 +47,12 @@ const handleMinimize = () => {
 
 const handleMaximize = () => {
   window.electron.frame.maximize();
-  isMaximized.value = true;
+  handleWindowResize();
 };
 
 const handleUnmaximize = () => {
   window.electron.frame.unmaximize();
-  isMaximized.value = false;
+  handleWindowResize();
 };
 
 const handleClose = () => {

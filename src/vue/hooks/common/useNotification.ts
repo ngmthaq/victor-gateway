@@ -2,7 +2,12 @@ import type { ToastType } from "@/configs/types/components";
 import { EVENT_BUS_EVENTS } from "@/configs/constants/event.const";
 import { useEventBus } from "./useEventBus";
 
-export const useNotification = () => {
+/**
+ * Custom hook to open snackbar (notification)
+ *
+ * @returns methods
+ */
+export function useNotification() {
   const eventBus = useEventBus();
 
   const append = (toast: ToastType) => {
@@ -10,4 +15,4 @@ export const useNotification = () => {
   };
 
   return { append };
-};
+}

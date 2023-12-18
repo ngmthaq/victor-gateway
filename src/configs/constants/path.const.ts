@@ -1,3 +1,9 @@
+/**
+ * Path constants for Vue-Router
+ *
+ * @see https://router.vuejs.org/guide/
+ */
+
 import type { RouteRecordRaw } from "vue-router";
 import HomeView from "@/vue/views/Home/HomeView.vue";
 import AboutView from "@/vue/views/About/AboutView.vue";

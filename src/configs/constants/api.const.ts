@@ -1,3 +1,8 @@
+/**
+ * HTTP response status codes
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+ */
 export const API_HTTP_STATUS = {
   OK: 200,
   BAD_REQUEST: 400,
@@ -10,6 +15,9 @@ export const API_HTTP_STATUS = {
   SERVICE_UNAVAILABLE: 503,
 };
 
+/**
+ * API Todo Endpoints
+ */
 export const API_TODO_ENDPOINTS = {
   todos: "/todos",
   todo: "/todos/:id",

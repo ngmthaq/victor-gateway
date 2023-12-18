@@ -4,8 +4,14 @@ import { LANGUAGE_CONFIGS, COOKIES_STORAGE_KEYS } from "@/configs/constants/app.
 import vi from "@/configs/languages/vi.json";
 import { getCookieStorage } from "./storage.plugin";
 
+/**
+ * Current language
+ */
 const language = getCookieStorage<Locale>(COOKIES_STORAGE_KEYS.language) || LANGUAGE_CONFIGS.defaultLanguage;
 
+/**
+ * I18n configurations
+ */
 export const i18n = createI18n({
   legacy: false,
   locale: language,

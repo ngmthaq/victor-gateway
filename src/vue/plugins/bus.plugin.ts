@@ -1,8 +1,17 @@
 import type { EventBusCallbackType } from "@/configs/types/plugins";
 
+/**
+ * EventBus configurations
+ */
 export class EventBus {
   private events: Record<string, EventBusCallbackType<any>[]> = {};
 
+  /**
+   * Add event listener
+   *
+   * @param eventName
+   * @param callback
+   */
   public on<T>(eventName: string, callback: EventBusCallbackType<T>) {
     if (this.events[eventName]) {
       this.events[eventName].push(callback);
@@ -11,6 +20,12 @@ export class EventBus {
     }
   }
 
+  /**
+   * Remove event listener
+   *
+   * @param eventName
+   * @param callback
+   */
   public off<T>(eventName: string, callback: EventBusCallbackType<T>) {
     if (this.events[eventName]) {
       this.events[eventName] = this.events[eventName].filter((cb) => cb !== callback);
@@ -19,6 +34,12 @@ export class EventBus {
     }
   }
 
+  /**
+   * Dispatch event
+   *
+   * @param eventName
+   * @param params
+   */
   public emit<T>(eventName: string, params?: T) {
     if (this.events[eventName]) {
       this.events[eventName].forEach((callback) => {
@@ -27,6 +48,12 @@ export class EventBus {
     }
   }
 
+  /**
+   * Add event listener for one time
+   *
+   * @param eventName
+   * @param callback
+   */
   public once<T>(eventName: string, callback: EventBusCallbackType<T>) {
     const handler = (params: T) => {
       callback(params);

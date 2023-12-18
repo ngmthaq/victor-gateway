@@ -2,7 +2,12 @@ import { BrowserWindow, app, ipcMain } from "electron";
 import { ELECTRON_EVENTS } from "@/configs/constants/event.const";
 import { mainWindowConfigs } from "./configs";
 
-// ipcMain listen events from preload/renderer
+/**
+ * ipcMain event listener from preload/renderer
+ *
+ * @see https://www.electronjs.org/docs/latest/api/ipc-main#methods
+ * @param {BrowserWindow} mainWindow
+ */
 export function ipcMainListener(mainWindow: BrowserWindow) {
   ipcMain.on(ELECTRON_EVENTS.quit, () => {
     mainWindowConfigs.isForgeQuit = true;

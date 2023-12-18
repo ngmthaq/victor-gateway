@@ -1,5 +1,10 @@
-import { eventBus } from "@/vue/plugins/bus.plugin";
+import { EventBus, eventBus } from "@/vue/plugins/bus.plugin";
 
-export function useEventBus() {
+/**
+ * Custom hook to handle EventBus
+ *
+ * @returns {EventBus}
+ */
+export function useEventBus(): EventBus {
   return eventBus;
 }

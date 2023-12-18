@@ -1,7 +1,12 @@
 import { EVENT_BUS_EVENTS } from "@/configs/constants/event.const";
 import { useEventBus } from "./useEventBus";
 
-export const useCircularLoading = () => {
+/**
+ * Custom hook to handle circular loading
+ *
+ * @returns methods
+ */
+export function useCircularLoading() {
   const eventBus = useEventBus();
 
   const open = () => {
@@ -13,4 +18,4 @@ export const useCircularLoading = () => {
   };
 
   return { open, close };
-};
+}

@@ -3,6 +3,12 @@ import type { UsePromiseCallbackType, UsePromiseResponseType, UsePromiseStatusTy
 import { ref } from "vue";
 import { CanceledError } from "axios";
 
+/**
+ * Custom hook to handle API promise
+ *
+ * @param callback
+ * @returns methods
+ */
 export function usePromise<R>(callback: UsePromiseCallbackType<R>): UsePromiseResponseType<R> {
   const abortController = ref<AbortController>(new AbortController());
   const data = ref<R | null>(null);
