@@ -3,7 +3,7 @@ import type { TitleBarMenuType } from "@/configs/types/components";
 import { ref, onMounted, onUnmounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { ELEMENT_SIZES } from "@/configs/constants/app.const";
-import pkg from "../../../../package.json";
+import pkg from "~/package.json";
 
 const emit = defineEmits<{
   (event: "clickSetting"): void;
@@ -77,6 +77,9 @@ onUnmounted(() => {
 
 <template>
   <section id="custom-window-title-bar" :style="{ height: `${ELEMENT_SIZES.titleBarHeight}px` }">
+    <div class="title-bar">
+      {{ pkg.productName }}
+    </div>
     <div class="left-bar">
       <div class="logo">
         <img src="@/assets/img/icon.png" alt="title-bar-logo" />
@@ -93,9 +96,7 @@ onUnmounted(() => {
         </template>
       </div>
     </div>
-    <div class="middle-bar">
-      {{ pkg.productName }}
-    </div>
+    <div class="middle-bar"></div>
     <div class="right-bar">
       <div class="action-button minimize" @click="handleMinimize">
         <i class="bi bi-dash-lg"></i>
@@ -126,9 +127,22 @@ onUnmounted(() => {
   left: 0;
   z-index: $z-index-common-titlebar;
 
+  & .title-bar {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    color: $gray-400;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+  }
+
   & .left-bar {
     height: 100%;
-    width: 300px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -159,7 +173,7 @@ onUnmounted(() => {
       gap: 2px;
 
       & .menu-item {
-        color: $gray-400;
+        color: $gray-500;
         font-size: 12px;
         cursor: pointer;
         background-color: transparent;
@@ -172,6 +186,7 @@ onUnmounted(() => {
         justify-content: center;
 
         &:hover {
+          color: $gray-400;
           background-color: rgba($color: #fff, $alpha: 0.2);
         }
       }
@@ -180,14 +195,14 @@ onUnmounted(() => {
 
   & .middle-bar {
     display: flex;
-    flex: 1;
     width: 100%;
     color: $gray-400;
     font-size: 14px;
     user-select: none;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    height: 100%;
+    background-color: transparent;
     -webkit-user-select: none;
     -webkit-app-region: drag;
   }
@@ -198,7 +213,6 @@ onUnmounted(() => {
     align-items: center;
     justify-content: flex-end;
     height: inherit;
-    width: 300px;
     gap: 2px;
 
     & .action-button {

@@ -8,7 +8,7 @@ import { usePromise } from "@/vue/hooks/common/usePromise";
 import { getTodo } from "@/vue/services/remotes/todo.remote";
 import { randomNumber } from "@/vue/plugins/number.plugins";
 import { PATH_ABOUT } from "@/configs/constants/path.const";
-import BaseLayout from "@/vue/components/layouts/BaseLayout.vue";
+import BaseLayout from "@/vue/components/layouts/BaseLayout/BaseLayout.vue";
 
 const { t } = useI18n();
 const notification = useNotification();
