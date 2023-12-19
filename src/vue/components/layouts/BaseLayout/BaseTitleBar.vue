@@ -66,6 +66,16 @@ function handleWindowResize() {
   isMaximized.value = isAtMaxWidth && isAtDefaultZoom;
 }
 
+function handleConfirmClose() {
+  if (confirm(t("TXT_ACCEPT_QUIT_APP"))) {
+    window.electron.frame.close();
+  }
+}
+
+function handleReload() {
+  window.location.reload();
+}
+
 onMounted(() => {
   window.addEventListener("resize", handleWindowResize);
 });
@@ -92,16 +102,23 @@ onUnmounted(() => {
             v-if="!item.onlyDev || (item.onlyDev && IS_DEV)"
             @click="() => item.handleClick(item.id)"
           >
-            <span v-if="item.id === VIEW" data-bs-toggle="dropdown" aria-expanded="false">
+            <span v-if="item.id === VIEW" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
               {{ t(item.title) }}
             </span>
             <span v-else>{{ t(item.title) }}</span>
+            <ul v-if="item.id === VIEW" class="dropdown-menu custom-dropdown-menu">
+              <li>
+                <a class="dropdown-item custom-dropdown-item" href="javascript:void(0)" @click="handleReload">
+                  {{ t("TXT_RELOAD") }}
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item custom-dropdown-item" href="javascript:void(0)" @click="handleConfirmClose">
+                  {{ t("TXT_EXIT") }}
+                </a>
+              </li>
+            </ul>
           </div>
-          <ul v-if="item.id === VIEW" class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
         </template>
       </div>
     </div>
@@ -158,6 +175,17 @@ onUnmounted(() => {
     justify-content: flex-start;
     flex-shrink: 0;
     gap: 8px;
+
+    & .custom-dropdown-menu {
+      padding: 0;
+      border-radius: 2px;
+      min-width: 120px;
+
+      & .custom-dropdown-item {
+        font-size: 12px;
+        padding: 4px 8px;
+      }
+    }
 
     & .logo {
       height: 100%;
