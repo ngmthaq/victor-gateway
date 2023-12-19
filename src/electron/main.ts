@@ -1,5 +1,6 @@
 import path from "path";
 import { app, BrowserWindow } from "electron";
+import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import { mainWindowConfigs } from "./configs";
 import { createWindowTray } from "./tray";
 import { getLogo } from "./logo";
@@ -44,13 +45,24 @@ function createWindow() {
   return mainWindow;
 }
 
+// Bootstraping application
+function bootstrap() {
+  const mainWindow = createWindow();
+  createWindowTray(mainWindow);
+  ipcMainListener(mainWindow);
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", () => {
-  const mainWindow = createWindow();
-  createWindowTray(mainWindow);
-  ipcMainListener(mainWindow);
+  if (process.env.NODE_ENV === "production") {
+    bootstrap();
+  } else {
+    installExtension(VUEJS_DEVTOOLS)
+      .then(() => bootstrap())
+      .catch((error) => console.log("An error occurred: ", error));
+  }
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common

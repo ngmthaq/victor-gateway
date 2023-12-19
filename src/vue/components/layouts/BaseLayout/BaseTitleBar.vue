@@ -3,7 +3,7 @@ import type { TitleBarMenuType } from "@/configs/types/components";
 import { ref, onMounted, onUnmounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { ELEMENT_SIZES } from "@/configs/constants/app.const";
-import pkg from "~/package.json";
+import { productName } from "~/package.json";
 
 const emit = defineEmits<{
   (event: "clickSetting"): void;
@@ -86,7 +86,7 @@ onUnmounted(() => {
 <template>
   <section id="custom-window-title-bar" :style="{ height: `${ELEMENT_SIZES.titleBarHeight}px` }">
     <div class="title-bar">
-      {{ pkg.productName }}
+      {{ productName }}
     </div>
     <div class="left-bar">
       <div class="logo">
