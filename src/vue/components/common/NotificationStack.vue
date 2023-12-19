@@ -64,7 +64,7 @@ onUpdated(() => {
   <section id="notification-stack" class="toast-container position-fixed bottom-0 end-0">
     <template v-for="toast in toasts" :key="toast.id">
       <div
-        class="toast align-items-center border-0 ms-0 me-1 my-1"
+        class="toast align-items-center border-0 ms-0 me-1 my-2"
         role="alert"
         aria-live="assertive"
         aria-atomic="true"
@@ -94,4 +94,8 @@ onUpdated(() => {
   </section>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+#notification-stack {
+  transform: translateX(-20px);
+}
+</style>

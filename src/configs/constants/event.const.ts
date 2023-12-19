@@ -21,4 +21,5 @@ export const ELECTRON_EVENTS = {
   close: "electron:close",
   openDevtools: "electron:openDevtools",
   isMaximized: "electron:isMaximized",
+  getEnv: "electron:getEnv",
 };

@@ -2,7 +2,7 @@ import { ipcRenderer } from "electron";
 import { ELECTRON_EVENTS } from "@/configs/constants/event.const";
 
 export const frame = {
-  isMaximized: () => {
+  isMaximized: (): Promise<boolean> => {
     return ipcRenderer.invoke(ELECTRON_EVENTS.isMaximized);
   },
 

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { TitleBarMenuType } from "@/configs/types/components";
 import { ref, onMounted, onUnmounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { ELEMENT_SIZES } from "@/configs/constants/app.const";
@@ -12,31 +11,22 @@ const emit = defineEmits<{
 const { t } = useI18n();
 const IS_DEV = window.electron.env.mode() === "development";
 const VIEW_POPOVER_ID = "title-bar-view-popover";
-const OPEN_DEVTOOLS = 1;
-const SETTING = 2;
-const HELP = 3;
-const VIEW = 4;
-
 const isAtMaxWidth = screen.availWidth - window.innerWidth === 0;
 const screenPixelRatio = (window.outerWidth - 8) / window.innerWidth;
 const isAtDefaultZoom = screenPixelRatio > 0.92 && screenPixelRatio <= 1.1;
 
 const isMaximized = ref<boolean>(isAtMaxWidth && isAtDefaultZoom);
-const menu = ref<TitleBarMenuType[]>([
-  { id: OPEN_DEVTOOLS, onlyDev: true, title: "TXT_DEVTOOLS", handleClick: handleClickMenuItem },
-  { id: SETTING, onlyDev: false, title: "TXT_SETTING", handleClick: handleClickMenuItem },
-  { id: HELP, onlyDev: false, title: "TXT_HELP", handleClick: handleClickMenuItem },
-  { id: VIEW, onlyDev: false, title: "TXT_VIEW", handleClick: handleClickMenuItem },
-]);
 
-function handleClickMenuItem(id: number) {
-  if (id === OPEN_DEVTOOLS) {
-    window.electron.frame.openDevtools();
-  } else if (id === SETTING) {
-    emit("clickSetting");
-  } else if (id === HELP) {
-    console.log("Go to help center page");
-  }
+function handleOpenDevtools() {
+  window.electron.frame.openDevtools();
+}
+
+function handleClickSetting() {
+  emit("clickSetting");
+}
+
+function handleClickHelp() {
+  console.log("Go to help center page");
 }
 
 function handleMinimize() {
@@ -93,31 +83,28 @@ onUnmounted(() => {
         <img src="@/assets/img/icon.png" alt="title-bar-logo" />
       </div>
       <div class="menu">
-        <template v-for="item in menu" :key="item.id">
-          <div
-            class="menu-item"
-            :class="{ dropdown: item.id === VIEW }"
-            v-if="!item.onlyDev || (item.onlyDev && IS_DEV)"
-            @click="() => item.handleClick(item.id)"
-          >
-            <span v-if="item.id === VIEW" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-              {{ t(item.title) }}
-            </span>
-            <span v-else>{{ t(item.title) }}</span>
-            <ul v-if="item.id === VIEW" class="dropdown-menu custom-dropdown-menu">
-              <li>
-                <a class="dropdown-item custom-dropdown-item" href="javascript:void(0)" @click="handleReload">
-                  {{ t("TXT_RELOAD") }}
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item custom-dropdown-item" href="javascript:void(0)" @click="handleConfirmClose">
-                  {{ t("TXT_EXIT") }}
-                </a>
-              </li>
-            </ul>
-          </div>
-        </template>
+        <div class="menu-item" @click="handleClickSetting">
+          <span>{{ t("TXT_SETTING") }}</span>
+        </div>
+        <div class="menu-item" @click="handleClickHelp">
+          <span>{{ t("TXT_HELP") }}</span>
+        </div>
+        <div class="menu-item dropdown">
+          <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ t("TXT_VIEW") }}
+          </span>
+          <ul class="dropdown-menu custom-dropdown-menu">
+            <li class="dropdown-item custom-dropdown-item" @click="handleOpenDevtools" v-if="IS_DEV">
+              {{ t("TXT_OPEN_DEVTOOLS") }}
+            </li>
+            <li class="dropdown-item custom-dropdown-item" @click="handleReload">
+              {{ t("TXT_RELOAD") }}
+            </li>
+            <li class="dropdown-item custom-dropdown-item" @click="handleConfirmClose">
+              {{ t("TXT_EXIT") }}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="middle-bar"></div>
@@ -213,12 +200,16 @@ onUnmounted(() => {
         font-size: 12px;
         cursor: pointer;
         background-color: transparent;
-        padding: 4px 8px;
         border-radius: 4px;
         user-select: none;
         display: flex;
         align-items: center;
         justify-content: center;
+
+        & span {
+          display: inline-block;
+          padding: 4px 8px;
+        }
 
         &:hover {
           color: $gray-400;

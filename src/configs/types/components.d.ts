@@ -10,11 +10,4 @@ export type NotificationPermissionType = {
   granted: boolean;
 };
 
-export type TitleBarMenuType = {
-  id: number;
-  title: string;
-  onlyDev: boolean;
-  handleClick: (id: number) => void;
-};
-
 export type SYSTEM_THEME_MODE_TYPE = "light" | "dark";

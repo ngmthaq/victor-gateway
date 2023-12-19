@@ -9,10 +9,13 @@ export class Api {
   protected instance: AxiosInstance;
 
   public constructor() {
-    this.instance = axios.create({
-      baseURL: window.electron.env.get("ELECTRON_PUBLIC_API_BASE_URL") || null,
-      timeout: parseInt(window.electron.env.get("ELECTRON_PUBLIC_API_TIMEOUT ") || "30000"),
-    });
+    this.getInstance();
+  }
+
+  protected async getInstance() {
+    const baseURL = await window.electron.env.get("ELECTRON_PUBLIC_API_BASE_URL");
+    const timeout = await window.electron.env.get("ELECTRON_PUBLIC_API_TIMEOUT");
+    this.instance = axios.create({ baseURL: baseURL || null, timeout: parseInt(timeout || "30000") });
   }
 
   /**

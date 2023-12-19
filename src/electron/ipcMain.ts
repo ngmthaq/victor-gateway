@@ -37,4 +37,17 @@ export function ipcMainListener(mainWindow: BrowserWindow) {
   ipcMain.handle(ELECTRON_EVENTS.isMaximized, () => {
     return mainWindow.isMaximized();
   });
+
+  ipcMain.handle(ELECTRON_EVENTS.getEnv, () => {
+    const env: Record<string, string> = {};
+    for (const key in process.env) {
+      if (Object.prototype.hasOwnProperty.call(process.env, key)) {
+        const value = process.env[key];
+        if (key.startsWith("ELECTRON_PUBLIC_")) {
+          env[key] = value;
+        }
+      }
+    }
+    return env;
+  });
 }

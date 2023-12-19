@@ -7,7 +7,8 @@ export type VersionsType = {
 };
 
 export type EnvType = {
-  get: (key: string) => string | undefined;
+  all: () => Promise<Record<string, string>>;
+  get: (key: string) => Promise<string | undefined>;
   mode: () => "development" | "production";
 };
 
@@ -18,7 +19,7 @@ export type ElectronEventNameType = "electron:quit";
 export type ElectronEventListenerType = (eventName: ElectronEventNameType, callback: ElectronEventCallbackType) => void;
 
 export type ElectronFrameType = {
-  isMaximized: () => boolean;
+  isMaximized: () => Promise<boolean>;
   minimize: () => void;
   maximize: () => void;
   unmaximize: () => void;
