@@ -10,7 +10,7 @@ import { mainWindowConfigs } from "./configs";
  */
 export function ipcMainListener(mainWindow: BrowserWindow) {
   ipcMain.on(ELECTRON_EVENTS.quit, () => {
-    mainWindowConfigs.isForgeQuit = true;
+    mainWindowConfigs.forceQuit = true;
     app.quit();
   });
 

@@ -11,8 +11,10 @@
     "publish": "electron-forge publish",
     "lint": "eslint --ext .ts,.tsx .",
     "format": "prettier --write .",
-    "dev": "npx cross-env NODE_ENV=development && yarn format && yarn start",
-    "build": "npx cross-env NODE_ENV=production && yarn lint && yarn make"
+    "predev": "yarn format",
+    "dev": "cross-env NODE_ENV=development yarn start",
+    "prebuild": "yarn lint",
+    "build": "cross-env NODE_ENV=production yarn make"
   },
   "keywords": [],
   "author": {

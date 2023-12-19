@@ -1,5 +1,5 @@
 import { BrowserWindow, Menu, Tray } from "electron";
-import pkg from "~/package.json";
+import { productName } from "~/package.json";
 import { ELECTRON_EVENTS } from "@/configs/constants/event.const";
 import { getLogo } from "./logo";
 
@@ -18,8 +18,8 @@ export function createWindowTray(mainWindow: BrowserWindow) {
   });
 
   tray.setIgnoreDoubleClickEvents(true);
-  tray.setTitle(pkg.productName);
-  tray.setToolTip(pkg.productName);
+  tray.setTitle(productName);
+  tray.setToolTip(productName);
   tray.setContextMenu(
     Menu.buildFromTemplate([
       {

@@ -1,11 +1,30 @@
-import path from "path";
-import { app, BrowserWindow } from "electron";
+import dotenv from "dotenv";
+import path from "node:path";
+import { readFile } from "node:fs/promises";
+import { app, BrowserWindow, dialog } from "electron";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
+import { productName } from "~/package.json";
 import { mainWindowConfigs } from "./configs";
+import { ipcMainListener } from "./ipcMain";
 import { createWindowTray } from "./tray";
 import { getLogo } from "./logo";
-import { ipcMainListener } from "./ipcMain";
-import "dotenv/config";
+
+// Config dotenv
+(async () => {
+  try {
+    const inputEnv = path.resolve(__dirname, "../../.env");
+    const envBuffer = await readFile(inputEnv);
+    const env = dotenv.parse(envBuffer);
+    process.env = { ...process.env, ...env };
+  } catch (error) {
+    console.error(".env error", error);
+    dialog.showErrorBox(productName, error?.message);
+    app.quit();
+  }
+})();
+
+// IS_DEV
+const IS_DEV = process.env.NODE_ENV === "development";
 
 // Security warnings and recommendations are printed to the developer console.
 // They only show up when the binary's name is Electron,
@@ -14,9 +33,7 @@ import "dotenv/config";
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require("electron-squirrel-startup")) {
-  app.quit();
-}
+if (require("electron-squirrel-startup")) app.quit();
 
 // Create the browser window.
 function createWindow() {
@@ -36,7 +53,7 @@ function createWindow() {
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
   else mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
   mainWindow.on("close", (event) => {
-    if (mainWindowConfigs.isForgeQuit === false) {
+    if (mainWindowConfigs.forceQuit === false) {
       event.preventDefault();
       mainWindow.hide();
     }
@@ -56,12 +73,10 @@ function bootstrap() {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", () => {
-  if (process.env.NODE_ENV === "production") {
-    bootstrap();
+  if (IS_DEV) {
+    installExtension(VUEJS_DEVTOOLS).then(bootstrap).catch(console.error);
   } else {
-    installExtension(VUEJS_DEVTOOLS)
-      .then(() => bootstrap())
-      .catch((error) => console.log("An error occurred: ", error));
+    bootstrap();
   }
 });
 
