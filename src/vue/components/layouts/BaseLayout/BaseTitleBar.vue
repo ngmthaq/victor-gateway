@@ -36,8 +36,6 @@ function handleClickMenuItem(id: number) {
     emit("clickSetting");
   } else if (id === HELP) {
     console.log("Go to help center page");
-  } else if (id === VIEW) {
-    console.log(VIEW);
   }
 }
 
