@@ -1,6 +1,5 @@
-import { BrowserWindow, app, ipcMain } from "electron";
+import { BrowserWindow, ipcMain } from "electron";
 import { ELECTRON_EVENTS } from "@/configs/constants/event.const";
-import { mainWindowConfigs } from "./configs";
 
 /**
  * ipcMain event listener from preload/renderer
@@ -9,11 +8,6 @@ import { mainWindowConfigs } from "./configs";
  * @param {BrowserWindow} mainWindow
  */
 export function ipcMainListener(mainWindow: BrowserWindow) {
-  ipcMain.on(ELECTRON_EVENTS.quit, () => {
-    mainWindowConfigs.forceQuit = true;
-    app.quit();
-  });
-
   ipcMain.on(ELECTRON_EVENTS.minimize, () => {
     mainWindow.minimize();
   });

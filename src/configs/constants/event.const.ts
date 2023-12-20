@@ -14,7 +14,6 @@ export const EVENT_BUS_EVENTS = {
  * @see https://www.electronjs.org/docs/latest/api/ipc-renderer#methods
  */
 export const ELECTRON_EVENTS = {
-  quit: "electron:quit",
   minimize: "electron:minimize",
   maximize: "electron:maximize",
   unmaximize: "electron:unmaximize",

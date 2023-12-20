@@ -14,7 +14,7 @@ export type EnvType = {
 
 export type ElectronEventCallbackType = (event: IpcRendererEvent, ...args: any[]) => Promise<void>;
 
-export type ElectronEventNameType = "electron:quit";
+export type ElectronEventNameType = "";
 
 export type ElectronEventListenerType = (eventName: ElectronEventNameType, callback: ElectronEventCallbackType) => void;
 

@@ -1,6 +1,6 @@
-import { BrowserWindow, Menu, Tray } from "electron";
+import { BrowserWindow, Menu, Tray, app, dialog } from "electron";
 import { productName } from "~/package.json";
-import { ELECTRON_EVENTS } from "@/configs/constants/event.const";
+import { mainWindowConfigs } from "./configs";
 import { getLogo } from "./logo";
 
 /**
@@ -31,7 +31,18 @@ export function createWindowTray(mainWindow: BrowserWindow) {
       {
         label: "Exit Application",
         click: () => {
-          mainWindow.webContents.send(ELECTRON_EVENTS.quit);
+          dialog
+            .showMessageBox(mainWindow, {
+              type: "question",
+              title: productName,
+              message: "Are you sure you want to exit the application?",
+              buttons: ["Yes", "No"],
+            })
+            .then((result) => {
+              if (result.response !== 0) return;
+              mainWindowConfigs.forceQuit = true;
+              app.quit();
+            });
         },
       },
     ]),

@@ -13,11 +13,13 @@
  *
  */
 
+import type { SYSTEM_THEME_MODE_TYPE } from "@/configs/types/components";
 import { createApp } from "vue";
-import { ELECTRON_EVENTS } from "@/configs/constants/event.const";
+import { COOKIES_STORAGE_KEYS } from "@/configs/constants/app.const";
 import { i18n } from "./plugins/i18n.plugin";
 import { router } from "./plugins/router.plugin";
 import { store } from "./plugins/pinia.plugin";
+import { getCookieStorage } from "./plugins/storage.plugin";
 import App from "./App.vue";
 import "bootstrap-icons/font/bootstrap-icons.scss";
 import "./scss/main.scss";
@@ -28,11 +30,8 @@ app.use(router);
 app.use(store);
 app.mount("#app");
 
-window.electron.addEventListener("electron:quit", async (event) => {
-  if (confirm(i18n.global.t("TXT_ACCEPT_QUIT_APP"))) {
-    event.sender.send(ELECTRON_EVENTS.quit);
-  }
-});
+const theme = getCookieStorage<SYSTEM_THEME_MODE_TYPE>(COOKIES_STORAGE_KEYS.theme) || "dark";
+document.getElementById("body").setAttribute("data-bs-theme", theme);
 
 if (window.electron.env.mode() === "development") {
   console.log(

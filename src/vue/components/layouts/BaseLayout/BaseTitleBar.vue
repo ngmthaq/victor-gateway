@@ -55,9 +55,7 @@ function handleWindowResize() {
 }
 
 function handleConfirmClose() {
-  if (confirm(t("TXT_ACCEPT_QUIT_APP"))) {
-    window.electron.frame.close();
-  }
+  window.electron.frame.close();
 }
 
 function handleReload() {
