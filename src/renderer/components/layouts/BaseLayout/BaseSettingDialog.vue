@@ -4,7 +4,7 @@ import { ref, watch, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { LANGUAGE_CONFIGS, COOKIES_STORAGE_KEYS } from "@/configs/constants/app.const";
 import { SYSTEM_THEME_MODE_TYPE } from "@/configs/types/components";
-import { getCookieStorage, setCookieStorage } from "@/vue/plugins/storage.plugin";
+import { getCookieStorage, setCookieStorage } from "@/renderer/plugins/storage.plugin";
 
 const props = defineProps<{
   open: boolean;

@@ -4,7 +4,7 @@ import { ref, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { Modal } from "bootstrap";
 import { COOKIES_STORAGE_KEYS } from "@/configs/constants/app.const";
-import { getCookieStorage, removeCookieStorage, setCookieStorage } from "@/vue/plugins/storage.plugin";
+import { getCookieStorage, removeCookieStorage, setCookieStorage } from "@/renderer/plugins/storage.plugin";
 
 const { t } = useI18n();
 const ID = "request-notification";

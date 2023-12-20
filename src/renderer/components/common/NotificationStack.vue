@@ -3,9 +3,9 @@ import type { ToastType } from "@/configs/types/components";
 import { onBeforeMount, onUnmounted, onUpdated, ref, watch } from "vue";
 import { Toast } from "bootstrap";
 import { EVENT_BUS_EVENTS } from "@/configs/constants/event.const";
-import { useEventBus } from "@/vue/hooks/common/useEventBus";
-import { randomStr } from "@/vue/plugins/str.plugin";
-import { getCurrentMilliseconds } from "@/vue/plugins/datetime.plugin";
+import { useEventBus } from "@/renderer/hooks/common/useEventBus";
+import { randomStr } from "@/renderer/plugins/str.plugin";
+import { getCurrentMilliseconds } from "@/renderer/plugins/datetime.plugin";
 
 const TOAST_DELAY = 6000;
 const TOAST_MAX = 5;

@@ -5,8 +5,8 @@
  */
 
 import type { RouteRecordRaw } from "vue-router";
-import HomeView from "@/vue/views/Home/HomeView.vue";
-import AboutView from "@/vue/views/About/AboutView.vue";
+import HomeView from "@/renderer/views/Home/HomeView.vue";
+import AboutView from "@/renderer/views/About/AboutView.vue";
 
 export const PATH_HOME: RouteRecordRaw = {
   path: "/",

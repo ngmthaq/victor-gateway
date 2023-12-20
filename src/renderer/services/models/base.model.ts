@@ -1,4 +1,4 @@
-import { getCurrentMilliseconds } from "@/vue/plugins/datetime.plugin";
+import { getCurrentMilliseconds } from "@/renderer/plugins/datetime.plugin";
 
 export abstract class BaseModel {
   public _milliseconds: number;

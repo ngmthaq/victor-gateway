@@ -1,4 +1,4 @@
-import { EventBus, eventBus } from "@/vue/plugins/bus.plugin";
+import { EventBus, eventBus } from "@/renderer/plugins/bus.plugin";
 
 /**
  * Custom hook to handle EventBus
