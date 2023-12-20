@@ -1,27 +1,11 @@
-import dotenv from "dotenv";
 import path from "node:path";
-import { readFile } from "node:fs/promises";
-import { app, BrowserWindow, dialog } from "electron";
+import { app, BrowserWindow } from "electron";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
-import { productName } from "~/package.json";
 import { mainWindowConfigs } from "./configs";
 import { ipcMainListener } from "./ipcMain";
 import { createWindowTray } from "./tray";
 import { getLogo } from "./logo";
-
-// Config dotenv
-(async () => {
-  try {
-    const inputEnv = path.resolve(__dirname, "../../.env");
-    const envBuffer = await readFile(inputEnv);
-    const env = dotenv.parse(envBuffer);
-    process.env = { ...process.env, ...env };
-  } catch (error) {
-    console.error(".env error", error);
-    dialog.showErrorBox(productName, error?.message);
-    app.quit();
-  }
-})();
+import "./env";
 
 // IS_DEV
 const IS_DEV = process.env.NODE_ENV === "development";
