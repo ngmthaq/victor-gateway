@@ -3,7 +3,7 @@
 import type { ElectronEventCallbackType, ElectronEventNameType } from "@/configs/types/window";
 import { contextBridge, ipcRenderer } from "electron";
 import { versions } from "./utils/export-versions";
-import { frame } from "./utils/export-frame-events";
+import { frame } from "./utils/frame-events";
 import { env } from "./utils/export-env";
 
 /**

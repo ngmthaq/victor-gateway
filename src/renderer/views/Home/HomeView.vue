@@ -26,7 +26,7 @@ function handleReset() {
 }
 
 function handleNotice() {
-  notification.append({ message: "Test Test Test Test Test", variant: "warning" });
+  notification.openSystemNotification("Test title", "Test description");
 }
 </script>
 

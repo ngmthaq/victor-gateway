@@ -1,4 +1,5 @@
 import type { ToastType } from "@/configs/types/components";
+import icon from "@/assets/img/icon.png";
 import { EVENT_BUS_EVENTS } from "@/configs/constants/event.const";
 import { useEventBus } from "./useEventBus";
 
@@ -14,5 +15,9 @@ export function useNotification() {
     eventBus.emit(EVENT_BUS_EVENTS.appendToast, toast);
   };
 
-  return { append };
+  const openSystemNotification = (title: string, message: string) => {
+    return new Notification(title, { body: message, icon: icon });
+  };
+
+  return { append, openSystemNotification };
 }
