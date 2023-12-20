@@ -2,9 +2,9 @@
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
 import type { ElectronEventCallbackType, ElectronEventNameType } from "@/configs/types/window";
 import { contextBridge, ipcRenderer } from "electron";
-import { frame } from "./preload.frame";
-import { env } from "./preload.env";
-import { versions } from "./preload.versions";
+import { versions } from "./utils/export-versions";
+import { frame } from "./utils/export-frame-events";
+import { env } from "./utils/export-env";
 
 /**
  * Electron Event Listener

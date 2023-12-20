@@ -5,7 +5,7 @@ import { readFile } from "node:fs/promises";
 import { productName } from "~/package.json";
 
 // Config dotenv
-(async () => {
+export async function initialEnv() {
   try {
     const inputEnv = path.resolve(__dirname, "../../.env");
     const envBuffer = await readFile(inputEnv);
@@ -16,4 +16,4 @@ import { productName } from "~/package.json";
     dialog.showErrorBox(productName, error?.message);
     app.quit();
   }
-})();
+}

@@ -1,7 +1,7 @@
 import { BrowserWindow, Menu, Tray, app, dialog } from "electron";
 import { productName } from "~/package.json";
-import { mainWindowConfigs } from "./configs";
-import { getLogo } from "./logo";
+import { mainWindowConfigs } from "./runtime-configs";
+import { getLogo } from "./get-logo";
 
 /**
  * Create tray icon and tray menu

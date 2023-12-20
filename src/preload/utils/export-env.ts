@@ -1,5 +1,5 @@
 import { ipcRenderer } from "electron";
-import { ELECTRON_EVENTS } from "../configs/constants/event.const";
+import { ELECTRON_EVENTS } from "../../configs/constants/event.const";
 
 export const env = {
   mode: () => process.env.NODE_ENV,

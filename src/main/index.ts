@@ -1,11 +1,8 @@
-import path from "node:path";
 import { app, BrowserWindow } from "electron";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
-import { mainWindowConfigs } from "./configs";
-import { ipcMainListener } from "./ipcMain";
-import { createWindowTray } from "./tray";
-import { getLogo } from "./logo";
-import "./env";
+import { createWindow } from "./utils/create-window";
+import { bootstrap } from "./utils/bootstrap";
+import { initialEnv } from "./utils/initial-env";
 
 // IS_DEV
 const IS_DEV = process.env.NODE_ENV === "development";
@@ -19,48 +16,14 @@ process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) app.quit();
 
-// Create the browser window.
-function createWindow() {
-  const mainWindow = new BrowserWindow({
-    icon: getLogo(32, 32),
-    minWidth: 1366,
-    minHeight: 768,
-    width: 1366,
-    height: 768,
-    autoHideMenuBar: true,
-    frame: false,
-    webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
-    },
-  });
-
-  if (MAIN_WINDOW_VITE_DEV_SERVER_URL) mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
-  else mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
-  mainWindow.on("close", (event) => {
-    if (mainWindowConfigs.forceQuit === false) {
-      event.preventDefault();
-      mainWindow.hide();
-    }
-  });
-
-  return mainWindow;
-}
-
-// Bootstraping application
-function bootstrap() {
-  const mainWindow = createWindow();
-  createWindowTray(mainWindow);
-  ipcMainListener(mainWindow);
-}
-
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", () => {
   if (IS_DEV) {
-    installExtension(VUEJS_DEVTOOLS).then(bootstrap).catch(console.error);
+    installExtension(VUEJS_DEVTOOLS).then(initialEnv).then(bootstrap).catch(console.error);
   } else {
-    bootstrap();
+    initialEnv().then(bootstrap).catch(console.error);
   }
 });
 
