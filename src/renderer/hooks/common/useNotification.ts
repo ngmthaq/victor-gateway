@@ -1,5 +1,6 @@
 import type { ToastType } from "@/configs/types/components";
 import icon from "@/assets/img/icon.png";
+import { productName } from "~/package.json";
 import { EVENT_BUS_EVENTS } from "@/configs/constants/event.const";
 import { useEventBus } from "./useEventBus";
 
@@ -11,13 +12,13 @@ import { useEventBus } from "./useEventBus";
 export function useNotification() {
   const eventBus = useEventBus();
 
-  const append = (toast: ToastType) => {
+  const openAppNotification = (toast: ToastType) => {
     eventBus.emit(EVENT_BUS_EVENTS.appendToast, toast);
   };
 
-  const openSystemNotification = (title: string, message: string) => {
-    return new Notification(title, { body: message, icon: icon });
+  const openSystemNotification = (message: string) => {
+    return new Notification(productName, { body: message, icon: icon });
   };
 
-  return { append, openSystemNotification };
+  return { openAppNotification, openSystemNotification };
 }

@@ -11,7 +11,7 @@ import { PATH_ABOUT } from "@/configs/constants/path.const";
 import BaseLayout from "@/renderer/components/layouts/BaseLayout/BaseLayout.vue";
 
 const { t } = useI18n();
-const notification = useNotification();
+const { openSystemNotification } = useNotification();
 const [status, data, error, fetch, reset] = usePromise<Todo>(getTodo);
 
 const id = ref<number>(1);
@@ -26,7 +26,7 @@ function handleReset() {
 }
 
 function handleNotice() {
-  notification.openSystemNotification("Test title", "Test description");
+  openSystemNotification("Test description");
 }
 </script>
 
