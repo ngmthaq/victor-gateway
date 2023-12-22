@@ -6,6 +6,8 @@ import { productName } from "~/package.json";
 
 const emit = defineEmits<{
   (event: "clickSetting"): void;
+  (event: "clickVersion"): void;
+  (event: "closeAll"): void;
 }>();
 
 const { t } = useI18n();
@@ -26,6 +28,7 @@ function handleClickSetting() {
 }
 
 function handleClickHelp() {
+  emit("closeAll");
   console.log("Go to help center page");
 }
 
@@ -62,6 +65,20 @@ function handleReload() {
   window.location.reload();
 }
 
+function handleHistoryBack() {
+  window.history.back();
+  emit("closeAll");
+}
+
+function handleHistoryForward() {
+  window.history.forward();
+  emit("closeAll");
+}
+
+function handleClickVersion() {
+  emit("clickVersion");
+}
+
 onMounted(() => {
   window.addEventListener("resize", handleWindowResize);
 });
@@ -87,6 +104,22 @@ onUnmounted(() => {
         <div class="menu-item" @click="handleClickHelp">
           <span>{{ t("TXT_HELP") }}</span>
         </div>
+        <div class="menu-item" @click="handleClickVersion">
+          <span>{{ t("TXT_VERSIONS") }}</span>
+        </div>
+        <div class="menu-item dropdown">
+          <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ t("TXT_HISTORY") }}
+          </span>
+          <ul class="dropdown-menu custom-dropdown-menu">
+            <li class="dropdown-item custom-dropdown-item" @click="handleHistoryForward">
+              {{ t("TXT_HISTORY_FORWARD") }}
+            </li>
+            <li class="dropdown-item custom-dropdown-item" @click="handleHistoryBack">
+              {{ t("TXT_HISTORY_BACK") }}
+            </li>
+          </ul>
+        </div>
         <div class="menu-item dropdown">
           <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             {{ t("TXT_VIEW") }}
@@ -97,6 +130,9 @@ onUnmounted(() => {
             </li>
             <li class="dropdown-item custom-dropdown-item" @click="handleReload">
               {{ t("TXT_RELOAD") }}
+            </li>
+            <li class="dropdown-item custom-dropdown-item" @click="handleMinimize">
+              {{ t("TXT_MINIMIZE") }}
             </li>
             <li class="dropdown-item custom-dropdown-item" @click="handleConfirmClose">
               {{ t("TXT_EXIT") }}

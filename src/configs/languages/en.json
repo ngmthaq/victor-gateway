@@ -19,5 +19,10 @@
   "TXT_REQUEST_NOTIFICATION_CONTENT": "Receive notifications from us so you don't miss important information. Notifications may include sounds and other information.",
   "TXT_ACCEPT_QUIT_APP": "Are you sure you want to exit the application?",
   "TXT_SYSTEM_SETTING": "System setting",
-  "TXT_OPEN_DEVTOOLS": "Open DevTools"
+  "TXT_OPEN_DEVTOOLS": "Open DevTools",
+  "TXT_HISTORY": "History",
+  "TXT_HISTORY_FORWARD": "Go Forward",
+  "TXT_HISTORY_BACK": "Go Back",
+  "TXT_VERSIONS": "Versions",
+  "TXT_MINIMIZE": "Minimize"
 }
