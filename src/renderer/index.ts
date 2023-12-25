@@ -13,7 +13,7 @@
  *
  */
 
-import type { SYSTEM_THEME_MODE_TYPE } from "@/configs/types/components";
+import type { SystemThemeModeType } from "@/configs/types/components";
 import { createApp } from "vue";
 import { COOKIES_STORAGE_KEYS } from "@/configs/constants/app.const";
 import { i18n } from "./plugins/i18n.plugin";
@@ -30,7 +30,7 @@ app.use(router);
 app.use(store);
 app.mount("#app");
 
-const theme = getCookieStorage<SYSTEM_THEME_MODE_TYPE>(COOKIES_STORAGE_KEYS.theme) || "dark";
+const theme = getCookieStorage<SystemThemeModeType>(COOKIES_STORAGE_KEYS.theme) || "dark";
 document.getElementById("body").setAttribute("data-bs-theme", theme);
 
 if (window.electron.env.mode() === "development") {

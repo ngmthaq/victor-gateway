@@ -3,7 +3,7 @@ import { Modal } from "bootstrap";
 import { ref, watch, onMounted, onBeforeUnmount } from "vue";
 import { useI18n } from "vue-i18n";
 import { LANGUAGE_CONFIGS, COOKIES_STORAGE_KEYS } from "@/configs/constants/app.const";
-import { SYSTEM_THEME_MODE_TYPE } from "@/configs/types/components";
+import { SystemThemeModeType } from "@/configs/types/components";
 import { getCookieStorage, setCookieStorage } from "@/renderer/plugins/storage.plugin";
 
 const props = defineProps<{
@@ -18,7 +18,7 @@ const { t, locale } = useI18n();
 const ID = "titlebar-setting-dialog";
 const modal = ref<Modal | null>(null);
 const language = ref<string>(locale.value);
-const theme = ref<SYSTEM_THEME_MODE_TYPE>(getCookieStorage(COOKIES_STORAGE_KEYS.theme) || "dark");
+const theme = ref<SystemThemeModeType>(getCookieStorage(COOKIES_STORAGE_KEYS.theme) || "dark");
 
 function handleClose() {
   language.value = locale.value;

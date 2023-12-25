@@ -10,4 +10,4 @@ export type NotificationPermissionType = {
   granted: boolean;
 };
 
-export type SYSTEM_THEME_MODE_TYPE = "light" | "dark";
+export type SystemThemeModeType = "light" | "dark";

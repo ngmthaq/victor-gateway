@@ -7,8 +7,8 @@ export default defineConfig({
     browserField: false,
     mainFields: ["module", "jsnext:main", "jsnext"],
     alias: {
-      "~": fileURLToPath(new URL("./", import.meta.url)),
       "@": fileURLToPath(new URL("./src", import.meta.url)),
+      "~": fileURLToPath(new URL("./", import.meta.url)),
     },
   },
 });

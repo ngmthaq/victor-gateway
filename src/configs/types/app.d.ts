@@ -9,6 +9,3 @@ declare module "*.ico";
 declare module "*.svg";
 declare module "*.jpg";
 declare module "*.jpeg";
-
-export type ElectronEventNameType = "";
-export type ElectronEventCallbackType = (event: IpcRendererEvent, ...args: any[]) => Promise<void>;

@@ -1,8 +1,9 @@
+import type { ElectronEnvModeType } from "@/configs/types/app";
 import { ipcRenderer } from "electron";
-import { ELECTRON_EVENTS } from "../../configs/constants/event.const";
+import { ELECTRON_EVENTS } from "@/configs/constants/event.const";
 
 export const env = {
-  mode: () => process.env.NODE_ENV,
+  mode: (): ElectronEnvModeType => process.env.NODE_ENV as ElectronEnvModeType,
 
   all: async (): Promise<Record<string, string>> => {
     return ipcRenderer.invoke(ELECTRON_EVENTS.getEnv);

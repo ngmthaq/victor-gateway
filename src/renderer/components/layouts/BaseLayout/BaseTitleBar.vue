@@ -146,9 +146,8 @@ onUnmounted(() => {
       <div class="action-button minimize" @click="handleMinimize">
         <i class="bi bi-dash-lg"></i>
       </div>
-      <div class="action-button maximize unmaximize" v-if="isMaximized" @click="handleUnmaximize">
-        <span><i class="bi bi-square"></i></span>
-        <span><i class="bi bi-square-fill"></i></span>
+      <div class="action-button unmaximize" v-if="isMaximized" @click="handleUnmaximize">
+        <i class="bi bi-copy"></i>
       </div>
       <div class="action-button maximize" v-else @click="handleMaximize">
         <i class="bi bi-square"></i>
@@ -297,18 +296,12 @@ onUnmounted(() => {
       &.maximize {
         font-size: 10px;
         position: relative;
+      }
 
-        &.unmaximize {
-          font-size: 8px;
-        }
-
-        & span {
-          position: absolute;
-
-          &:first-child {
-            transform: translate(2px, -2px);
-          }
-        }
+      &.unmaximize {
+        font-size: 10px;
+        position: relative;
+        transform: rotate(180deg);
       }
 
       &.close {
