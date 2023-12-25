@@ -1,6 +1,6 @@
 // See the Electron documentation for details on how to use preload scripts:
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
-import type { ElectronEventCallbackType, ElectronEventNameType } from "@/configs/types/window";
+import type { ElectronEventCallbackType, ElectronEventNameType } from "@/configs/types/app";
 import { contextBridge, ipcRenderer } from "electron";
 import { versions } from "./utils/export-versions";
 import { frame } from "./utils/frame-events";
@@ -17,11 +17,16 @@ const addEventListener = (eventName: ElectronEventNameType, callback: ElectronEv
 };
 
 /**
- * Electron Context Bridge
+ * Electron Preload Object
  */
-contextBridge.exposeInMainWorld("electron", {
+export const electronPreload = {
   env: env,
   versions: versions,
   frame: frame,
   addEventListener: addEventListener,
-});
+};
+
+/**
+ * Electron Context Bridge
+ */
+contextBridge.exposeInMainWorld("electron", electronPreload);

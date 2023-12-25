@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Modal } from "bootstrap";
-import { ref, watch, onMounted } from "vue";
+import { ref, watch, onMounted, onBeforeUnmount } from "vue";
 import { useI18n } from "vue-i18n";
 import { LANGUAGE_CONFIGS, COOKIES_STORAGE_KEYS } from "@/configs/constants/app.const";
 import { SYSTEM_THEME_MODE_TYPE } from "@/configs/types/components";
@@ -15,7 +15,7 @@ const emit = defineEmits<{
 }>();
 
 const { t, locale } = useI18n();
-const ID = "setting-dialog";
+const ID = "titlebar-setting-dialog";
 const modal = ref<Modal | null>(null);
 const language = ref<string>(locale.value);
 const theme = ref<SYSTEM_THEME_MODE_TYPE>(getCookieStorage(COOKIES_STORAGE_KEYS.theme) || "dark");
@@ -49,12 +49,17 @@ watch(
 );
 
 onMounted(() => {
-  modal.value = new Modal(document.getElementById(ID), { backdrop: "static", keyboard: false });
+  modal.value = new Modal(document.getElementById(ID));
+  document.getElementById(ID).addEventListener("hidden.bs.modal", handleClose);
+});
+
+onBeforeUnmount(() => {
+  document.getElementById(ID).removeEventListener("hidden.bs.modal", handleClose);
 });
 </script>
 
 <template>
-  <section :id="ID" class="modal fade" tabindex="-1">
+  <section :id="ID" class="modal modal-titlebar" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content rounded-1 shadow">
         <div class="modal-body p-4">
@@ -118,7 +123,6 @@ onMounted(() => {
             type="button"
             class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0"
             data-bs-dismiss="modal"
-            @click="handleClose"
           >
             {{ t("TXT_CLOSE") }}
           </button>

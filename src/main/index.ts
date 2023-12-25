@@ -1,8 +1,8 @@
 import { app, BrowserWindow } from "electron";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import { createWindow } from "./utils/create-window";
-import { bootstrap } from "./utils/bootstrap";
 import { initialEnv } from "./utils/initial-env";
+import { bootstrap } from "./utils/bootstrap";
 
 // IS_DEV
 const IS_DEV = process.env.NODE_ENV === "development";

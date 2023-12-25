@@ -171,7 +171,7 @@ onUnmounted(() => {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: $z-index-common-titlebar;
+  z-index: $zindex-common-titlebar;
 
   & .title-bar {
     position: absolute;

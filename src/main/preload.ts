@@ -1,1 +1,1 @@
-import "../preload/index";
+import "../preload";

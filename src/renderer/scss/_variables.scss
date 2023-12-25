@@ -1,2 +1,13 @@
-$z-index-common-loading: 10;
-$z-index-common-titlebar: 999999;
+$zindex-dropdown: 1000;
+$zindex-sticky: 1020;
+$zindex-fixed: 1030;
+$zindex-offcanvas-backdrop: 1040;
+$zindex-offcanvas: 1045;
+$zindex-modal-backdrop: 1050;
+$zindex-modal: 1055;
+$zindex-popover: 1070;
+$zindex-tooltip: 1080;
+$zindex-toast: 1090;
+$zindex-common-loading: 1100;
+$zindex-common-titlebar-modal: 1105;
+$zindex-common-titlebar: 1110;

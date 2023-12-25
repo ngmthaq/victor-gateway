@@ -10,3 +10,7 @@ body {
 select {
   cursor: pointer;
 }
+
+.modal-titlebar {
+  z-index: $zindex-common-titlebar-modal;
+}

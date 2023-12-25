@@ -15,6 +15,7 @@ const { openSystemNotification } = useNotification();
 const [status, data, error, fetch, reset] = usePromise<Todo>(getTodo);
 
 const id = ref<number>(1);
+const text = ref<string>("");
 
 function handleClick() {
   id.value = randomNumber(1, 100);
@@ -40,6 +41,7 @@ function handleNotice() {
     <button @click="handleClick">Change Todo</button>
     <button @click="handleReset">Clear</button>
     <button @click="handleNotice">Notice</button>
+    <input type="text" v-model="text" />
     <br />
     <br />
     <RouterLink :to="PATH_ABOUT.path">About</RouterLink>
