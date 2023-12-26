@@ -7,9 +7,11 @@ import { COOKIES_STORAGE_KEYS } from "@/configs/constants/app.const";
 import { getCookieStorage, removeCookieStorage, setCookieStorage } from "@/renderer/plugins/storage.plugin";
 
 const { t } = useI18n();
+
 const ID = "request-notification";
 const NOTIFICATION_PERMISSION_KEY = COOKIES_STORAGE_KEYS.notificationPermission;
 const RECHECK_PERMISSION_TIME = 14 * 24 * 60 * 60 * 1000; // 14 days (milliseconds)
+
 const modal = ref<Modal | null>(null);
 
 async function handleAccept() {

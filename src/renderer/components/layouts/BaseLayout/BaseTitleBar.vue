@@ -11,6 +11,7 @@ const emit = defineEmits<{
 }>();
 
 const { t } = useI18n();
+
 const IS_DEV = window.electron.env.mode() === "development";
 const VIEW_POPOVER_ID = "title-bar-view-popover";
 const isAtMaxWidth = screen.availWidth - window.innerWidth === 0;

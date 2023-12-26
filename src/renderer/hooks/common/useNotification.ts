@@ -1,7 +1,7 @@
 import type { ToastType } from "@/configs/types/components";
 import icon from "@/assets/img/icon.png";
-import { productName } from "~/package.json";
 import { EVENT_BUS_EVENTS } from "@/configs/constants/event.const";
+import { productName } from "~/package.json";
 import { useEventBus } from "./useEventBus";
 
 /**

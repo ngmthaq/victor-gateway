@@ -9,7 +9,9 @@ import { getCurrentMilliseconds } from "@/renderer/plugins/datetime.plugin";
 
 const TOAST_DELAY = 6000;
 const TOAST_MAX = 5;
+
 const eventBus = useEventBus();
+
 const newToast = ref<ToastType>();
 const toasts = ref<ToastType[]>([]);
 

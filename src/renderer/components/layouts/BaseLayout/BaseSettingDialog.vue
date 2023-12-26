@@ -14,8 +14,10 @@ const emit = defineEmits<{
   (event: "close"): void;
 }>();
 
-const { t, locale } = useI18n();
 const ID = "titlebar-setting-dialog";
+
+const { t, locale } = useI18n();
+
 const modal = ref<Modal | null>(null);
 const language = ref<string>(locale.value);
 const theme = ref<SystemThemeModeType>(getCookieStorage(COOKIES_STORAGE_KEYS.theme) || "dark");

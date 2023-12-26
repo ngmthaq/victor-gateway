@@ -4,6 +4,7 @@ import { EVENT_BUS_EVENTS } from "@/configs/constants/event.const";
 import { useEventBus } from "@/renderer/hooks/common/useEventBus";
 
 const eventBus = useEventBus();
+
 const isLoading = ref<boolean>(false);
 
 function handleOpenLoading(open: boolean) {

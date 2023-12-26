@@ -1,4 +1,4 @@
-import type { ElectronEnvModeType } from "@/configs/types/app";
+import type { ElectronEnvModeType } from "@/configs/types/electron";
 import { ipcRenderer } from "electron";
 import { ELECTRON_EVENTS } from "@/configs/constants/event.const";
 

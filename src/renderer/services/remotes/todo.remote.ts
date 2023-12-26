@@ -10,7 +10,6 @@ export async function getAllTodoList(_: any, configs: AxiosRequestConfig = {}): 
 }
 
 export async function getTodo(payloads: PayloadGetTodoType, configs: AxiosRequestConfig = {}): Promise<Todo> {
-  const id: any = payloads.id;
-  const response = await api.default().get(API_TODO_ENDPOINTS.todo.replace(":id", id), {}, configs);
+  const response = await api.default().get(API_TODO_ENDPOINTS.todo.replace(":id", payloads.id.toString()), {}, configs);
   return new Todo(response.data.userId, response.data.id, response.data.title, response.data.completed);
 }
