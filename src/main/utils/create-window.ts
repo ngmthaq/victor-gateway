@@ -7,10 +7,10 @@ import { mainWindowConfigs } from "./runtime-configs";
 export function createWindow() {
   const mainWindow = new BrowserWindow({
     icon: getLogo(32, 32),
-    minWidth: 1366,
-    minHeight: 768,
-    width: 1366,
-    height: 768,
+    minWidth: 1280,
+    minHeight: 720,
+    width: 1280,
+    height: 720,
     autoHideMenuBar: true,
     frame: false,
     webPreferences: {
