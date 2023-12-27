@@ -6,6 +6,11 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue(), vueJsx()],
+  build: {
+    rollupOptions: {
+      external: ["better-sqlite3, sqlite3"],
+    },
+  },
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
