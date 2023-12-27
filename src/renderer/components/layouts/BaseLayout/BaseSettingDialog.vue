@@ -42,6 +42,7 @@ function handleSubmit() {
   setCookieStorage(COOKIES_STORAGE_KEYS.language, language.value);
   setCookieStorage(COOKIES_STORAGE_KEYS.theme, theme.value);
   locale.value = language.value;
+  document.querySelector("html").setAttribute("lang", language.value);
   document.getElementById("body").setAttribute("data-bs-theme", theme.value);
 }
 

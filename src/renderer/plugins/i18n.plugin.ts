@@ -9,6 +9,7 @@ import { getCookieStorage } from "./storage.plugin";
  * Current language
  */
 const language = getCookieStorage<Locale>(COOKIES_STORAGE_KEYS.language) || LANGUAGE_CONFIGS.defaultLanguage;
+document.querySelector("html").setAttribute("lang", language);
 
 /**
  * I18n configurations

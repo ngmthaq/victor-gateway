@@ -13,13 +13,11 @@
  *
  */
 
-import type { SystemThemeModeType } from "@/configs/types/components";
 import { createApp } from "vue";
-import { COOKIES_STORAGE_KEYS } from "@/configs/constants/app.const";
 import { i18n } from "./plugins/i18n.plugin";
 import { router } from "./plugins/router.plugin";
 import { store } from "./plugins/pinia.plugin";
-import { getCookieStorage } from "./plugins/storage.plugin";
+import { setTheme } from "./plugins/bootstrap.plugin";
 import App from "./App.vue";
 import "bootstrap-icons/font/bootstrap-icons.scss";
 import "./scss/main.scss";
@@ -30,8 +28,7 @@ app.use(router);
 app.use(store);
 app.mount("#app");
 
-const theme = getCookieStorage<SystemThemeModeType>(COOKIES_STORAGE_KEYS.theme) || "dark";
-document.getElementById("body").setAttribute("data-bs-theme", theme);
+setTheme();
 
 if (window.electron.env.mode() === "development") {
   console.log(
