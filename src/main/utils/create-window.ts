@@ -1,10 +1,14 @@
 import path from "path";
 import { BrowserWindow } from "electron";
 import { getLogo } from "./get-logo";
-import { mainWindowConfigs } from "./runtime-configs";
+import { runtimeConfigs } from "./runtime-configs";
 
-// Create the browser window.
-export function createWindow() {
+/**
+ * Create the browser window
+ *
+ * @returns {BrowserWindow}
+ */
+export function createWindow(): BrowserWindow {
   const mainWindow = new BrowserWindow({
     icon: getLogo(32, 32),
     minWidth: 1280,
@@ -21,7 +25,7 @@ export function createWindow() {
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
   else mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
   mainWindow.on("close", (event) => {
-    if (mainWindowConfigs.forceQuit === false) {
+    if (runtimeConfigs.forceQuit === false) {
       event.preventDefault();
       mainWindow.hide();
     }

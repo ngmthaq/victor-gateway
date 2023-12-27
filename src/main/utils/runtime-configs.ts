@@ -1,6 +1,9 @@
+import type { ElectronRuntimeConfigType } from "@/configs/types/electron";
+
 /**
  * Runtime configurations
  */
-export const mainWindowConfigs = {
+export const runtimeConfigs: ElectronRuntimeConfigType = {
   forceQuit: false,
+  mainWindow: null,
 };

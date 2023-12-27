@@ -1,6 +1,6 @@
 import { BrowserWindow, Menu, Tray, app, dialog } from "electron";
 import { productName } from "~/package.json";
-import { mainWindowConfigs } from "./runtime-configs";
+import { runtimeConfigs } from "./runtime-configs";
 import { getLogo } from "./get-logo";
 
 /**
@@ -40,7 +40,7 @@ export function createWindowTray(mainWindow: BrowserWindow) {
             })
             .then((result) => {
               if (result.response !== 0) return;
-              mainWindowConfigs.forceQuit = true;
+              runtimeConfigs.forceQuit = true;
               app.quit();
             });
         },

@@ -3,6 +3,7 @@ import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import { createWindow } from "./utils/create-window";
 import { initialEnv } from "./utils/initial-env";
 import { bootstrap } from "./utils/bootstrap";
+import { handleMainWindowInstance, handleProtocol } from "./utils/handle-deeplink";
 
 // IS_DEV
 const IS_DEV = process.env.NODE_ENV === "development";
@@ -15,6 +16,10 @@ process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) app.quit();
+
+// Setup protocol and detect mainWindow instance to handle deeplink
+handleProtocol();
+handleMainWindowInstance();
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
