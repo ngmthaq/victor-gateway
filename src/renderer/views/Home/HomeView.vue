@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import type { Todo } from "@/renderer/services/models/todo.model";
-import { ref } from "vue";
+import { onBeforeUnmount, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { RouterLink } from "vue-router";
+import { onChangeInternetStatus } from "@/renderer/plugins/navigator.plugin";
 import { useNotification } from "@/renderer/hooks/common/useNotification";
 import { usePromise } from "@/renderer/hooks/common/usePromise";
 import { getTodo } from "@/renderer/services/remotes/todo.remote";
@@ -40,6 +41,18 @@ function handleCloseAlert(value: string) {
   console.log("input value:", value);
   isOpenAlert.value = false;
 }
+
+onMounted(() => {
+  console.log("Mounted");
+});
+
+onBeforeUnmount(() => {
+  console.log("Before Unmount");
+});
+
+onChangeInternetStatus((isOnline) => {
+  console.log(isOnline);
+});
 </script>
 
 <template>

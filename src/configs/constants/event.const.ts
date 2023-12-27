@@ -6,6 +6,7 @@
 export const EVENT_BUS_EVENTS = {
   openCircularLoading: "eventBus:openCircularLoading",
   appendToast: "eventBus:appendToast",
+  changeInternetStatus: "eventBus:changeInternetStatus",
 };
 
 /**

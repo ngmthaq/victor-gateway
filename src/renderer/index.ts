@@ -18,6 +18,7 @@ import { i18n } from "./plugins/i18n.plugin";
 import { router } from "./plugins/router.plugin";
 import { store } from "./plugins/pinia.plugin";
 import { setTheme } from "./plugins/bootstrap.plugin";
+import { handleInternetConnection } from "./plugins/navigator.plugin";
 import App from "./App.vue";
 import "bootstrap-icons/font/bootstrap-icons.scss";
 import "./scss/main.scss";
@@ -29,6 +30,9 @@ app.use(store);
 app.mount("#app");
 
 setTheme();
+
+window.addEventListener("online", handleInternetConnection);
+window.addEventListener("offline", handleInternetConnection);
 
 if (window.electron.env.mode() === "development") {
   console.log(
