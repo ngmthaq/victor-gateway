@@ -9,6 +9,7 @@ import { getTodo } from "@/renderer/services/remotes/todo.remote";
 import { randomNumber } from "@/renderer/plugins/number.plugins";
 import { PATH_ABOUT } from "@/configs/constants/path.const";
 import BaseLayout from "@/renderer/components/layouts/BaseLayout/BaseLayout.vue";
+import PromptDialog from "@/renderer/components/common/PromptDialog.vue";
 
 const { t } = useI18n();
 const { openSystemNotification } = useNotification();
@@ -16,6 +17,7 @@ const [status, data, error, fetch, reset] = usePromise<Todo>(getTodo);
 
 const id = ref<number>(1);
 const text = ref<string>("");
+const isOpenAlert = ref<boolean>(false);
 
 function handleClick() {
   id.value = randomNumber(1, 100);
@@ -29,6 +31,15 @@ function handleReset() {
 function handleNotice() {
   openSystemNotification("Test description");
 }
+
+function handleOpenAlert() {
+  isOpenAlert.value = true;
+}
+
+function handleCloseAlert(value: string) {
+  console.log("input value:", value);
+  isOpenAlert.value = false;
+}
 </script>
 
 <template>
@@ -41,10 +52,18 @@ function handleNotice() {
     <button @click="handleClick">Change Todo</button>
     <button @click="handleReset">Clear</button>
     <button @click="handleNotice">Notice</button>
+    <button @click="handleOpenAlert">Alert</button>
     <input type="text" v-model="text" />
     <br />
     <br />
     <RouterLink :to="PATH_ABOUT.path">About</RouterLink>
+    <PromptDialog
+      id="confirm"
+      label="What is your name?"
+      :open="isOpenAlert"
+      @accept="handleCloseAlert"
+      @deny="handleCloseAlert"
+    />
   </BaseLayout>
 </template>
 

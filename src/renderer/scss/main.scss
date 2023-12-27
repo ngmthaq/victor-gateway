@@ -13,4 +13,8 @@ select {
 
 .modal-titlebar {
   z-index: $zindex-common-titlebar-modal;
+
+  & .modal-dialog {
+    max-width: 520px;
+  }
 }

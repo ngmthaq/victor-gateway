@@ -34,13 +34,15 @@ function handleCloseAll() {
 
 <template>
   <section id="base-layout">
-    <BaseSettingDialog :open="isOpenSettingDialog" @close="handleCloseSettingDialog" />
-    <BaseVersionDialog :open="isOpenVersionDialog" @close="handleCloseVersionsDialog" />
-    <BaseTitleBar
-      @click-setting="handleOpenSettingDialog"
-      @click-version="handleOpenVersionsDialog"
-      @close-all="handleCloseAll"
-    />
+    <section id="base-layout-titlebar">
+      <BaseSettingDialog :open="isOpenSettingDialog" @close="handleCloseSettingDialog" />
+      <BaseVersionDialog :open="isOpenVersionDialog" @close="handleCloseVersionsDialog" />
+      <BaseTitleBar
+        @click-setting="handleOpenSettingDialog"
+        @click-version="handleOpenVersionsDialog"
+        @close-all="handleCloseAll"
+      />
+    </section>
     <section
       id="base-layout-content"
       :style="{

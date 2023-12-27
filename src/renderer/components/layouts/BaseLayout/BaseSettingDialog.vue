@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Modal } from "bootstrap";
-import { ref, watch, onMounted, onBeforeUnmount } from "vue";
+import { ref, watch, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { LANGUAGE_CONFIGS, COOKIES_STORAGE_KEYS } from "@/configs/constants/app.const";
 import { SystemThemeModeType } from "@/configs/types/components";
@@ -51,12 +51,7 @@ watch(
 );
 
 onMounted(() => {
-  modal.value = new Modal(document.getElementById(ID));
-  document.getElementById(ID).addEventListener("hidden.bs.modal", handleClose);
-});
-
-onBeforeUnmount(() => {
-  document.getElementById(ID).removeEventListener("hidden.bs.modal", handleClose);
+  modal.value = new Modal(document.getElementById(ID), { keyboard: false, backdrop: "static" });
 });
 </script>
 
@@ -124,7 +119,7 @@ onBeforeUnmount(() => {
           <button
             type="button"
             class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0"
-            data-bs-dismiss="modal"
+            @click="handleClose"
           >
             {{ t("TXT_CLOSE") }}
           </button>

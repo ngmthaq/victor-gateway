@@ -1,4 +1,5 @@
 {
+  "TXT_OK": "OK",
   "TXT_HELP": "Trợ giúp",
   "TXT_EXIT": "Thoát",
   "TXT_CLOSE": "Đóng",
@@ -6,6 +7,7 @@
   "TXT_SETTING": "Cài đặt",
   "TXT_SAVE_SETTING": "Lưu cài đặt",
   "TXT_ACCEPT": "Đồng ý",
+  "TXT_CONFIRM": "Xác nhận",
   "TXT_DENY": "Từ chối",
   "TXT_LATER": "Để sau",
   "TXT_HELLO": "Xin chào",
@@ -24,5 +26,7 @@
   "TXT_HISTORY_FORWARD": "Nhấn để tiến",
   "TXT_HISTORY_BACK": "Nhấn để lùi",
   "TXT_VERSIONS": "Phiên bản",
-  "TXT_MINIMIZE": "Thu nhỏ"
+  "TXT_MINIMIZE": "Thu nhỏ",
+  "TXT_NOTICE": "Thông báo",
+  "TXT_COMMON_PLACEHOLDER": "Nhập thông tin của bạn tại đây"
 }

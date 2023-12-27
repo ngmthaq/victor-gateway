@@ -1,4 +1,5 @@
 {
+  "TXT_OK": "OK",
   "TXT_HELP": "Help",
   "TXT_EXIT": "Exit",
   "TXT_CLOSE": "Close",
@@ -6,6 +7,7 @@
   "TXT_SETTING": "Setting",
   "TXT_SAVE_SETTING": "Save changes",
   "TXT_ACCEPT": "Accept",
+  "TXT_CONFIRM": "Confirm",
   "TXT_DENY": "Deny",
   "TXT_LATER": "Later",
   "TXT_HELLO": "Hello",
@@ -24,5 +26,7 @@
   "TXT_HISTORY_FORWARD": "Go Forward",
   "TXT_HISTORY_BACK": "Go Back",
   "TXT_VERSIONS": "Versions",
-  "TXT_MINIMIZE": "Minimize"
+  "TXT_MINIMIZE": "Minimize",
+  "TXT_NOTICE": "Notice",
+  "TXT_COMMON_PLACEHOLDER": "Enter your text here"
 }
