@@ -15,33 +15,34 @@ export function createWindowTray(mainWindow: BrowserWindow) {
   const tray = new Tray(logo);
   const menu = Menu.buildFromTemplate([
     {
-      label: "Open application",
+      label: "Open",
       click: () => {
         mainWindow.show();
       },
     },
     { type: "separator" },
     {
-      label: "Open application setting",
+      label: "Setting",
       click: () => {
         mainWindow.webContents.send(ELECTRON_EVENTS.openSetting);
       },
     },
     {
-      label: "Show application version",
-      click: () => {
-        mainWindow.webContents.send(ELECTRON_EVENTS.showVersion);
-      },
-    },
-    {
-      label: "Open help center",
+      label: "Help Center",
       click: () => {
         mainWindow.webContents.send(ELECTRON_EVENTS.openHelpCenter);
       },
     },
     { type: "separator" },
     {
-      label: "Exit application",
+      label: "Version",
+      click: () => {
+        mainWindow.webContents.send(ELECTRON_EVENTS.showVersion);
+      },
+    },
+    { type: "separator" },
+    {
+      label: "Exit",
       click: () => {
         dialog
           .showMessageBox(mainWindow, {
