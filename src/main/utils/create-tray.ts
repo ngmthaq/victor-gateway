@@ -15,7 +15,7 @@ export function createWindowTray(mainWindow: BrowserWindow) {
   const tray = new Tray(logo);
   const menu = Menu.buildFromTemplate([
     {
-      label: productName,
+      label: productName.trim() + " is running",
       enabled: false,
     },
     { type: "separator" },
