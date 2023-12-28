@@ -2,9 +2,9 @@
 import { Modal } from "bootstrap";
 import { ref, watch, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
-import { LANGUAGE_CONFIGS, COOKIES_STORAGE_KEYS } from "@/configs/constants/app.const";
+import { LANGUAGE_CONFIGS, LOCAL_STORAGE_KEYS } from "@/configs/constants/app.const";
 import { SystemThemeModeType } from "@/configs/types/components";
-import { getCookieStorage, setCookieStorage } from "@/renderer/plugins/storage.plugin";
+import { getLocalStorage, setLocalStorage } from "@/renderer/plugins/storage.plugin";
 
 const props = defineProps<{
   open: boolean;
@@ -20,11 +20,11 @@ const { t, locale } = useI18n();
 
 const modal = ref<Modal | null>(null);
 const language = ref<string>(locale.value);
-const theme = ref<SystemThemeModeType>(getCookieStorage(COOKIES_STORAGE_KEYS.theme) || "dark");
+const theme = ref<SystemThemeModeType>(getLocalStorage(LOCAL_STORAGE_KEYS.theme) || "dark");
 
 function handleClose() {
   language.value = locale.value;
-  theme.value = getCookieStorage(COOKIES_STORAGE_KEYS.theme) || "dark";
+  theme.value = getLocalStorage(LOCAL_STORAGE_KEYS.theme) || "dark";
   emit("close");
 }
 
@@ -39,8 +39,8 @@ function handleToggleOpenModal(open: boolean) {
 }
 
 function handleSubmit() {
-  setCookieStorage(COOKIES_STORAGE_KEYS.language, language.value);
-  setCookieStorage(COOKIES_STORAGE_KEYS.theme, theme.value);
+  setLocalStorage(LOCAL_STORAGE_KEYS.language, language.value);
+  setLocalStorage(LOCAL_STORAGE_KEYS.theme, theme.value);
   locale.value = language.value;
   document.querySelector("html").setAttribute("lang", language.value);
   document.getElementById("body").setAttribute("data-bs-theme", theme.value);

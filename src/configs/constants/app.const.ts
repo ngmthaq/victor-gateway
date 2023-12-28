@@ -18,6 +18,9 @@ export const LANGUAGE_CONFIGS = {
  */
 export const LOCAL_STORAGE_KEYS = {
   accessToken: "local:accessToken",
+  language: "cookies:language",
+  notificationPermission: "cookies:notificationPermission",
+  theme: "cookies:theme",
 };
 
 /**
@@ -27,18 +30,6 @@ export const LOCAL_STORAGE_KEYS = {
  */
 export const SESSION_STORAGE_KEYS = {
   accessToken: "session:accessToken",
-};
-
-/**
- * Cookies Key Constants
- *
- * @see https://github.com/js-cookie/js-cookie#readme
- * @see https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
- */
-export const COOKIES_STORAGE_KEYS = {
-  language: "cookies:language",
-  notificationPermission: "cookies:notificationPermission",
-  theme: "cookies:theme",
 };
 
 /**

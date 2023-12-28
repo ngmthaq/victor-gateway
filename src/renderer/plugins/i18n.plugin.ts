@@ -1,14 +1,14 @@
 import type { Locale } from "vue-i18n";
 import { createI18n } from "vue-i18n";
-import { LANGUAGE_CONFIGS, COOKIES_STORAGE_KEYS } from "@/configs/constants/app.const";
+import { LANGUAGE_CONFIGS, LOCAL_STORAGE_KEYS } from "@/configs/constants/app.const";
 import vi from "@/configs/languages/vi.json";
 import en from "@/configs/languages/en.json";
-import { getCookieStorage } from "./storage.plugin";
+import { getLocalStorage } from "./storage.plugin";
 
 /**
  * Current language
  */
-const language = getCookieStorage<Locale>(COOKIES_STORAGE_KEYS.language) || LANGUAGE_CONFIGS.defaultLanguage;
+const language = getLocalStorage<Locale>(LOCAL_STORAGE_KEYS.language) || LANGUAGE_CONFIGS.defaultLanguage;
 document.querySelector("html").setAttribute("lang", language);
 
 /**

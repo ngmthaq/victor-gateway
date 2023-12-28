@@ -13,14 +13,14 @@ import {
   Toast,
   Tooltip,
 } from "bootstrap";
-import { COOKIES_STORAGE_KEYS } from "@/configs/constants/app.const";
-import { getCookieStorage } from "./storage.plugin";
+import { LOCAL_STORAGE_KEYS } from "@/configs/constants/app.const";
+import { getLocalStorage } from "./storage.plugin";
 
 /**
  * Setup bootstrap theme (dark | light)
  */
 export function setTheme() {
-  const theme = getCookieStorage<SystemThemeModeType>(COOKIES_STORAGE_KEYS.theme) || "dark";
+  const theme = getLocalStorage<SystemThemeModeType>(LOCAL_STORAGE_KEYS.theme) || "dark";
   document.getElementById("body").setAttribute("data-bs-theme", theme);
 }
 

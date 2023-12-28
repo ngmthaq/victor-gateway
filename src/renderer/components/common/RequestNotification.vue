@@ -3,13 +3,13 @@ import type { NotificationPermissionType } from "@/configs/types/components";
 import { ref, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { Modal } from "bootstrap";
-import { COOKIES_STORAGE_KEYS } from "@/configs/constants/app.const";
-import { getCookieStorage, removeCookieStorage, setCookieStorage } from "@/renderer/plugins/storage.plugin";
+import { LOCAL_STORAGE_KEYS } from "@/configs/constants/app.const";
+import { getLocalStorage, removeLocalStorage, setLocalStorage } from "@/renderer/plugins/storage.plugin";
 
 const { t } = useI18n();
 
 const ID = "request-notification";
-const NOTIFICATION_PERMISSION_KEY = COOKIES_STORAGE_KEYS.notificationPermission;
+const NOTIFICATION_PERMISSION_KEY = LOCAL_STORAGE_KEYS.notificationPermission;
 const RECHECK_PERMISSION_TIME = 14 * 24 * 60 * 60 * 1000; // 14 days (milliseconds)
 
 const modal = ref<Modal | null>(null);
@@ -32,19 +32,19 @@ function handleSetPermission(granted: boolean) {
     time: Date.now(),
     granted: granted,
   };
-  setCookieStorage(NOTIFICATION_PERMISSION_KEY, newNotificationPermission);
+  setLocalStorage(NOTIFICATION_PERMISSION_KEY, newNotificationPermission);
 }
 
 onMounted(() => {
   if ("Notification" in window) {
     modal.value = new Modal("#" + ID, { keyboard: false, backdrop: "static" });
-    const permission = getCookieStorage<NotificationPermissionType>(NOTIFICATION_PERMISSION_KEY);
+    const permission = getLocalStorage<NotificationPermissionType>(NOTIFICATION_PERMISSION_KEY);
     if (permission) {
       if (Date.now() - permission.time > RECHECK_PERMISSION_TIME) {
         if (Notification.permission === "granted") {
           handleSetPermission(true);
         } else if (Notification.permission === "default") {
-          removeCookieStorage(NOTIFICATION_PERMISSION_KEY);
+          removeLocalStorage(NOTIFICATION_PERMISSION_KEY);
           modal.value.show();
         }
       }

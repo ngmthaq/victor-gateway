@@ -8,7 +8,6 @@ import { productName, name } from "./package.json";
 
 const config: ForgeConfig = {
   packagerConfig: {
-    asar: true,
     protocols: [
       {
         name: productName,
@@ -16,9 +15,7 @@ const config: ForgeConfig = {
       },
     ],
   },
-  rebuildConfig: {
-    force: true,
-  },
+  rebuildConfig: {},
   makers: [
     new MakerSquirrel({}),
     new MakerZIP({}, ["darwin"]),
