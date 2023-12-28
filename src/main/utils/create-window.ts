@@ -9,6 +9,7 @@ import { runtimeConfigs } from "./runtime-configs";
  * @returns {BrowserWindow}
  */
 export function createWindow(): BrowserWindow {
+  const isMac = process.platform === "darwin";
   const mainWindow = new BrowserWindow({
     icon: getLogo(32, 32),
     minWidth: 1280,
@@ -16,7 +17,7 @@ export function createWindow(): BrowserWindow {
     width: 1280,
     height: 720,
     autoHideMenuBar: true,
-    frame: false,
+    frame: isMac ? true : false,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },

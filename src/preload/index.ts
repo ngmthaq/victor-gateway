@@ -23,6 +23,7 @@ export const electronPreload = {
   env: env,
   versions: versions,
   frame: frame,
+  platform: process.platform,
   addEventListener: addEventListener,
 };
 

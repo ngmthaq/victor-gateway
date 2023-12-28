@@ -5,6 +5,8 @@ import BaseTitleBar from "./BaseTitleBar.vue";
 import BaseSettingDialog from "./BaseSettingDialog.vue";
 import BaseVersionDialog from "./BaseVersionDialog.vue";
 
+const isMac = window.electron.platform === "darwin";
+
 const isOpenSettingDialog = ref<boolean>(false);
 const isOpenVersionDialog = ref<boolean>(false);
 
@@ -38,6 +40,7 @@ function handleCloseAll() {
       <BaseSettingDialog :open="isOpenSettingDialog" @close="handleCloseSettingDialog" />
       <BaseVersionDialog :open="isOpenVersionDialog" @close="handleCloseVersionsDialog" />
       <BaseTitleBar
+        v-if="!isMac"
         @click-setting="handleOpenSettingDialog"
         @click-version="handleOpenVersionsDialog"
         @close-all="handleCloseAll"
