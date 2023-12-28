@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [vue(), vueJsx()],
   build: {
     rollupOptions: {
-      external: ["better-sqlite3, sqlite3"],
+      external: ["better-sqlite3", "sqlite3"],
     },
   },
   resolve: {
