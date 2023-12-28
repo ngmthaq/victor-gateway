@@ -6,6 +6,7 @@ import BaseSettingDialog from "./BaseSettingDialog.vue";
 import BaseVersionDialog from "./BaseVersionDialog.vue";
 
 const isMac = window.electron.platform === "darwin";
+const titleBarHeight = isMac ? 0 : ELEMENT_SIZES.titleBarHeight;
 
 const isOpenSettingDialog = ref<boolean>(false);
 const isOpenVersionDialog = ref<boolean>(false);
@@ -49,8 +50,8 @@ function handleCloseAll() {
     <section
       id="base-layout-content"
       :style="{
-        height: `calc(100vh - ${ELEMENT_SIZES.titleBarHeight}px)`,
-        marginTop: ` ${ELEMENT_SIZES.titleBarHeight}px`,
+        height: `calc(100vh - ${titleBarHeight}px)`,
+        marginTop: ` ${titleBarHeight}px`,
       }"
     >
       <slot></slot>
