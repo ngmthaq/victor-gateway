@@ -4,7 +4,9 @@ import path from "node:path";
 import { readFile } from "node:fs/promises";
 import { productName } from "~/package.json";
 
-// Config dotenv
+/**
+ * Config dotenv
+ */
 export async function initialEnv() {
   try {
     const inputEnv = path.resolve(__dirname, "../../.env");
