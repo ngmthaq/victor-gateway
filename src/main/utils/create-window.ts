@@ -1,5 +1,5 @@
 import path from "path";
-import { BrowserWindow } from "electron";
+import { BrowserWindow, app } from "electron";
 import { getLogo } from "./get-logo";
 import { runtimeConfigs } from "./runtime-configs";
 
@@ -20,6 +20,7 @@ export function createWindow(): BrowserWindow {
     frame: isMac ? true : false,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
+      devTools: !app.isPackaged,
     },
   });
 
