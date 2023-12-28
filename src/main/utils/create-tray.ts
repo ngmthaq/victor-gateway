@@ -65,7 +65,6 @@ export function createWindowTray(mainWindow: BrowserWindow) {
   });
 
   tray.setIgnoreDoubleClickEvents(true);
-  tray.setTitle(productName);
   tray.setToolTip(productName);
   tray.setContextMenu(menu);
 }
