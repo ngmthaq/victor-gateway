@@ -2,6 +2,7 @@ import type { RouteRecordRaw } from "vue-router";
 import { createRouter, createWebHashHistory } from "vue-router";
 import * as PATH_CONST from "@/configs/constants/path.const";
 import NotFoundView from "@/renderer/views/NotFound/NotFoundView.vue";
+import { productName } from "~/package.json";
 
 /**
  * Not found (404) path
@@ -23,7 +24,7 @@ const router = createRouter({
  * Router Hook: Before change route
  */
 router.beforeEach((to, from, next) => {
-  if (to.meta.title) document.title = to.meta.title as string;
+  document.title = productName.trim();
   return next();
 });
 
