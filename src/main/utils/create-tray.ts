@@ -20,6 +20,7 @@ export function createWindowTray(mainWindow: BrowserWindow) {
         mainWindow.show();
       },
     },
+    { type: "separator" },
     {
       label: "Open application setting",
       click: () => {
@@ -38,6 +39,7 @@ export function createWindowTray(mainWindow: BrowserWindow) {
         mainWindow.webContents.send(ELECTRON_EVENTS.openHelpCenter);
       },
     },
+    { type: "separator" },
     {
       label: "Exit application",
       click: () => {
