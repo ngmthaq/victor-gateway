@@ -20,34 +20,34 @@ export function createWindowTray(mainWindow: BrowserWindow) {
     },
     { type: "separator" },
     {
-      label: "Open",
+      label: "Open " + productName.trim(),
       click: () => {
         mainWindow.show();
       },
     },
     { type: "separator" },
     {
-      label: "Setting",
+      label: "Open Setting",
       click: () => {
         mainWindow.webContents.send(ELECTRON_EVENTS.openSetting);
       },
     },
     {
-      label: "Help Center",
+      label: "Go to Help Center",
       click: () => {
         mainWindow.webContents.send(ELECTRON_EVENTS.openHelpCenter);
       },
     },
     { type: "separator" },
     {
-      label: "Version",
+      label: "About " + productName.trim(),
       click: () => {
         mainWindow.webContents.send(ELECTRON_EVENTS.showVersion);
       },
     },
     { type: "separator" },
     {
-      label: "Exit",
+      label: "Quit",
       click: () => {
         dialog
           .showMessageBox(mainWindow, {
