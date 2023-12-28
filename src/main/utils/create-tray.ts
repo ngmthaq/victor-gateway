@@ -29,6 +29,7 @@ export function createWindowTray(mainWindow: BrowserWindow) {
     {
       label: "Open Setting",
       click: () => {
+        mainWindow.show();
         mainWindow.webContents.send(ELECTRON_EVENTS.openSetting);
       },
     },
@@ -42,6 +43,7 @@ export function createWindowTray(mainWindow: BrowserWindow) {
     {
       label: "About " + productName.trim(),
       click: () => {
+        mainWindow.show();
         mainWindow.webContents.send(ELECTRON_EVENTS.showVersion);
       },
     },
