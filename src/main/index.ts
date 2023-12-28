@@ -4,6 +4,7 @@ import { createWindow } from "./utils/create-window";
 import { initialEnv } from "./utils/initial-env";
 import { bootstrap } from "./utils/bootstrap";
 import { handleMainWindowInstance, handleProtocol } from "./utils/handle-deeplink";
+import { runtimeConfigs } from "./utils/runtime-configs";
 
 // IS_DEV
 const IS_DEV = process.env.NODE_ENV === "development";
@@ -46,5 +47,8 @@ app.on("window-all-closed", () => {
 app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
+  } else {
+    if (!runtimeConfigs.mainWindow.isVisible()) runtimeConfigs.mainWindow.show();
+    runtimeConfigs.mainWindow.focus();
   }
 });
