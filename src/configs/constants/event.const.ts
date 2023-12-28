@@ -22,4 +22,7 @@ export const ELECTRON_EVENTS = {
   openDevtools: "electron:openDevtools",
   isMaximized: "electron:isMaximized",
   getEnv: "electron:getEnv",
+  openSetting: "electron:openSetting",
+  showVersion: "electron:showVersion",
+  openHelpCenter: "electron:openHelpCenter",
 };

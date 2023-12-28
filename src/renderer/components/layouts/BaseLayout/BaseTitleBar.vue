@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 import { useI18n } from "vue-i18n";
 import { ELEMENT_SIZES } from "@/configs/constants/app.const";
 import { productName } from "~/package.json";
+import { ELECTRON_EVENTS } from "@/configs/constants/event.const";
 
 const emit = defineEmits<{
   (event: "clickSetting"): void;
@@ -28,7 +29,7 @@ function handleClickSetting() {
   emit("clickSetting");
 }
 
-function handleClickHelp() {
+async function handleClickHelp() {
   emit("closeAll");
   console.log("Go to help center page");
 }
@@ -82,10 +83,12 @@ function handleClickVersion() {
 
 onMounted(() => {
   window.addEventListener("resize", handleWindowResize);
+  window.electron.addEventListener(ELECTRON_EVENTS.openHelpCenter, handleClickHelp);
 });
 
-onUnmounted(() => {
+onBeforeUnmount(() => {
   window.removeEventListener("resize", handleWindowResize);
+  window.electron.removeEventListener(ELECTRON_EVENTS.openHelpCenter, handleClickHelp);
 });
 </script>
 

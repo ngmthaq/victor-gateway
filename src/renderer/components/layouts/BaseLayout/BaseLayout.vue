@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ELEMENT_SIZES } from "@/configs/constants/app.const";
-import { ref } from "vue";
+import { onBeforeUnmount, onMounted, ref } from "vue";
+import { ELECTRON_EVENTS } from "@/configs/constants/event.const";
 import BaseTitleBar from "./BaseTitleBar.vue";
 import BaseSettingDialog from "./BaseSettingDialog.vue";
 import BaseVersionDialog from "./BaseVersionDialog.vue";
@@ -11,18 +12,18 @@ const titleBarHeight = isMac ? 0 : ELEMENT_SIZES.titleBarHeight;
 const isOpenSettingDialog = ref<boolean>(false);
 const isOpenVersionDialog = ref<boolean>(false);
 
-function handleOpenSettingDialog() {
+async function handleOpenSettingDialog() {
   isOpenSettingDialog.value = true;
   isOpenVersionDialog.value = false;
 }
 
-function handleCloseSettingDialog() {
-  isOpenSettingDialog.value = false;
-}
-
-function handleOpenVersionsDialog() {
+async function handleOpenVersionsDialog() {
   isOpenSettingDialog.value = false;
   isOpenVersionDialog.value = true;
+}
+
+function handleCloseSettingDialog() {
+  isOpenSettingDialog.value = false;
 }
 
 function handleCloseVersionsDialog() {
@@ -33,6 +34,16 @@ function handleCloseAll() {
   isOpenSettingDialog.value = false;
   isOpenVersionDialog.value = false;
 }
+
+onMounted(() => {
+  window.electron.addEventListener(ELECTRON_EVENTS.openSetting, handleOpenSettingDialog);
+  window.electron.addEventListener(ELECTRON_EVENTS.showVersion, handleOpenVersionsDialog);
+});
+
+onBeforeUnmount(() => {
+  window.electron.removeEventListener(ELECTRON_EVENTS.openSetting, handleOpenSettingDialog);
+  window.electron.removeEventListener(ELECTRON_EVENTS.showVersion, handleOpenVersionsDialog);
+});
 </script>
 
 <template>
