@@ -25,4 +25,7 @@ export const ELECTRON_EVENTS = {
   openSetting: "electron:openSetting",
   showVersion: "electron:showVersion",
   openHelpCenter: "electron:openHelpCenter",
+  getLocalStorage: "electron:getLocalStorage",
+  setLocalStorage: "electron:setLocalStorage",
+  removeLocalStorage: "electron:removeLocalStorage",
 };

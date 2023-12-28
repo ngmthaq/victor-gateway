@@ -17,19 +17,10 @@ export const LANGUAGE_CONFIGS = {
  * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
  */
 export const LOCAL_STORAGE_KEYS = {
-  accessToken: "local:accessToken",
-  language: "cookies:language",
-  notificationPermission: "cookies:notificationPermission",
-  theme: "cookies:theme",
-};
-
-/**
- * SessionStorage Key Constants
- *
- * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage
- */
-export const SESSION_STORAGE_KEYS = {
-  accessToken: "session:accessToken",
+  theme: "theme",
+  language: "language",
+  accessToken: "accessToken",
+  notificationPermission: "notificationPermission",
 };
 
 /**

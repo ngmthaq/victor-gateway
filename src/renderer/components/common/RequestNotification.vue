@@ -17,40 +17,40 @@ const modal = ref<Modal | null>(null);
 async function handleAccept() {
   const permission = await Notification.requestPermission();
   if (permission === "granted") {
-    handleSetPermission(true);
+    await handleSetPermission(true);
   } else {
-    handleDeny();
+    await handleDeny();
   }
 }
 
-function handleDeny() {
-  handleSetPermission(false);
+async function handleDeny() {
+  await handleSetPermission(false);
 }
 
-function handleSetPermission(granted: boolean) {
+async function handleSetPermission(granted: boolean) {
   const newNotificationPermission: NotificationPermissionType = {
     time: Date.now(),
     granted: granted,
   };
-  setLocalStorage(NOTIFICATION_PERMISSION_KEY, newNotificationPermission);
+  await setLocalStorage(NOTIFICATION_PERMISSION_KEY, newNotificationPermission);
 }
 
-onMounted(() => {
+onMounted(async () => {
   if ("Notification" in window) {
     modal.value = new Modal("#" + ID, { keyboard: false, backdrop: "static" });
-    const permission = getLocalStorage<NotificationPermissionType>(NOTIFICATION_PERMISSION_KEY);
+    const permission = await getLocalStorage<NotificationPermissionType>(NOTIFICATION_PERMISSION_KEY);
     if (permission) {
       if (Date.now() - permission.time > RECHECK_PERMISSION_TIME) {
         if (Notification.permission === "granted") {
-          handleSetPermission(true);
+          await handleSetPermission(true);
         } else if (Notification.permission === "default") {
-          removeLocalStorage(NOTIFICATION_PERMISSION_KEY);
+          await removeLocalStorage(NOTIFICATION_PERMISSION_KEY);
           modal.value.show();
         }
       }
     } else {
       if (Notification.permission === "granted") {
-        handleSetPermission(true);
+        await handleSetPermission(true);
       } else if (Notification.permission === "default") {
         modal.value.show();
       }

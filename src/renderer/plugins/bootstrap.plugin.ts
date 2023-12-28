@@ -19,8 +19,9 @@ import { getLocalStorage } from "./storage.plugin";
 /**
  * Setup bootstrap theme (dark | light)
  */
-export function setTheme() {
-  const theme = getLocalStorage<SystemThemeModeType>(LOCAL_STORAGE_KEYS.theme) || "dark";
+export async function setTheme() {
+  const currentTheme = await getLocalStorage<SystemThemeModeType>(LOCAL_STORAGE_KEYS.theme);
+  const theme = currentTheme || "dark";
   document.getElementById("body").setAttribute("data-bs-theme", theme);
 }
 

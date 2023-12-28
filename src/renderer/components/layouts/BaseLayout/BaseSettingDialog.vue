@@ -20,11 +20,12 @@ const { t, locale } = useI18n();
 
 const modal = ref<Modal | null>(null);
 const language = ref<string>(locale.value);
-const theme = ref<SystemThemeModeType>(getLocalStorage(LOCAL_STORAGE_KEYS.theme) || "dark");
+const theme = ref<SystemThemeModeType>("dark");
 
-function handleClose() {
+async function handleClose() {
+  const currentTheme = await getLocalStorage<SystemThemeModeType>(LOCAL_STORAGE_KEYS.theme);
+  theme.value = currentTheme || "dark";
   language.value = locale.value;
-  theme.value = getLocalStorage(LOCAL_STORAGE_KEYS.theme) || "dark";
   emit("close");
 }
 
@@ -38,9 +39,9 @@ function handleToggleOpenModal(open: boolean) {
   }
 }
 
-function handleSubmit() {
-  setLocalStorage(LOCAL_STORAGE_KEYS.language, language.value);
-  setLocalStorage(LOCAL_STORAGE_KEYS.theme, theme.value);
+async function handleSubmit() {
+  await setLocalStorage(LOCAL_STORAGE_KEYS.language, language.value);
+  await setLocalStorage(LOCAL_STORAGE_KEYS.theme, theme.value);
   locale.value = language.value;
   document.querySelector("html").setAttribute("lang", language.value);
   document.getElementById("body").setAttribute("data-bs-theme", theme.value);
@@ -51,7 +52,9 @@ watch(
   (value) => handleToggleOpenModal(value),
 );
 
-onMounted(() => {
+onMounted(async () => {
+  const currentTheme = await getLocalStorage<SystemThemeModeType>(LOCAL_STORAGE_KEYS.theme);
+  theme.value = currentTheme || "dark";
   modal.value = new Modal(document.getElementById(ID), { keyboard: false, backdrop: "static" });
 });
 </script>

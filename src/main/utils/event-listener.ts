@@ -1,5 +1,6 @@
 import { BrowserWindow, ipcMain } from "electron";
 import { ELECTRON_EVENTS } from "@/configs/constants/event.const";
+import { runtimeConfigs } from "./runtime-configs";
 
 /**
  * ipcMain event listener from preload/renderer
@@ -43,5 +44,17 @@ export function ipcMainListener(mainWindow: BrowserWindow) {
       }
     }
     return env;
+  });
+
+  ipcMain.handle(ELECTRON_EVENTS.getLocalStorage, (_: any, key: string) => {
+    return runtimeConfigs.localStorage.get(key);
+  });
+
+  ipcMain.handle(ELECTRON_EVENTS.setLocalStorage, (_: any, key: string, value: any) => {
+    return runtimeConfigs.localStorage.set(key, value);
+  });
+
+  ipcMain.handle(ELECTRON_EVENTS.removeLocalStorage, (_: any, key: string) => {
+    return runtimeConfigs.localStorage.delete(key);
   });
 }

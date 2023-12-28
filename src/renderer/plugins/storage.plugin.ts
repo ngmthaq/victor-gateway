@@ -1,17 +1,18 @@
-import { isJsonString } from "./str.plugin";
+import { name } from "~/package.json";
 
 /**
  * Set localStorage item
  *
- * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+ * @see https://github.com/sindresorhus/electron-store?tab=readme-ov-file#electron-store
  * @param key
  * @param value
  * @returns any
  */
-export function setLocalStorage(key: string, value: any) {
+export async function setLocalStorage<T>(key: string, value: T): Promise<T | undefined> {
   try {
-    const ref = { value: value };
-    localStorage.setItem(key, JSON.stringify(ref));
+    key = `${name}:${key}`;
+    await window.electron.localStorage.set(key, value);
+    if (window.electron.env.mode() === "development") console.log("setLocalStorage", { key, value });
     return value;
   } catch (error) {
     console.error(error);
@@ -22,54 +23,25 @@ export function setLocalStorage(key: string, value: any) {
 /**
  * Remove localStorage item
  *
- * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+ * @see https://github.com/sindresorhus/electron-store?tab=readme-ov-file#electron-store
  * @param key
  */
-export function removeLocalStorage(key: string) {
-  localStorage.removeItem(key);
+export async function removeLocalStorage(key: string) {
+  key = `${name}:${key}`;
+  await window.electron.localStorage.remove(key);
+  if (window.electron.env.mode() === "development") console.log("removeLocalStorage", { key });
 }
 
 /**
  * Get localStorage item
  *
- * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+ * @see https://github.com/sindresorhus/electron-store?tab=readme-ov-file#electron-store
  * @param key
  * @returns any
  */
-export function getLocalStorage<T>(key: string): T | undefined {
-  const value: any = localStorage.getItem(key);
-  if (value !== null && value !== undefined && isJsonString(value)) {
-    const ref = JSON.parse(value);
-    return ref.value;
-  }
-  return undefined;
-}
-
-/**
- * Set sessionStorage item
- *
- * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage
- * @param key
- * @param value
- * @returns any
- */
-export function setSessionStorage(key: string, value: any) {
-  try {
-    const ref = { value: value };
-    sessionStorage.setItem(key, JSON.stringify(ref));
-    return value;
-  } catch (error) {
-    console.error(error);
-    return undefined;
-  }
-}
-
-/**
- * Remove sessionStorage item
- *
- * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage
- * @param key
- */
-export function removeSessionStorage(key: string) {
-  sessionStorage.removeItem(key);
+export async function getLocalStorage<T>(key: string): Promise<T | undefined> {
+  key = `${name}:${key}`;
+  const value: T = await window.electron.localStorage.get(key);
+  if (window.electron.env.mode() === "development") console.log("getLocalStorage", { key, value });
+  return value;
 }

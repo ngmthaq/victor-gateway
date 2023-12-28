@@ -6,17 +6,20 @@ import en from "@/configs/languages/en.json";
 import { getLocalStorage } from "./storage.plugin";
 
 /**
- * Current language
- */
-const language = getLocalStorage<Locale>(LOCAL_STORAGE_KEYS.language) || LANGUAGE_CONFIGS.defaultLanguage;
-document.querySelector("html").setAttribute("lang", language);
-
-/**
  * I18n configurations
  */
 export const i18n = createI18n({
   legacy: false,
-  locale: language,
-  fallbackLocale: LANGUAGE_CONFIGS.defaultLanguage,
+  locale: LANGUAGE_CONFIGS.defaultLanguage,
   messages: { vi, en },
 });
+
+/**
+ * Get current language
+ */
+(async () => {
+  const currentLanguage = await getLocalStorage<Locale>(LOCAL_STORAGE_KEYS.language);
+  const language: any = currentLanguage || LANGUAGE_CONFIGS.defaultLanguage;
+  document.querySelector("html").setAttribute("lang", language);
+  i18n.global.locale.value = language;
+})();

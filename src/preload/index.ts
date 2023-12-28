@@ -2,6 +2,7 @@
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
 import type { ElectronEventCallbackType } from "@/configs/types/electron";
 import { contextBridge, ipcRenderer } from "electron";
+import { localStorage } from "./utils/local-storage";
 import { versions } from "./utils/export-versions";
 import { frame } from "./utils/frame-events";
 import { env } from "./utils/export-env";
@@ -31,8 +32,9 @@ const removeEventListener = (eventName: string, callback: ElectronEventCallbackT
  */
 export const electronPreload = {
   env: env,
-  versions: versions,
   frame: frame,
+  versions: versions,
+  localStorage: localStorage,
   platform: process.platform,
   addEventListener: addEventListener,
   removeEventListener: removeEventListener,
