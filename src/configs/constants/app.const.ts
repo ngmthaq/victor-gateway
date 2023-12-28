@@ -14,7 +14,7 @@ export const LANGUAGE_CONFIGS = {
 /**
  * LocalStorage Key Constants
  *
- * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+ * @see https://github.com/sindresorhus/electron-store?tab=readme-ov-file#electron-store
  */
 export const LOCAL_STORAGE_KEYS = {
   theme: "theme",
