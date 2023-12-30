@@ -3,6 +3,7 @@ import { MakerSquirrel } from "@electron-forge/maker-squirrel";
 import { MakerZIP } from "@electron-forge/maker-zip";
 import { MakerDeb } from "@electron-forge/maker-deb";
 import { MakerRpm } from "@electron-forge/maker-rpm";
+import { MakerDMG } from "@electron-forge/maker-dmg";
 import { VitePlugin } from "@electron-forge/plugin-vite";
 import { productName, name } from "./package.json";
 
@@ -15,10 +16,11 @@ const config: ForgeConfig = {
       },
     ],
   },
-  rebuildConfig: {},
+  rebuildConfig: { force: true },
   makers: [
-    new MakerSquirrel({}),
-    new MakerZIP({}, ["darwin"]),
+    new MakerSquirrel({ noMsi: false }),
+    new MakerDMG({}),
+    new MakerZIP({}, ["darwin", "win32", "linux"]),
     new MakerRpm({}),
     new MakerDeb({
       options: {
