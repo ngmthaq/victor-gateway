@@ -51,6 +51,7 @@ export function createWindowTray(mainWindow: BrowserWindow) {
     {
       label: "Quit",
       click: () => {
+        mainWindow.show();
         dialog
           .showMessageBox(mainWindow, {
             type: "question",
