@@ -55,6 +55,7 @@ watch(
 onMounted(async () => {
   const currentTheme = await getLocalStorage<SystemThemeModeType>(LOCAL_STORAGE_KEYS.theme);
   theme.value = currentTheme || "dark";
+  language.value = locale.value;
   modal.value = new Modal(document.getElementById(ID), { keyboard: false, backdrop: "static" });
 });
 </script>

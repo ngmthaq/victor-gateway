@@ -67,7 +67,7 @@ export function createWindowTray(mainWindow: BrowserWindow) {
     },
   ]);
 
-  tray.on("click", () => {
+  tray.on("double-click", () => {
     mainWindow.show();
   });
 

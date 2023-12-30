@@ -6,9 +6,6 @@ import BaseTitleBar from "./BaseTitleBar.vue";
 import BaseSettingDialog from "./BaseSettingDialog.vue";
 import BaseVersionDialog from "./BaseVersionDialog.vue";
 
-const isMac = window.electron.platform === "darwin";
-const titleBarHeight = isMac ? 0 : ELEMENT_SIZES.titleBarHeight;
-
 const isOpenSettingDialog = ref<boolean>(false);
 const isOpenVersionDialog = ref<boolean>(false);
 
@@ -52,7 +49,6 @@ onBeforeUnmount(() => {
       <BaseSettingDialog :open="isOpenSettingDialog" @close="handleCloseSettingDialog" />
       <BaseVersionDialog :open="isOpenVersionDialog" @close="handleCloseVersionsDialog" />
       <BaseTitleBar
-        v-if="!isMac"
         @click-setting="handleOpenSettingDialog"
         @click-version="handleOpenVersionsDialog"
         @close-all="handleCloseAll"
@@ -61,8 +57,8 @@ onBeforeUnmount(() => {
     <section
       id="base-layout-content"
       :style="{
-        height: `calc(100vh - ${titleBarHeight}px)`,
-        marginTop: ` ${titleBarHeight}px`,
+        height: `calc(100vh - ${ELEMENT_SIZES.titleBarHeight}px)`,
+        marginTop: ` ${ELEMENT_SIZES.titleBarHeight}px`,
       }"
     >
       <slot></slot>

@@ -14,7 +14,7 @@ const emit = defineEmits<{
 const { t } = useI18n();
 
 const IS_DEV = window.electron.env.mode() === "development";
-const VIEW_POPOVER_ID = "title-bar-view-popover";
+const IS_MAC = window.electron.platform === "darwin";
 const isAtMaxWidth = screen.availWidth - window.innerWidth === 0;
 const screenPixelRatio = (window.outerWidth - 8) / window.innerWidth;
 const isAtDefaultZoom = screenPixelRatio > 0.92 && screenPixelRatio <= 1.1;
@@ -93,15 +93,18 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section id="custom-window-title-bar" :style="{ height: `${ELEMENT_SIZES.titleBarHeight}px` }">
+  <section
+    id="custom-window-title-bar"
+    :style="{ height: `${ELEMENT_SIZES.titleBarHeight}px`, flexDirection: IS_MAC ? 'row-reverse' : 'row' }"
+  >
     <div class="title-bar">
       {{ productName }}
     </div>
     <div class="left-bar">
-      <div class="logo">
+      <div class="logo" v-if="!IS_MAC">
         <img src="@/assets/img/icon.png" alt="title-bar-logo" />
       </div>
-      <div class="menu">
+      <div class="menu" :style="{ marginRight: IS_MAC ? '10px' : '0px' }">
         <div class="menu-item" @click="handleClickSetting">
           <span>{{ t("TXT_SETTING") }}</span>
         </div>
@@ -146,7 +149,7 @@ onBeforeUnmount(() => {
       </div>
     </div>
     <div class="middle-bar"></div>
-    <div class="right-bar">
+    <div class="right-bar" v-if="!IS_MAC">
       <div class="action-button minimize" @click="handleMinimize">
         <i class="bi bi-dash-lg"></i>
       </div>
@@ -160,7 +163,6 @@ onBeforeUnmount(() => {
         <i class="bi bi-x-lg"></i>
       </div>
     </div>
-    <div :id="VIEW_POPOVER_ID"></div>
   </section>
 </template>
 
