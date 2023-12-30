@@ -1,10 +1,11 @@
 import { app, BrowserWindow } from "electron";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
-import { createWindow } from "./utils/create-window";
-import { initialEnv } from "./utils/initial-env";
-import { bootstrap } from "./utils/bootstrap";
-import { handleMainWindowInstance, handleProtocol } from "./utils/handle-deeplink";
-import { runtimeConfigs } from "./utils/runtime-configs";
+import { migrate } from "@/database/migrations";
+import { createWindow } from "./services/window.service";
+import { initialEnv } from "./services/env.service";
+import { bootstrap } from "./services/bootstrap.service";
+import { handleMainWindowInstance, handleProtocol } from "./services/deeplink.service";
+import { runtimeConfigs } from "./services/runtime.service";
 
 // IS_DEV
 const IS_DEV = process.env.NODE_ENV === "development";
@@ -26,10 +27,15 @@ handleMainWindowInstance();
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", () => {
+  const quit = (e: any) => {
+    console.error(e);
+    app.quit();
+  };
+
   if (IS_DEV) {
-    installExtension(VUEJS_DEVTOOLS).then(initialEnv).then(bootstrap).catch(console.error);
+    installExtension(VUEJS_DEVTOOLS).then(initialEnv).then(migrate).then(bootstrap).catch(quit);
   } else {
-    initialEnv().then(bootstrap).catch(console.error);
+    initialEnv().then(migrate).then(bootstrap).catch(quit);
   }
 });
 
