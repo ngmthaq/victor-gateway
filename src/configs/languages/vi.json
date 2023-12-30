@@ -26,7 +26,9 @@
   "TXT_HISTORY_FORWARD": "Nhấn để tiến",
   "TXT_HISTORY_BACK": "Nhấn để lùi",
   "TXT_VERSIONS": "Phiên bản",
-  "TXT_MINIMIZE": "Thu nhỏ",
+  "TXT_MINIMIZE": "Ẩn ứng dụng",
   "TXT_NOTICE": "Thông báo",
-  "TXT_COMMON_PLACEHOLDER": "Nhập thông tin của bạn tại đây"
+  "TXT_COMMON_PLACEHOLDER": "Nhập thông tin của bạn tại đây",
+  "TXT_MAXIMIZE": "Phóng to",
+  "TXT_UNMAXIMIZE": "Thu nhỏ"
 }

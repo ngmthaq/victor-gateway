@@ -28,5 +28,7 @@
   "TXT_VERSIONS": "Versions",
   "TXT_MINIMIZE": "Minimize",
   "TXT_NOTICE": "Notice",
-  "TXT_COMMON_PLACEHOLDER": "Enter your text here"
+  "TXT_COMMON_PLACEHOLDER": "Enter your text here",
+  "TXT_MAXIMIZE": "Maximize",
+  "TXT_UNMAXIMIZE": "Unmaximize"
 }

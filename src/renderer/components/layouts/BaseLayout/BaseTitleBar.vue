@@ -150,16 +150,16 @@ onBeforeUnmount(() => {
     </div>
     <div class="middle-bar"></div>
     <div class="right-bar" v-if="!IS_MAC">
-      <div class="action-button minimize" @click="handleMinimize">
+      <div :title="t('TXT_MINIMIZE')" class="action-button minimize" @click="handleMinimize">
         <i class="bi bi-dash-lg"></i>
       </div>
-      <div class="action-button unmaximize" v-if="isMaximized" @click="handleUnmaximize">
+      <div :title="t('TXT_UNMAXIMIZE')" class="action-button unmaximize" v-if="isMaximized" @click="handleUnmaximize">
         <i class="bi bi-copy"></i>
       </div>
-      <div class="action-button maximize" v-else @click="handleMaximize">
+      <div :title="t('TXT_MAXIMIZE')" class="action-button maximize" v-else @click="handleMaximize">
         <i class="bi bi-square"></i>
       </div>
-      <div class="action-button close" @click="handleClose">
+      <div :title="t('TXT_CLOSE')" class="action-button close" @click="handleClose">
         <i class="bi bi-x-lg"></i>
       </div>
     </div>

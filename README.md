@@ -26,6 +26,7 @@ yarn format && yarn lint
 ```
 
 ## For rebuild native deps (sqlite3)
+
 1. Install the node-gyp global `npm install -g node-gyp`
 2. Install latest [Visual Studio Community and Desktop Development](https://visualstudio.microsoft.com/vs/community/) with `C++ extension`
 3. Install latest [Python](https://www.python.org/downloads/)
