@@ -5,6 +5,7 @@ import { MakerDeb } from "@electron-forge/maker-deb";
 import { MakerRpm } from "@electron-forge/maker-rpm";
 import { MakerDMG } from "@electron-forge/maker-dmg";
 import { VitePlugin } from "@electron-forge/plugin-vite";
+import { PublisherGithub } from "@electron-forge/publisher-github";
 import { productName, name } from "./package.json";
 
 const config: ForgeConfig = {
@@ -49,6 +50,14 @@ const config: ForgeConfig = {
           config: "vite.renderer.config.ts",
         },
       ],
+    }),
+  ],
+  publishers: [
+    new PublisherGithub({
+      repository: {
+        owner: "ngmthaq",
+        name: "vue-electron",
+      },
     }),
   ],
 };
