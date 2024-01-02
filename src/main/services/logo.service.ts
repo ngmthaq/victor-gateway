@@ -1,5 +1,5 @@
 import { nativeImage } from "electron";
-import icon from "@/assets/img/icon.png";
+import icon from "@/assets/img/app-icon.png";
 
 /**
  * Get logo of the application

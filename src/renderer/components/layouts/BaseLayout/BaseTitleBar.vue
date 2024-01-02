@@ -102,7 +102,7 @@ onBeforeUnmount(() => {
     </div>
     <div class="left-bar">
       <div class="logo" v-if="!IS_MAC">
-        <img src="@/assets/img/icon.png" alt="title-bar-logo" />
+        <img src="@/assets/img/titlebar-icon.png" alt="title-bar-logo" />
       </div>
       <div class="menu" :style="{ marginRight: IS_MAC ? '10px' : '0px' }">
         <div class="menu-item" @click="handleClickSetting">

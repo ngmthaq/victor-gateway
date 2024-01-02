@@ -21,7 +21,7 @@ const config: ForgeConfig = {
   makers: [
     new MakerSquirrel({}),
     new MakerDMG({}),
-    new MakerZIP({}, ["darwin", "win32", "linux"]),
+    new MakerZIP({}, ["darwin"]),
     new MakerRpm({}),
     new MakerDeb({
       options: {
