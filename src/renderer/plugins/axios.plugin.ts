@@ -79,7 +79,7 @@ export class Api {
     data = typeof data === "object" ? humps.decamelizeKeys(data) : data;
     const requestConfigs: AxiosRequestConfig = { ...configs, url, method, params, data };
     const response = await this.instance.request(requestConfigs);
-    response.data = typeof data === "object" ? humps.camelizeKeys(response.data) : response.data;
+    response.data = typeof response.data === "object" ? humps.camelizeKeys(response.data) : response.data;
     return response;
   }
 
