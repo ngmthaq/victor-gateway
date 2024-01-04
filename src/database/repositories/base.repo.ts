@@ -1,7 +1,7 @@
 import { DB } from "../configs";
-import { BaseTable } from "../tables/base.table";
+import BaseTable from "../tables/base.table";
 
-export abstract class BaseRepo {
+export default abstract class BaseRepo {
   protected abstract Table: BaseTable;
 
   public async getAll<T>(): Promise<T[]> {

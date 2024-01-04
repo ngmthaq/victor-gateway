@@ -1,7 +1,7 @@
 import { DatabaseColumnType } from "@/configs/types/database";
 import { DB } from "@/database/configs";
 
-export abstract class BaseTable {
+export default abstract class BaseTable {
   public abstract tableName: string;
   public abstract columns: Record<string, DatabaseColumnType>;
 
@@ -12,6 +12,15 @@ export abstract class BaseTable {
         .join(", ");
 
       DB.run(`CREATE TABLE IF NOT EXISTS ${this.tableName} (${columns})`, (result: any, error: any) => {
+        if (error) reject(error);
+        resolve(result);
+      });
+    });
+  }
+
+  public async dropTable(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      DB.run(`DROP TABLE IF EXISTS ${this.tableName}`, (result: any, error: any) => {
         if (error) reject(error);
         resolve(result);
       });

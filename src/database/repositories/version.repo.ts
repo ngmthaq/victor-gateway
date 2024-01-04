@@ -1,8 +1,9 @@
+import type { Version } from "../tables/version.table";
 import { DB } from "../configs";
-import { Version, VersionTable } from "../tables/version.table";
-import { BaseRepo } from "./base.repo";
+import VersionTable from "../tables/version.table";
+import BaseRepo from "./base.repo";
 
-export class VersionRepo extends BaseRepo {
+export default class VersionRepo extends BaseRepo {
   public Table: VersionTable = new VersionTable();
 
   public async getVersion(): Promise<Version | undefined> {

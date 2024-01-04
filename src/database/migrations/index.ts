@@ -1,11 +1,11 @@
 import { app } from "electron";
-import { DATABASE_VERSION, beginTransaction, commitTransaction, rollbackTransaction } from "../configs";
-import { VersionRepo } from "../repositories/version.repo";
+import { DB_VERSION, DB_HELPERS } from "../configs";
+import VersionRepo from "../repositories/version.repo";
 
 export async function migrate() {
   try {
     // Begin Transaction
-    beginTransaction();
+    await DB_HELPERS.begin();
 
     // Repositories
     const versionRepo = new VersionRepo();
@@ -17,17 +17,17 @@ export async function migrate() {
     const currentDatabaseVersion = await versionRepo.getVersion();
     if (currentDatabaseVersion === undefined) {
       // Setup for new device
-      await versionRepo.setVersion(DATABASE_VERSION);
+      await versionRepo.setVersion(DB_VERSION);
     } else {
       // Setup for each new version
-      await versionRepo.updateVersion(DATABASE_VERSION);
+      await versionRepo.updateVersion(DB_VERSION);
     }
 
-    // Commit
-    commitTransaction();
+    // Commit Transaction
+    await DB_HELPERS.commit();
   } catch (error) {
-    // Rollback and Quit
-    rollbackTransaction();
+    // Rollback Transaction and Quit
+    await DB_HELPERS.rollback();
     console.error(error);
     app.quit();
   }

@@ -103,8 +103,12 @@ export class Api {
    * @param configs
    * @returns response
    */
-  public async get(url: string, params: any = {}, configs: AxiosRequestConfig = {}) {
-    return this.request(url, "get".toUpperCase(), params, {}, configs);
+  public async get<T, D = any>(
+    url: string,
+    params: any = {},
+    configs: AxiosRequestConfig = {},
+  ): Promise<AxiosResponse<T, D>> {
+    return this.request(url, "get", params, {}, configs);
   }
 
   /**
@@ -115,8 +119,12 @@ export class Api {
    * @param configs
    * @returns response
    */
-  public async post(url: string, data: any = {}, configs: AxiosRequestConfig = {}) {
-    return this.request(url, "post".toUpperCase(), {}, data, configs);
+  public async post<T, D = any>(
+    url: string,
+    data: any = {},
+    configs: AxiosRequestConfig = {},
+  ): Promise<AxiosResponse<T, D>> {
+    return this.request(url, "post", {}, data, configs);
   }
 
   /**
@@ -127,8 +135,12 @@ export class Api {
    * @param configs
    * @returns response
    */
-  public async put(url: string, data: any = {}, configs: AxiosRequestConfig = {}) {
-    return this.request(url, "put".toUpperCase(), {}, data, configs);
+  public async put<T, D = any>(
+    url: string,
+    data: any = {},
+    configs: AxiosRequestConfig = {},
+  ): Promise<AxiosResponse<T, D>> {
+    return this.request(url, "put", {}, data, configs);
   }
 
   /**
@@ -139,8 +151,12 @@ export class Api {
    * @param configs
    * @returns response
    */
-  public async patch(url: string, data: any = {}, configs: AxiosRequestConfig = {}) {
-    return this.request(url, "patch".toUpperCase(), {}, data, configs);
+  public async patch<T, D = any>(
+    url: string,
+    data: any = {},
+    configs: AxiosRequestConfig = {},
+  ): Promise<AxiosResponse<T, D>> {
+    return this.request(url, "patch", {}, data, configs);
   }
 
   /**
@@ -151,8 +167,12 @@ export class Api {
    * @param configs
    * @returns response
    */
-  public async delete(url: string, data: any = {}, configs: AxiosRequestConfig = {}) {
-    return this.request(url, "delete".toUpperCase(), {}, data, configs);
+  public async delete<T, D = any>(
+    url: string,
+    data: any = {},
+    configs: AxiosRequestConfig = {},
+  ): Promise<AxiosResponse<T, D>> {
+    return this.request(url, "delete", {}, data, configs);
   }
 
   /**
