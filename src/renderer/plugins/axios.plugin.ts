@@ -1,6 +1,8 @@
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import axios from "axios";
 import humps from "humps";
+import { getLocalStorage } from "./storage.plugin";
+import { LOCAL_STORAGE_KEYS } from "@/configs/constants/app.const";
 
 /**
  * Api logic base on Axios
@@ -24,7 +26,9 @@ export class Api {
    * @param {InternalAxiosRequestConfig} configs
    * @returns configs
    */
-  protected handleDefaultRequestSuccess<C>(configs: InternalAxiosRequestConfig<C>) {
+  protected async handleDefaultRequestSuccess<C>(configs: InternalAxiosRequestConfig<C>) {
+    const accessToken = await getLocalStorage<string>(LOCAL_STORAGE_KEYS.accessToken);
+    if (accessToken) configs.headers.Authorization = "Bearer " + accessToken;
     return configs;
   }
 
@@ -45,6 +49,17 @@ export class Api {
    * @returns response
    */
   protected handleDefaultResponseSuccess(response: AxiosResponse) {
+    return response;
+  }
+
+  /**
+   * Handle toCamel response success interceptor
+   *
+   * @param {AxiosResponse} response
+   * @returns response
+   */
+  protected handleToCamelResponseSuccess(response: AxiosResponse) {
+    if (typeof response.data === "object") response.data = humps.camelizeKeys(response.data);
     return response;
   }
 
@@ -75,11 +90,8 @@ export class Api {
     data: any = {},
     configs: AxiosRequestConfig = {},
   ) {
-    params = typeof params === "object" ? humps.decamelizeKeys(params) : params;
-    data = typeof data === "object" ? humps.decamelizeKeys(data) : data;
     const requestConfigs: AxiosRequestConfig = { ...configs, url, method, params, data };
     const response = await this.instance.request(requestConfigs);
-    response.data = typeof response.data === "object" ? humps.camelizeKeys(response.data) : response.data;
     return response;
   }
 
@@ -157,6 +169,25 @@ export class Api {
     );
     this.instance.interceptors.response.use(
       (response) => this.handleDefaultResponseSuccess(response),
+      (error) => this.handleDefaultResponseError(error),
+    );
+    return this;
+  }
+
+  /**
+   * toCamel interceptors
+   *
+   * @returns this
+   */
+  public toCamel() {
+    this.instance.interceptors.request.clear();
+    this.instance.interceptors.response.clear();
+    this.instance.interceptors.request.use(
+      (configs) => this.handleDefaultRequestSuccess(configs),
+      (error) => this.handleDefaultRequestError(error),
+    );
+    this.instance.interceptors.response.use(
+      (response) => this.handleToCamelResponseSuccess(response),
       (error) => this.handleDefaultResponseError(error),
     );
     return this;

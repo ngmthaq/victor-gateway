@@ -1,4 +1,5 @@
 import type { ForgeConfig } from "@electron-forge/shared-types";
+import path from "path";
 import { MakerSquirrel } from "@electron-forge/maker-squirrel";
 import { MakerZIP } from "@electron-forge/maker-zip";
 import { MakerDeb } from "@electron-forge/maker-deb";
@@ -8,8 +9,14 @@ import { VitePlugin } from "@electron-forge/plugin-vite";
 import { PublisherGithub } from "@electron-forge/publisher-github";
 import { productName, name } from "./package.json";
 
+const icon = path.resolve(__dirname, "./src/assets/img/app-icon");
+const icoIcon = path.resolve(__dirname, "./src/assets/img/app-icon.ico");
+const pngIcon = path.resolve(__dirname, "./src/assets/img/app-icon.png");
+const icnsIcon = path.resolve(__dirname, "./src/assets/img/app-icon.icns");
+
 const config: ForgeConfig = {
   packagerConfig: {
+    icon: icon,
     protocols: [
       {
         name: productName,
@@ -17,14 +24,25 @@ const config: ForgeConfig = {
       },
     ],
   },
-  rebuildConfig: { force: true },
+  rebuildConfig: {
+    force: true,
+  },
   makers: [
-    new MakerSquirrel({}),
-    new MakerDMG({}),
     new MakerZIP({}, ["darwin"]),
-    new MakerRpm({}),
+    new MakerSquirrel({
+      setupIcon: icoIcon,
+    }),
+    new MakerDMG({
+      icon: icnsIcon,
+    }),
+    new MakerRpm({
+      options: {
+        icon: pngIcon,
+      },
+    }),
     new MakerDeb({
       options: {
+        icon: pngIcon,
         mimeType: ["x-scheme-handler/" + name],
       },
     }),

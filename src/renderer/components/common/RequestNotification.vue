@@ -66,7 +66,7 @@ onMounted(async () => {
         <div class="modal-body">
           <div class="d-flex align-items-center justify-content-start">
             <div>
-              <img alt="logo" src="@/assets/img/icon.png" style="width: 40px; height: auto; margin: 0 24px 0 8px" />
+              <img alt="logo" src="@/assets/img/app-icon.png" style="width: 40px; height: auto; margin: 0 24px 0 8px" />
             </div>
             <div>
               <h4>{{ t("TXT_REQUEST_NOTIFICATION_TITLE") }}</h4>
