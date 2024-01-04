@@ -1,4 +1,4 @@
-import VersionTable from "./version.table";
+import { VersionTable } from "./version.table";
 
 const tables = [VersionTable];
 

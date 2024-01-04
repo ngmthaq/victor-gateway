@@ -1,13 +1,7 @@
-import { DatabaseColumnType } from "@/configs/types/database";
-import BaseTable from "./base.table";
+import { DatabaseColumnType, VersionColumns } from "@/configs/types/database";
+import { BaseTable } from "./base.table";
 
-export type Version = {
-  version: number;
-};
-
-export type VersionColumns = "version";
-
-export default class VersionTable extends BaseTable {
+export class VersionTable extends BaseTable {
   public tableName: string = "versions";
 
   public columns: Record<VersionColumns, DatabaseColumnType> = {

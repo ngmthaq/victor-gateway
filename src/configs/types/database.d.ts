@@ -3,3 +3,9 @@ export type DatabaseColumnType = {
   type: string;
   attributes: string;
 };
+
+export type Version = {
+  version: number;
+};
+
+export type VersionColumns = "version";

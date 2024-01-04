@@ -15,7 +15,7 @@ export const SQLITE3 = verbose();
 export const DB = new SQLITE3.Database(DB_PATH);
 
 export const DB_HELPERS = {
-  begin: (): Promise<void> =>
+  begin: async (): Promise<void> =>
     new Promise((resolve, reject) =>
       DB.exec("BEGIN TRANSACTION", (error) => {
         if (error) reject(error);
@@ -23,7 +23,7 @@ export const DB_HELPERS = {
       }),
     ),
 
-  commit: (): Promise<void> =>
+  commit: async (): Promise<void> =>
     new Promise((resolve, reject) =>
       DB.exec("COMMIT", (error) => {
         if (error) reject(error);
@@ -31,7 +31,7 @@ export const DB_HELPERS = {
       }),
     ),
 
-  rollback: (): Promise<void> =>
+  rollback: async (): Promise<void> =>
     new Promise((resolve, reject) =>
       DB.exec("ROLLBACK", (error) => {
         if (error) reject(error);
@@ -39,7 +39,7 @@ export const DB_HELPERS = {
       }),
     ),
 
-  drop: (): Promise<void> =>
+  drop: async (): Promise<void> =>
     new Promise((resolve, reject) => {
       DB.exec("PRAGMA foreign_keys = OFF", (error) => {
         if (error) reject(error);

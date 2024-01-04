@@ -1,6 +1,6 @@
 import { app } from "electron";
 import { DB_VERSION, DB_HELPERS } from "../configs";
-import VersionRepo from "../repositories/version.repo";
+import { VersionRepo } from "../repositories/version.repo";
 
 export async function migrate() {
   try {
@@ -17,7 +17,7 @@ export async function migrate() {
     const currentDatabaseVersion = await versionRepo.getVersion();
     if (currentDatabaseVersion === undefined) {
       // Setup for new device
-      await versionRepo.setVersion(DB_VERSION);
+      await versionRepo.insertVersion(DB_VERSION);
     } else {
       // Setup for each new version
       await versionRepo.updateVersion(DB_VERSION);
