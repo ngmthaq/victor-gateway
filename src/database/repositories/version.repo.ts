@@ -11,24 +11,24 @@ export class VersionRepo extends BaseRepo {
     return currentVersion;
   }
 
-  public async updateVersion(version: number): Promise<number> {
+  public async updateVersion(version: number): Promise<void> {
     return new Promise((resolve, reject) => {
       const sql = `UPDATE ${this.Table.tableName} SET ${this.Table.columns.version.name} = ?`;
       const statement = DB.prepare(sql, [version]);
       statement.run((error) => {
         if (error) reject(error);
-        resolve(version);
+        resolve();
       });
     });
   }
 
-  public async insertVersion(version: number): Promise<number> {
+  public async insertVersion(version: number): Promise<void> {
     return new Promise((resolve, reject) => {
       const sql = `INSERT INTO ${this.Table.tableName} (${this.Table.columns.version.name}) VALUES (?)`;
       const statement = DB.prepare(sql, [version]);
       statement.run((error) => {
         if (error) reject(error);
-        resolve(version);
+        resolve();
       });
     });
   }
