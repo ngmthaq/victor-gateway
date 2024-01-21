@@ -28,4 +28,6 @@ export const ELECTRON_EVENTS = {
   getLocalStorage: "electron:getLocalStorage",
   setLocalStorage: "electron:setLocalStorage",
   removeLocalStorage: "electron:removeLocalStorage",
+  clearLocalStorage: "electron:clearLocalStorage",
+  queryRepositories: "electron:queryRepositories",
 };

@@ -6,7 +6,7 @@ import { localStorage } from "./services/storage.service";
 import { versions } from "./services/versions.service";
 import { frame } from "./services/frame.service";
 import { env } from "./services/env.service";
-import { localDatabase } from "./services/database.service";
+import { db } from "./services/database.service";
 
 /**
  * Electron Add Event Listener
@@ -32,12 +32,12 @@ const removeEventListener = (eventName: string, callback: ElectronEventCallbackT
  * Electron Preload Object
  */
 export const electronPreload = {
+  db: db,
   env: env,
   frame: frame,
   versions: versions,
   platform: process.platform,
   localStorage: localStorage,
-  localDatabase: localDatabase,
   addEventListener: addEventListener,
   removeEventListener: removeEventListener,
 };

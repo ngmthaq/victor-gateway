@@ -1,5 +1,6 @@
 import { BrowserWindow, ipcMain } from "electron";
 import { ELECTRON_EVENTS } from "@/configs/constants/event.const";
+import repositories from "@/database/repositories/_repositories";
 import { runtimeConfigs } from "./runtime.service";
 
 /**
@@ -56,5 +57,14 @@ export function ipcMainListener(mainWindow: BrowserWindow) {
 
   ipcMain.handle(ELECTRON_EVENTS.removeLocalStorage, (_: any, key: string) => {
     return runtimeConfigs.localStorage.delete(key);
+  });
+
+  ipcMain.handle(ELECTRON_EVENTS.clearLocalStorage, () => {
+    return runtimeConfigs.localStorage.clear();
+  });
+
+  ipcMain.handle(ELECTRON_EVENTS.queryRepositories, async (_: any, repo: string, action: string, ...params: any[]) => {
+    const Repositories: any = repositories;
+    return Repositories[repo][action](...params);
   });
 }
