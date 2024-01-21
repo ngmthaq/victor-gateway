@@ -35,6 +35,7 @@ export function createWindowTray(mainWindow: BrowserWindow) {
     },
     {
       label: "Go to Help Center",
+      enabled: false,
       click: () => {
         mainWindow.webContents.send(ELECTRON_EVENTS.openHelpCenter);
       },

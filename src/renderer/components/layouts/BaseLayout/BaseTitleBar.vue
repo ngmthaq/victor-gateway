@@ -108,9 +108,6 @@ onBeforeUnmount(() => {
         <div class="menu-item" @click="handleClickSetting">
           <span>{{ t("TXT_SETTING") }}</span>
         </div>
-        <div class="menu-item" @click="handleClickHelp">
-          <span>{{ t("TXT_HELP") }}</span>
-        </div>
         <div class="menu-item" @click="handleClickVersion">
           <span>{{ t("TXT_VERSIONS") }}</span>
         </div>
@@ -145,6 +142,9 @@ onBeforeUnmount(() => {
               {{ t("TXT_EXIT") }}
             </li>
           </ul>
+        </div>
+        <div class="menu-item disabled" @click="handleClickHelp">
+          <span>{{ t("TXT_HELP") }}</span>
         </div>
       </div>
     </div>
@@ -244,6 +244,12 @@ onBeforeUnmount(() => {
         display: flex;
         align-items: center;
         justify-content: center;
+
+        &.disabled {
+          cursor: not-allowed;
+          background-color: transparent !important;
+          opacity: 0.6;
+        }
 
         & span {
           display: inline-block;

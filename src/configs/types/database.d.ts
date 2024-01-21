@@ -4,8 +4,14 @@ export type DatabaseColumnType = {
   attributes: string;
 };
 
+export type VersionColumns = "version";
 export type Version = {
   version: number;
 };
 
-export type VersionColumns = "version";
+export type SettingColumns = "username" | "password" | "personalKey";
+export type Setting = {
+  username: string;
+  password: string;
+  personalKey: string;
+};
