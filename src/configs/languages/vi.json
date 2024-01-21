@@ -43,5 +43,7 @@
   "TXT_REQUIRED_FIELD": "Vui lòng không để trống trường này",
   "TXT_MIN_PASSWORD": "Mật khẩu phải có tối thiểu 8 ký tự",
   "TXT_COMMON_ERROR": "Đã có lỗi xảy ra, vui lòng thử lại sau",
-  "TXT_PASSWORD_CONFIRMATION_NOT_MATCH": "Mật khẩu không trùng khớp"
+  "TXT_PASSWORD_CONFIRMATION_NOT_MATCH": "Mật khẩu không trùng khớp",
+  "TXT_LOGIN": "Đăng nhập",
+  "TXT_ACTIVATE_SUCCESSFULLY": "Kích hoạt hệ thống thành công"
 }

@@ -66,11 +66,12 @@ async function handleFinishSetup() {
     loading.open();
     await window.electron.db.query("SettingRepo", "insertSetting", payload);
     isOpenConfirmDialog.value = false;
+    openAppNotification({ message: "TXT_ACTIVATE_SUCCESSFULLY", variant: "success" });
     router.replace(PATH_LOGIN.path);
     loading.close();
   } catch (error) {
     console.error(error);
-    openAppNotification({ message: t("TXT_COMMON_ERROR"), variant: "danger" });
+    openAppNotification({ message: "TXT_COMMON_ERROR", variant: "danger" });
     loading.close();
   }
 }

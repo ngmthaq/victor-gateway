@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ToastType } from "@/configs/types/components";
 import { onBeforeMount, onUnmounted, onUpdated, ref, watch } from "vue";
+import { useI18n } from "vue-i18n";
 import { Toast } from "bootstrap";
 import { EVENT_BUS_EVENTS } from "@/configs/constants/event.const";
 import { useEventBus } from "@/renderer/hooks/common/useEventBus";
@@ -10,6 +11,7 @@ import { getCurrentMilliseconds } from "@/renderer/plugins/datetime.plugin";
 const TOAST_DELAY = 6000;
 const TOAST_MAX = 5;
 
+const { t } = useI18n();
 const eventBus = useEventBus();
 
 const newToast = ref<ToastType>();
@@ -80,7 +82,7 @@ onUpdated(() => {
             <i v-else-if="toast.variant === 'warning'" class="bi bi-exclamation-circle"></i>
             <i v-else-if="toast.variant === 'info'" class="bi bi-info-circle"></i>
             <i v-else class="bi bi-bell"></i>
-            <p class="p-0 m-0 ms-2">{{ toast.message }}</p>
+            <p class="p-0 m-0 ms-2">{{ t(toast.message) }}</p>
           </div>
           <button
             type="button"
