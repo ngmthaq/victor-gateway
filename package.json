@@ -8,14 +8,32 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "publish:app": "electron-forge publish",
+    "publisher": "electron-forge publish",
     "lint": "eslint --ext .ts,.tsx .",
     "format": "prettier --write .",
     "predev": "yarn format",
     "dev": "cross-env NODE_ENV=development yarn start",
-    "dev:mac": "cross-env NODE_ENV=development yarn start",
     "prebuild": "yarn lint",
-    "build": "cross-env NODE_ENV=production yarn make"
+    "build": "cross-env NODE_ENV=production yarn make",
+    "watch": "npm-watch dev"
+  },
+  "watch": {
+    "dev": {
+      "extensions": "ts,tsx",
+      "delay": 2500,
+      "patterns": [
+        "src/database",
+        "src/main",
+        "src/preload",
+        "index.html",
+        "forge.config.ts",
+        "vite.main.config.ts",
+        "vite.preload.config.ts",
+        "vite.renderer.config.ts",
+        "package.json",
+        ".env"
+      ]
+    }
   },
   "keywords": [],
   "author": {
@@ -60,6 +78,7 @@
     "eslint-plugin-vue": "^9.17.0",
     "jsdom": "^22.1.0",
     "npm-run-all2": "^6.1.1",
+    "npm-watch": "^0.11.0",
     "prettier": "^3.1.1",
     "sass": "^1.69.5",
     "start-server-and-test": "^2.0.1",

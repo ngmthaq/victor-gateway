@@ -60,8 +60,6 @@ onChangeInternetStatus((isOnline) => {
     <button @click="handleNotice">Notice</button>
     <button @click="handleOpenAlert">Alert</button>
     <input type="text" v-model="text" />
-    <br />
-    <br />
     <RouterLink :to="PATH_SETTING.path">About</RouterLink>
     <PromptDialog
       id="confirm"
