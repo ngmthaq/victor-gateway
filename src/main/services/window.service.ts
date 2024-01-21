@@ -1,5 +1,5 @@
 import path from "path";
-import { BrowserWindow, app } from "electron";
+import { BrowserWindow } from "electron";
 import { getLogo } from "./logo.service";
 import { runtimeConfigs } from "./runtime.service";
 
@@ -22,7 +22,7 @@ export function createWindow(): BrowserWindow {
     trafficLightPosition: { x: 8, y: 12 },
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
-      devTools: !app.isPackaged,
+      devTools: process.env.APP_OPEN_DEVTOOLS === "true",
     },
   });
 

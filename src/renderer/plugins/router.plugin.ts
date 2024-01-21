@@ -3,6 +3,8 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import * as PATH_CONST from "@/configs/constants/path.const";
 import NotFoundView from "@/renderer/views/NotFound/NotFoundView.vue";
 import { productName } from "~/package.json";
+import { LOCAL_STORAGE_KEYS } from "@/configs/constants/app.const";
+import { Setting } from "@/configs/types/database";
 
 /**
  * Not found (404) path
@@ -25,8 +27,17 @@ const router = createRouter({
  */
 router.beforeEach(async (to, from, next) => {
   document.title = productName.trim();
-  const setting = await window.electron.db.query("SettingRepo", "getSetting");
-  if (to.path !== PATH_CONST.PATH_SETTING.path && !setting) return next(PATH_CONST.PATH_SETTING.path);
+
+  const setting = await window.electron.db.query<Setting>("SettingRepo", "getSetting");
+  if (!setting && to.path !== PATH_CONST.PATH_ACTIVE.path) {
+    return next(PATH_CONST.PATH_ACTIVE.path);
+  }
+
+  const isLogin = window.sessionStorage.getItem(LOCAL_STORAGE_KEYS.isLogin);
+  if (setting && !isLogin && to.path !== PATH_CONST.PATH_LOGIN.path) {
+    return next(PATH_CONST.PATH_LOGIN.path);
+  }
+
   return next();
 });
 

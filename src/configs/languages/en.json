@@ -37,7 +37,7 @@
   "TXT_USERNAME_PLACEHOLDER": "What is your username?",
   "TXT_PASSWORD_PLACEHOLDER": "What is your password?",
   "TXT_INTERNET_MODE_LABEL": "Setup for internet mode",
-  "TXT_SETUP": "Setup Application",
+  "TXT_ACTIVATE": "Activate Application",
   "TXT_COPY_PERSONAL_KEY_MSG": "Make sure you have copied your personal key and saved it on your device",
   "TXT_REQUIRED_FIELD": "Please do not leave this field blank",
   "TXT_MIN_PASSWORD": "Password must have a minimum of 8 characters",

@@ -105,7 +105,7 @@ watch(isCopied, (value) => {
     <div class="wrapper">
       <form class="form" @submit="handleSubmit">
         <div class="mb-5">
-          <h1 class="text-center">{{ t("TXT_SETUP") }}</h1>
+          <h3 class="text-center">{{ t("TXT_ACTIVATE") }}</h3>
         </div>
         <div class="mb-3">
           <label for="username" class="form-label">{{ t("TXT_USERNAME_LABEL") }}</label>
@@ -187,7 +187,7 @@ watch(isCopied, (value) => {
   height: 100%;
 
   & .form {
-    min-width: 500px;
+    min-width: 520px;
     padding: 32px 16px;
     border-radius: 4px;
   }
