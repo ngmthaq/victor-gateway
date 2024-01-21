@@ -65,6 +65,8 @@ export function ipcMainListener(mainWindow: BrowserWindow) {
 
   ipcMain.handle(ELECTRON_EVENTS.queryRepositories, async (_: any, repo: string, action: string, ...params: any[]) => {
     const Repositories: any = repositories;
-    return Repositories[repo][action](...params);
+    const result = await Repositories[repo][action](...params);
+    console.log(">>> Query Repository:", { repo, action, params, result }, "\n");
+    return result;
   });
 }

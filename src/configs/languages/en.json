@@ -40,5 +40,6 @@
   "TXT_SETUP": "Setup Application",
   "TXT_COPY_PERSONAL_KEY_MSG": "Make sure you have copied your personal key and saved it on your device",
   "TXT_REQUIRED_FIELD": "Please do not leave this field blank",
-  "TXT_MIN_PASSWORD": "Password must have a minimum of 8 characters"
+  "TXT_MIN_PASSWORD": "Password must have a minimum of 8 characters",
+  "TXT_COMMON_ERROR": "Something went wrong, please try again later"
 }

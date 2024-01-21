@@ -14,4 +14,5 @@ export type Setting = {
   username: string;
   password: string;
   personalKey: string;
+  isInternet: boolean;
 };

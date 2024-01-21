@@ -1,7 +1,12 @@
 <script setup lang="ts">
+import type { Setting } from "@/configs/types/database";
 import { ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
+import { useRouter } from "vue-router";
+import { PATH_LOGIN } from "@/configs/constants/path.const";
 import { E2EE } from "@/renderer/plugins/encrypt.plugin";
+import { useNotification } from "@/renderer/hooks/common/useNotification";
+import { useCircularLoading } from "@/renderer/hooks/common/useCircularLoading";
 import BaseLayout from "@/renderer/components/layouts/BaseLayout/BaseLayout.vue";
 import ConfirmDialog from "@/renderer/components/common/ConfirmDialog.vue";
 
@@ -10,6 +15,9 @@ type ErrorMessageType = { username: string; password: string };
 
 // Hooks
 const { t } = useI18n();
+const { openAppNotification } = useNotification();
+const router = useRouter();
+const loading = useCircularLoading();
 
 // State
 const isOpenConfirmDialog = ref<boolean>(false);
@@ -42,7 +50,23 @@ function handleCloseConfirmDialog() {
 }
 
 async function handleFinishSetup() {
-  console.log("Go Go Go");
+  try {
+    const payload: Setting = {
+      username: username.value,
+      password: btoa(password.value),
+      personalKey: personalKey.value,
+      isInternet: isInternetMode.value,
+    };
+    loading.open();
+    await window.electron.db.query("SettingRepo", "insertSetting", payload);
+    isOpenConfirmDialog.value = false;
+    router.replace(PATH_LOGIN.path);
+    loading.close();
+  } catch (error) {
+    console.error(error);
+    openAppNotification({ message: t("TXT_COMMON_ERROR"), variant: "danger" });
+    loading.close();
+  }
 }
 
 function handleFormValidation() {
