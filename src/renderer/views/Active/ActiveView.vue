@@ -11,7 +11,7 @@ import BaseLayout from "@/renderer/components/layouts/BaseLayout/BaseLayout.vue"
 import ConfirmDialog from "@/renderer/components/common/ConfirmDialog.vue";
 
 // Types
-type ErrorMessageType = { username: string; password: string };
+type ErrorMessageType = { username: string; password: string; passwordConfirmation: string };
 
 // Hooks
 const { t } = useI18n();
@@ -23,14 +23,20 @@ const loading = useCircularLoading();
 const isOpenConfirmDialog = ref<boolean>(false);
 const isCopied = ref<boolean>(false);
 const isShowPassword = ref<boolean>(false);
+const isShowPasswordConfirmation = ref<boolean>(false);
 const isInternetMode = ref<boolean>(false);
 const username = ref<string>("");
 const password = ref<string>("");
+const passwordConfirmation = ref<string>("");
 const personalKey = ref<string>(E2EE.generatePersonalKey());
-const errorMessages = ref<ErrorMessageType>({ username: "", password: "" });
+const errorMessages = ref<ErrorMessageType>({ username: "", password: "", passwordConfirmation: "" });
 
 function handleToggleShowPassword() {
   isShowPassword.value = !isShowPassword.value;
+}
+
+function handleToggleShowPasswordConfirmation() {
+  isShowPasswordConfirmation.value = !isShowPasswordConfirmation.value;
 }
 
 function handleCopyPersonalKey() {
@@ -74,18 +80,24 @@ function handleFormValidation() {
 
   errorMessages.value.username = "";
   errorMessages.value.password = "";
+  errorMessages.value.passwordConfirmation = "";
 
   if (username.value.trim() === "") {
     isValidated = false;
-    errorMessages.value.username = t("TXT_REQUIRED_FIELD");
+    errorMessages.value.username = "TXT_REQUIRED_FIELD";
   }
 
   if (password.value.trim() === "") {
     isValidated = false;
-    errorMessages.value.password = t("TXT_REQUIRED_FIELD");
+    errorMessages.value.password = "TXT_REQUIRED_FIELD";
   } else if (password.value.trim().length < 8) {
     isValidated = false;
-    errorMessages.value.password = t("TXT_MIN_PASSWORD");
+    errorMessages.value.password = "TXT_MIN_PASSWORD";
+  }
+
+  if (password.value !== passwordConfirmation.value) {
+    isValidated = false;
+    errorMessages.value.passwordConfirmation = "TXT_PASSWORD_CONFIRMATION_NOT_MATCH";
   }
 
   return isValidated;
@@ -104,7 +116,7 @@ watch(isCopied, (value) => {
   <BaseLayout>
     <div class="wrapper">
       <form class="form" @submit="handleSubmit">
-        <div class="mb-5">
+        <div class="mb-3">
           <h3 class="text-center">{{ t("TXT_ACTIVATE") }}</h3>
         </div>
         <div class="mb-3">
@@ -117,7 +129,7 @@ watch(isCopied, (value) => {
             :placeholder="t('TXT_USERNAME_PLACEHOLDER')"
             v-model="username"
           />
-          <small class="text-danger">{{ errorMessages.username }}</small>
+          <small class="text-danger">{{ t(errorMessages.username) }}</small>
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">{{ t("TXT_PASSWORD_LABEL") }}</label>
@@ -137,7 +149,27 @@ watch(isCopied, (value) => {
               </button>
             </span>
           </div>
-          <small class="text-danger">{{ errorMessages.password }}</small>
+          <small class="text-danger">{{ t(errorMessages.password) }}</small>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">{{ t("TXT_PASSWORD_CONFIRMATION_LABEL") }}</label>
+          <div class="input-group">
+            <input
+              class="form-control"
+              id="password"
+              maxlength="48"
+              :type="isShowPasswordConfirmation ? 'text' : 'password'"
+              :placeholder="t('TXT_PASSWORD_CONFIRMATION_LABEL')"
+              v-model="passwordConfirmation"
+            />
+            <span class="input-group-text p-0">
+              <button type="button" class="btn rounded-0" @click="handleToggleShowPasswordConfirmation">
+                <i class="bi bi-eye-slash" v-if="isShowPasswordConfirmation"></i>
+                <i class="bi bi-eye-fill" v-else></i>
+              </button>
+            </span>
+          </div>
+          <small class="text-danger">{{ t(errorMessages.passwordConfirmation) }}</small>
         </div>
         <div class="mb-3">
           <label for="personal-key" class="form-label">{{ t("TXT_PERSONAL_KEY_LABEL") }}</label>
@@ -187,7 +219,7 @@ watch(isCopied, (value) => {
   height: 100%;
 
   & .form {
-    min-width: 520px;
+    min-width: 580px;
     padding: 32px 16px;
     border-radius: 4px;
   }

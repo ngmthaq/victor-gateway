@@ -33,13 +33,15 @@
   "TXT_UNMAXIMIZE": "Thu nhỏ",
   "TXT_USERNAME_LABEL": "Tên đăng nhập",
   "TXT_PASSWORD_LABEL": "Mật khẩu",
+  "TXT_PASSWORD_CONFIRMATION_LABEL": "Xác nhận lại mật khẩu",
   "TXT_PERSONAL_KEY_LABEL": "Mã khóa cá nhân",
   "TXT_USERNAME_PLACEHOLDER": "Tên đăng nhập của bạn là gì?",
   "TXT_PASSWORD_PLACEHOLDER": "Mật khẩu của bạn là gì?",
-  "TXT_INTERNET_MODE_LABEL": "Cài đặt cho chế độ có kết nối mạng",
+  "TXT_INTERNET_MODE_LABEL": "Cài đặt cho chế độ \"CÓ KẾT NỐI MẠNG\"",
   "TXT_ACTIVATE": "Kích hoạt hệ thống",
-  "TXT_COPY_PERSONAL_KEY_MSG": "Hãy chắc chắn rằng bạn đã sao chép mã cá nhân và lưu lại ở thiết bị của bạn",
+  "TXT_COPY_PERSONAL_KEY_MSG": "Hãy chắc chắn rằng bạn đã sao chép và lưu lại mã khóa cá nhân của bạn !",
   "TXT_REQUIRED_FIELD": "Vui lòng không để trống trường này",
   "TXT_MIN_PASSWORD": "Mật khẩu phải có tối thiểu 8 ký tự",
-  "TXT_COMMON_ERROR": "Đã có lỗi xảy ra, vui lòng thử lại sau"
+  "TXT_COMMON_ERROR": "Đã có lỗi xảy ra, vui lòng thử lại sau",
+  "TXT_PASSWORD_CONFIRMATION_NOT_MATCH": "Mật khẩu không trùng khớp"
 }
