@@ -1,14 +1,14 @@
 {
-  "name": "victor-vue-electron",
-  "productName": "Victor Desktop",
+  "name": "victor-vue-electron-secure-gateway",
+  "productName": "Victor Gateway Desktop",
   "version": "0.0.1",
-  "description": "My Electron application description",
+  "description": "Victor Gateway Desktop Application",
   "main": ".vite/build/index.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "publish": "electron-forge publish",
+    "publish:app": "electron-forge publish",
     "lint": "eslint --ext .ts,.tsx .",
     "format": "prettier --write .",
     "predev": "yarn format",
