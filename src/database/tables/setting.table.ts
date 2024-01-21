@@ -22,5 +22,11 @@ export class SettingTable extends BaseTable {
       type: "TEXT",
       attributes: "",
     },
+
+    isInternet: {
+      name: "isInternet",
+      type: "INTEGER",
+      attributes: "",
+    },
   };
 }

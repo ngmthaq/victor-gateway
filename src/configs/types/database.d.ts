@@ -9,7 +9,7 @@ export type Version = {
   version: number;
 };
 
-export type SettingColumns = "username" | "password" | "personalKey";
+export type SettingColumns = "username" | "password" | "personalKey" | "isInternet";
 export type Setting = {
   username: string;
   password: string;

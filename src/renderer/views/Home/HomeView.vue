@@ -8,7 +8,7 @@ import { useNotification } from "@/renderer/hooks/common/useNotification";
 import { usePromise } from "@/renderer/hooks/common/usePromise";
 import { getTodo } from "@/renderer/services/remotes/todo.remote";
 import { randomNumber } from "@/renderer/plugins/number.plugins";
-import { PATH_ABOUT } from "@/configs/constants/path.const";
+import { PATH_SETTING } from "@/configs/constants/path.const";
 import BaseLayout from "@/renderer/components/layouts/BaseLayout/BaseLayout.vue";
 import PromptDialog from "@/renderer/components/common/PromptDialog.vue";
 
@@ -61,7 +61,7 @@ onChangeInternetStatus((isOnline) => {
     <input type="text" v-model="text" />
     <br />
     <br />
-    <RouterLink :to="PATH_ABOUT.path">About</RouterLink>
+    <RouterLink :to="PATH_SETTING.path">About</RouterLink>
     <PromptDialog
       id="confirm"
       label="What is your name?"

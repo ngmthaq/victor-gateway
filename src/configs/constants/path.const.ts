@@ -13,7 +13,7 @@ export const PATH_HOME: RouteRecordRaw = {
   component: HomeView,
 };
 
-export const PATH_ABOUT: RouteRecordRaw = {
+export const PATH_SETTING: RouteRecordRaw = {
   path: "/setting",
   component: SettingView,
 };

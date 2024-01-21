@@ -30,5 +30,15 @@
   "TXT_NOTICE": "Notice",
   "TXT_COMMON_PLACEHOLDER": "Enter your text here",
   "TXT_MAXIMIZE": "Maximize",
-  "TXT_UNMAXIMIZE": "Unmaximize"
+  "TXT_UNMAXIMIZE": "Unmaximize",
+  "TXT_USERNAME_LABEL": "Username",
+  "TXT_PASSWORD_LABEL": "Password",
+  "TXT_PERSONAL_KEY_LABEL": "Personal Key",
+  "TXT_USERNAME_PLACEHOLDER": "What is your username?",
+  "TXT_PASSWORD_PLACEHOLDER": "What is your password?",
+  "TXT_INTERNET_MODE_LABEL": "Setup for internet mode",
+  "TXT_SETUP": "Setup Application",
+  "TXT_COPY_PERSONAL_KEY_MSG": "Make sure you have copied your personal key and saved it on your device",
+  "TXT_REQUIRED_FIELD": "Please do not leave this field blank",
+  "TXT_MIN_PASSWORD": "Password must have a minimum of 8 characters"
 }

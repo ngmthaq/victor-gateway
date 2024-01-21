@@ -1,11 +1,171 @@
 <script setup lang="ts">
+import { ref, watch } from "vue";
+import { useI18n } from "vue-i18n";
+import { E2EE } from "@/renderer/plugins/encrypt.plugin";
 import BaseLayout from "@/renderer/components/layouts/BaseLayout/BaseLayout.vue";
+import ConfirmDialog from "@/renderer/components/common/ConfirmDialog.vue";
+
+// Types
+type ErrorMessageType = { username: string; password: string };
+
+// Hooks
+const { t } = useI18n();
+
+// State
+const isOpenConfirmDialog = ref<boolean>(false);
+const isCopied = ref<boolean>(false);
+const isShowPassword = ref<boolean>(false);
+const isInternetMode = ref<boolean>(false);
+const username = ref<string>("");
+const password = ref<string>("");
+const personalKey = ref<string>(E2EE.generatePersonalKey());
+const errorMessages = ref<ErrorMessageType>({ username: "", password: "" });
+
+function handleToggleShowPassword() {
+  isShowPassword.value = !isShowPassword.value;
+}
+
+function handleCopyPersonalKey() {
+  navigator.clipboard.writeText(personalKey.value);
+  isCopied.value = true;
+}
+
+function handleSubmit(event: Event) {
+  event.preventDefault();
+  if (handleFormValidation()) {
+    isOpenConfirmDialog.value = true;
+  }
+}
+
+function handleCloseConfirmDialog() {
+  isOpenConfirmDialog.value = false;
+}
+
+async function handleFinishSetup() {
+  console.log("Go Go Go");
+}
+
+function handleFormValidation() {
+  let isValidated = true;
+
+  errorMessages.value.username = "";
+  errorMessages.value.password = "";
+
+  if (username.value.trim() === "") {
+    isValidated = false;
+    errorMessages.value.username = t("TXT_REQUIRED_FIELD");
+  }
+
+  if (password.value.trim() === "") {
+    isValidated = false;
+    errorMessages.value.password = t("TXT_REQUIRED_FIELD");
+  } else if (password.value.trim().length < 8) {
+    isValidated = false;
+    errorMessages.value.password = t("TXT_MIN_PASSWORD");
+  }
+
+  return isValidated;
+}
+
+watch(isCopied, (value) => {
+  if (value === true) {
+    setTimeout(() => {
+      isCopied.value = false;
+    }, 5000);
+  }
+});
 </script>
 
 <template>
   <BaseLayout>
-    <h1>This is setting page</h1>
+    <div class="wrapper">
+      <form class="form" @submit="handleSubmit">
+        <div class="mb-5">
+          <h1 class="text-center">{{ t("TXT_SETUP") }}</h1>
+        </div>
+        <div class="mb-3">
+          <label for="username" class="form-label">{{ t("TXT_USERNAME_LABEL") }}</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            maxlength="48"
+            :placeholder="t('TXT_USERNAME_PLACEHOLDER')"
+            v-model="username"
+          />
+          <small class="text-danger">{{ errorMessages.username }}</small>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">{{ t("TXT_PASSWORD_LABEL") }}</label>
+          <div class="input-group">
+            <input
+              class="form-control"
+              id="password"
+              maxlength="48"
+              :type="isShowPassword ? 'text' : 'password'"
+              :placeholder="t('TXT_PASSWORD_PLACEHOLDER')"
+              v-model="password"
+            />
+            <span class="input-group-text p-0">
+              <button type="button" class="btn rounded-0" @click="handleToggleShowPassword">
+                <i class="bi bi-eye-slash" v-if="isShowPassword"></i>
+                <i class="bi bi-eye-fill" v-else></i>
+              </button>
+            </span>
+          </div>
+          <small class="text-danger">{{ errorMessages.password }}</small>
+        </div>
+        <div class="mb-3">
+          <label for="personal-key" class="form-label">{{ t("TXT_PERSONAL_KEY_LABEL") }}</label>
+          <div class="input-group">
+            <input disabled class="form-control" id="personal-key" maxlength="48" type="text" :value="personalKey" />
+            <span class="input-group-text p-0">
+              <button type="button" class="btn rounded-0" @click="handleCopyPersonalKey">
+                <i class="bi bi-clipboard-check text-success" v-if="isCopied"></i>
+                <i class="bi bi-copy" v-else></i>
+              </button>
+            </span>
+          </div>
+          <small class="text-secondary">{{ t("TXT_COPY_PERSONAL_KEY_MSG") }}</small>
+        </div>
+        <div class="mb-3">
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="internet-mode-checkbox"
+              v-model="isInternetMode"
+            />
+            <label class="form-check-label" for="internet-mode-checkbox">{{ t("TXT_INTERNET_MODE_LABEL") }}</label>
+          </div>
+        </div>
+        <div class="mb-3">
+          <button type="submit" class="btn btn-primary w-100 text-uppercase">{{ t("TXT_CONFIRM") }}</button>
+        </div>
+      </form>
+    </div>
+    <ConfirmDialog
+      id="peronal-key-copied-confirmation"
+      :open="isOpenConfirmDialog"
+      :message="t('TXT_COPY_PERSONAL_KEY_MSG')"
+      @accept="handleFinishSetup"
+      @deny="handleCloseConfirmDialog"
+    />
   </BaseLayout>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  & .form {
+    min-width: 500px;
+    padding: 32px 16px;
+    border-radius: 4px;
+  }
+}
+</style>

@@ -18,3 +18,7 @@ select {
     max-width: 520px;
   }
 }
+
+label {
+  user-select: none;
+}

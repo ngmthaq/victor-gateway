@@ -1,3 +1,4 @@
+// z-index
 $zindex-dropdown: 1000;
 $zindex-sticky: 1020;
 $zindex-fixed: 1030;
@@ -11,3 +12,6 @@ $zindex-toast: 1090;
 $zindex-common-loading: 1500;
 $zindex-common-titlebar-modal: 1505;
 $zindex-common-titlebar: 1510;
+
+// box-shadow
+$box-shadow-common: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;

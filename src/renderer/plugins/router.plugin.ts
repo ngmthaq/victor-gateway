@@ -23,8 +23,10 @@ const router = createRouter({
 /**
  * Router Hook: Before change route
  */
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   document.title = productName.trim();
+  const setting = await window.electron.db.query("SettingRepo", "getSetting");
+  if (to.path !== PATH_CONST.PATH_SETTING.path && !setting) return next(PATH_CONST.PATH_SETTING.path);
   return next();
 });
 
