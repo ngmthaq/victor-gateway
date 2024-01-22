@@ -1,8 +1,6 @@
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import axios from "axios";
 import humps from "humps";
-import { getLocalStorage } from "./storage.plugin";
-import { LOCAL_STORAGE_KEYS } from "@/configs/constants/app.const";
 
 /**
  * Api logic base on Axios
@@ -27,8 +25,6 @@ export class Api {
    * @returns configs
    */
   protected async handleDefaultRequestSuccess<C>(configs: InternalAxiosRequestConfig<C>) {
-    const accessToken = await getLocalStorage<string>(LOCAL_STORAGE_KEYS.accessToken);
-    if (accessToken) configs.headers.Authorization = "Bearer " + accessToken;
     return configs;
   }
 

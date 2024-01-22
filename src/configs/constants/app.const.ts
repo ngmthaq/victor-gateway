@@ -19,8 +19,9 @@ export const LANGUAGE_CONFIGS = {
 export const LOCAL_STORAGE_KEYS = {
   theme: "theme",
   language: "language",
-  isLogin: "isLogin",
   notificationPermission: "notificationPermission",
+  username: "username",
+  password: "password",
 };
 
 /**

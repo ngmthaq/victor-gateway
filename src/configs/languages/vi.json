@@ -45,5 +45,6 @@
   "TXT_COMMON_ERROR": "Đã có lỗi xảy ra, vui lòng thử lại sau",
   "TXT_PASSWORD_CONFIRMATION_NOT_MATCH": "Mật khẩu không trùng khớp",
   "TXT_LOGIN": "Đăng nhập",
-  "TXT_ACTIVATE_SUCCESSFULLY": "Kích hoạt hệ thống thành công"
+  "TXT_ACTIVATE_SUCCESSFULLY": "Kích hoạt hệ thống thành công",
+  "TXT_WRONG_USERNAME_PASSWORD": "Sai tài khoản hoặc mật khẩu, vui lòng đăng nhập lại"
 }

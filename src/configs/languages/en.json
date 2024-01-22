@@ -45,5 +45,6 @@
   "TXT_COMMON_ERROR": "Something went wrong, please try again later",
   "TXT_PASSWORD_CONFIRMATION_NOT_MATCH": "Password confirmation does not match",
   "TXT_LOGIN": "Login",
-  "TXT_ACTIVATE_SUCCESSFULLY": "System activation successful"
+  "TXT_ACTIVATE_SUCCESSFULLY": "System activation successful",
+  "TXT_WRONG_USERNAME_PASSWORD": "Wrong username or password, please try again"
 }

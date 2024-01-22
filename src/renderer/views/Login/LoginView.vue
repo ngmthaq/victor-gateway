@@ -1,6 +1,12 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import type { Setting } from "@/configs/types/database";
+import { ref } from "vue";
 import { useI18n } from "vue-i18n";
+import { useRouter } from "vue-router";
+import { PATH_HOME } from "@/configs/constants/path.const";
+import { LOCAL_STORAGE_KEYS } from "@/configs/constants/app.const";
+import { useCircularLoading } from "@/renderer/hooks/common/useCircularLoading";
+import { useNotification } from "@/renderer/hooks/common/useNotification";
 import BaseLayout from "@/renderer/components/layouts/BaseLayout/BaseLayout.vue";
 
 // Types
@@ -8,9 +14,11 @@ type ErrorMessageType = { username: string; password: string };
 
 // Hooks
 const { t } = useI18n();
+const { openAppNotification } = useNotification();
+const loading = useCircularLoading();
+const router = useRouter();
 
 // State
-const isCopied = ref<boolean>(false);
 const isShowPassword = ref<boolean>(false);
 const username = ref<string>("");
 const password = ref<string>("");
@@ -20,10 +28,26 @@ function handleToggleShowPassword() {
   isShowPassword.value = !isShowPassword.value;
 }
 
-function handleSubmit(event: Event) {
-  event.preventDefault();
-  if (handleFormValidation()) {
-    //
+async function handleSubmit(event: Event) {
+  try {
+    event.preventDefault();
+    if (handleFormValidation()) {
+      loading.open();
+      const setting = await window.electron.db.query<Setting>("SettingRepo", "getSetting");
+      if (setting.username === username.value && setting.password === btoa(password.value)) {
+        window.sessionStorage.setItem(LOCAL_STORAGE_KEYS.username, username.value);
+        window.sessionStorage.setItem(LOCAL_STORAGE_KEYS.password, btoa(password.value));
+        router.replace(PATH_HOME.path);
+      } else {
+        errorMessages.value.username = "";
+        errorMessages.value.password = "TXT_WRONG_USERNAME_PASSWORD";
+      }
+      loading.close();
+    }
+  } catch (error) {
+    console.error(error);
+    openAppNotification({ message: "TXT_COMMON_ERROR", variant: "danger" });
+    loading.close();
   }
 }
 
@@ -48,14 +72,6 @@ function handleFormValidation() {
 
   return isValidated;
 }
-
-watch(isCopied, (value) => {
-  if (value === true) {
-    setTimeout(() => {
-      isCopied.value = false;
-    }, 5000);
-  }
-});
 </script>
 
 <template>
@@ -75,7 +91,7 @@ watch(isCopied, (value) => {
             :placeholder="t('TXT_USERNAME_PLACEHOLDER')"
             v-model="username"
           />
-          <small class="text-danger">{{ t(errorMessages.username) }}</small>
+          <small class="text-danger" v-if="errorMessages.username">{{ t(errorMessages.username) }}</small>
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">{{ t("TXT_PASSWORD_LABEL") }}</label>
@@ -95,7 +111,7 @@ watch(isCopied, (value) => {
               </button>
             </span>
           </div>
-          <small class="text-danger">{{ t(errorMessages.password) }}</small>
+          <small class="text-danger" v-if="errorMessages.password">{{ t(errorMessages.password) }}</small>
         </div>
         <div class="mb-3">
           <button type="submit" class="btn btn-primary w-100 text-uppercase">{{ t("TXT_LOGIN") }}</button>

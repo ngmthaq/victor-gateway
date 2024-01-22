@@ -33,8 +33,11 @@ router.beforeEach(async (to, from, next) => {
     return next(PATH_CONST.PATH_ACTIVE.path);
   }
 
-  const isLogin = window.sessionStorage.getItem(LOCAL_STORAGE_KEYS.isLogin);
-  if (setting && !isLogin && to.path !== PATH_CONST.PATH_LOGIN.path) {
+  const username = window.sessionStorage.getItem(LOCAL_STORAGE_KEYS.username);
+  const password = window.sessionStorage.getItem(LOCAL_STORAGE_KEYS.password);
+  const isAuthenticated = setting && setting.username === username && setting.password === password;
+  if (!isAuthenticated && to.path !== PATH_CONST.PATH_LOGIN.path) {
+    window.sessionStorage.clear();
     return next(PATH_CONST.PATH_LOGIN.path);
   }
 

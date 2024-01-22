@@ -130,7 +130,7 @@ watch(isCopied, (value) => {
             :placeholder="t('TXT_USERNAME_PLACEHOLDER')"
             v-model="username"
           />
-          <small class="text-danger">{{ t(errorMessages.username) }}</small>
+          <small class="text-danger" v-if="errorMessages.username">{{ t(errorMessages.username) }}</small>
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">{{ t("TXT_PASSWORD_LABEL") }}</label>
@@ -150,7 +150,7 @@ watch(isCopied, (value) => {
               </button>
             </span>
           </div>
-          <small class="text-danger">{{ t(errorMessages.password) }}</small>
+          <small class="text-danger" v-if="errorMessages.password">{{ t(errorMessages.password) }}</small>
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">{{ t("TXT_PASSWORD_CONFIRMATION_LABEL") }}</label>
@@ -170,7 +170,9 @@ watch(isCopied, (value) => {
               </button>
             </span>
           </div>
-          <small class="text-danger">{{ t(errorMessages.passwordConfirmation) }}</small>
+          <small class="text-danger" v-if="errorMessages.passwordConfirmation">
+            {{ t(errorMessages.passwordConfirmation) }}
+          </small>
         </div>
         <div class="mb-3">
           <label for="personal-key" class="form-label">{{ t("TXT_PERSONAL_KEY_LABEL") }}</label>
