@@ -12,7 +12,8 @@ const outputs = ref<string[]>([]);
 <template>
   <div id="auth-console">
     <div class="auth-console-header" :class="`${theme}`">
-      <span :class="`${theme}`">{{ t("TXT_CONSOLE") }}</span>
+      <span :class="`${theme}`"><i class="bi bi-window-fullscreen"></i></span>
+      <span :class="`${theme}`">{{ t("TXT_CONSOLE") }} </span>
     </div>
     <div class="auth-console-body">
       <template v-if="outputs.length > 0">
@@ -37,28 +38,22 @@ const outputs = ref<string[]>([]);
       height: 26px;
       width: 100%;
 
-      & > span {
-        display: block;
+      & span {
+        display: inline-block;
         font-size: 12px;
-        padding: 4px 8px;
+        padding: 4px;
         border-radius: 2px;
         font-weight: bold;
-
-        &.light {
-          background-color: $gray-200;
-        }
-
-        &.dark {
-          background-color: $gray-800;
-        }
       }
 
       &.light {
         border-top: 1px solid $gray-600;
+        background-color: $gray-200;
       }
 
       &.dark {
         border-top: 1px solid $gray-300;
+        background-color: $gray-800;
       }
     }
 
