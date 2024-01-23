@@ -3,7 +3,9 @@ import { Modal } from "bootstrap";
 import { ref, watch, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { LANGUAGE_CONFIGS, LOCAL_STORAGE_KEYS } from "@/configs/constants/app.const";
+import { EVENT_BUS_EVENTS } from "@/configs/constants/event.const";
 import { SystemThemeModeType } from "@/configs/types/components";
+import { useEventBus } from "@/renderer/hooks/common/useEventBus";
 import { getLocalStorage, setLocalStorage } from "@/renderer/plugins/storage.plugin";
 
 const props = defineProps<{
@@ -16,6 +18,7 @@ const emit = defineEmits<{
 
 const ID = "titlebar-setting-dialog";
 
+const eventBus = useEventBus();
 const { t, locale } = useI18n();
 
 const modal = ref<Modal | null>(null);
@@ -45,6 +48,8 @@ async function handleSubmit() {
   locale.value = language.value;
   document.querySelector("html").setAttribute("lang", language.value);
   document.getElementById("body").setAttribute("data-bs-theme", theme.value);
+  eventBus.emit(EVENT_BUS_EVENTS.changeThemeMode, theme.value);
+  eventBus.emit(EVENT_BUS_EVENTS.changeLanguage, language.value);
 }
 
 watch(
