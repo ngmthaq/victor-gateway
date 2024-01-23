@@ -8,7 +8,7 @@ import type { RouteRecordRaw } from "vue-router";
 import ActiveViewVue from "@/renderer/views/Active/ActiveView.vue";
 import LoginViewVue from "@/renderer/views/Login/LoginView.vue";
 import RequestViewVue from "@/renderer/views/Request/RequestView.vue";
-import ResponseViewVue from "@/renderer/views/Response/ResponseView.vue";
+import EnvironmentViewVue from "@/renderer/views/Environment/EnvironmentView.vue";
 
 export const PATH_ACTIVE: RouteRecordRaw = {
   path: "/active",
@@ -25,7 +25,7 @@ export const PATH_REQUEST: RouteRecordRaw = {
   component: RequestViewVue,
 };
 
-export const PATH_RESPONSE: RouteRecordRaw = {
-  path: "/response",
-  component: ResponseViewVue,
+export const PATH_ENVIRONMENT: RouteRecordRaw = {
+  path: "/environment",
+  component: EnvironmentViewVue,
 };

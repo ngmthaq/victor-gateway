@@ -67,7 +67,7 @@ onBeforeUnmount(() => {
 <style scoped lang="scss">
 #auth-console {
   width: 100%;
-  height: 27px;
+  height: 26px;
   transition: all ease-in-out 0.1s;
 
   &.open {
@@ -104,7 +104,7 @@ onBeforeUnmount(() => {
 
     &-body {
       padding: 0 8px;
-      height: calc(100% - 27px);
+      height: calc(100% - 26px);
       width: 100%;
       overflow-y: scroll;
     }

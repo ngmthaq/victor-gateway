@@ -15,7 +15,7 @@ import { db } from "./services/database.service";
  * @param callback
  */
 const addEventListener = (eventName: string, callback: ElectronEventCallbackType) => {
-  ipcRenderer.on(eventName, callback);
+  ipcRenderer.addListener(eventName, callback);
 };
 
 /**
@@ -25,7 +25,7 @@ const addEventListener = (eventName: string, callback: ElectronEventCallbackType
  * @param callback
  */
 const removeEventListener = (eventName: string, callback: ElectronEventCallbackType) => {
-  ipcRenderer.off(eventName, callback);
+  ipcRenderer.removeListener(eventName, callback);
 };
 
 /**

@@ -3,7 +3,7 @@ import type { Setting } from "@/configs/types/database";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
-import { PATH_REQUEST, PATH_RESPONSE } from "@/configs/constants/path.const";
+import { PATH_REQUEST } from "@/configs/constants/path.const";
 import { LOCAL_STORAGE_KEYS } from "@/configs/constants/app.const";
 import { useCircularLoading } from "@/renderer/hooks/common/useCircularLoading";
 import { useNotification } from "@/renderer/hooks/common/useNotification";
@@ -37,7 +37,7 @@ async function handleSubmit(event: Event) {
       if (setting.username === username.value && setting.password === btoa(password.value)) {
         window.sessionStorage.setItem(LOCAL_STORAGE_KEYS.username, username.value);
         window.sessionStorage.setItem(LOCAL_STORAGE_KEYS.password, btoa(password.value));
-        router.replace(setting.isInternet ? PATH_RESPONSE.path : PATH_REQUEST.path);
+        router.replace(PATH_REQUEST.path);
       } else {
         errorMessages.value.username = "";
         errorMessages.value.password = "TXT_WRONG_USERNAME_PASSWORD";

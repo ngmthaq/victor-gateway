@@ -3,7 +3,7 @@ import AuthLayout from "@/renderer/components/layouts/AuthLayout/AuthLayout.vue"
 </script>
 
 <template>
-  <AuthLayout></AuthLayout>
+  <AuthLayout> Request </AuthLayout>
 </template>
 
 <style scoped lang="scss"></style>

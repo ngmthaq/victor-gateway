@@ -39,7 +39,7 @@ function handleCloseConsole() {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: calc(100% - 27px);
+    height: calc(100% - 26px);
     transition: all ease-in-out 0.1s;
 
     &.open {
@@ -48,7 +48,7 @@ function handleCloseConsole() {
 
     & #auth-layout-slot {
       height: 100%;
-      width: calc(100% - 300px);
+      width: calc(100% - 400px);
     }
   }
 }
