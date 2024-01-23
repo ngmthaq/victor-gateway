@@ -9,6 +9,7 @@ export const EVENT_BUS_EVENTS = {
   changeInternetStatus: "eventBus:changeInternetStatus",
   changeThemeMode: "eventBus:changeThemeMode",
   changeLanguage: "eventBus:changeLanguage",
+  pushConsole: "eventBus:pushConsole",
 };
 
 /**

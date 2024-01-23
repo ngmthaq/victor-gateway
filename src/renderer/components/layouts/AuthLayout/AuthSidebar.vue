@@ -13,6 +13,6 @@
 <style scoped lang="scss">
 #auth-sidebar {
   height: 100%;
-  width: 400px;
+  width: 300px;
 }
 </style>
