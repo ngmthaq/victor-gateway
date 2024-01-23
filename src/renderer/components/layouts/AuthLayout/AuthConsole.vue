@@ -68,5 +68,9 @@ const outputs = ref<string[]>([]);
       overflow-y: scroll;
     }
   }
+
+  & code {
+    font-size: 12px;
+  }
 }
 </style>
