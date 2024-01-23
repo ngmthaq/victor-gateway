@@ -1,0 +1,12 @@
+<script setup lang="ts"></script>
+
+<template>
+  <div id="auth-sidebar"></div>
+</template>
+
+<style scoped lang="scss">
+#auth-sidebar {
+  height: 100%;
+  width: 400px;
+}
+</style>

@@ -69,7 +69,7 @@ onBeforeUnmount(() => {
 <style scoped lang="scss">
 #base-layout-content {
   width: 100vw;
-  overflow-y: scroll;
+  overflow-y: hidden;
   position: relative;
 }
 </style>

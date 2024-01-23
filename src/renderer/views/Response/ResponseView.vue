@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import BaseLayout from "@/renderer/components/layouts/BaseLayout/BaseLayout.vue";
+import AuthLayout from "@/renderer/components/layouts/AuthLayout/AuthLayout.vue";
 </script>
 
 <template>
-  <BaseLayout></BaseLayout>
+  <AuthLayout></AuthLayout>
 </template>
 
 <style scoped lang="scss"></style>
