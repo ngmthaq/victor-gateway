@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 import { PATH_REQUEST, PATH_ENVIRONMENT } from "@/configs/constants/path.const";
+import { LOCAL_STORAGE_KEYS } from "../../../../configs/constants/app.const";
 
 type LeftButtonType = {
   path: string;
@@ -12,21 +14,24 @@ type LeftButtonType = {
 
 const route = useRoute();
 const router = useRouter();
+const { t } = useI18n();
 
 const leftButtons = ref<LeftButtonType[]>([
   {
     path: PATH_REQUEST.path,
-    title: "Request",
+    title: "TXT_REQUEST",
     icon: "bi bi-collection",
     isActive: route.path === PATH_REQUEST.path,
   },
   {
     path: PATH_ENVIRONMENT.path,
-    title: "Environment",
+    title: "TXT_ENVIRONMENT",
     icon: "bi bi-box",
     isActive: route.path === PATH_ENVIRONMENT.path,
   },
 ]);
+
+const username = sessionStorage.getItem(LOCAL_STORAGE_KEYS.username);
 
 function handleChangePage(page: string) {
   router.push(page);
@@ -37,7 +42,7 @@ function handleChangePage(page: string) {
   <div id="auth-sidebar">
     <div class="auth-sidebar-header">
       <i class="bi bi-person-circle"></i>
-      <span>thangnm</span>
+      <span>{{ username }}</span>
     </div>
     <div class="auth-sidebar-body">
       <div class="auth-sidebar-body-left">
@@ -49,7 +54,7 @@ function handleChangePage(page: string) {
           class="btn d-flex flex-column align-items-center justify-content-center"
         >
           <i :class="button.icon"></i>
-          <span>{{ button.title }}</span>
+          <span>{{ t(button.title) }}</span>
         </button>
       </div>
       <div class="auth-sidebar-body-right"></div>
@@ -82,7 +87,7 @@ function handleChangePage(page: string) {
       height: calc(100% - 34px);
 
       &-left {
-        width: 80px;
+        width: 100px;
         padding: 4px;
         border-right: 1px solid rgba($color: $gray-500, $alpha: 0.5);
         height: 100%;
@@ -107,7 +112,7 @@ function handleChangePage(page: string) {
       }
 
       &-right {
-        width: calc(100% - 80px);
+        width: calc(100% - 100px);
         padding: 4px;
       }
     }

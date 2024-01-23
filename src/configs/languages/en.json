@@ -48,5 +48,7 @@
   "TXT_ACTIVATE_SUCCESSFULLY": "System activation successful",
   "TXT_WRONG_USERNAME_PASSWORD": "Wrong username or password, please try again",
   "TXT_CONSOLE": "Console",
-  "TXT_NO_DATA": "No records found"
+  "TXT_NO_DATA": "No records found",
+  "TXT_REQUEST": "Request",
+  "TXT_ENVIRONMENT": "Environment"
 }

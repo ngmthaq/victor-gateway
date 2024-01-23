@@ -48,5 +48,7 @@
   "TXT_ACTIVATE_SUCCESSFULLY": "Kích hoạt hệ thống thành công",
   "TXT_WRONG_USERNAME_PASSWORD": "Sai tài khoản hoặc mật khẩu, vui lòng đăng nhập lại",
   "TXT_CONSOLE": "Bảng điều khiển",
-  "TXT_NO_DATA": "Không có dữ liệu"
+  "TXT_NO_DATA": "Không có dữ liệu",
+  "TXT_REQUEST": "Truy vấn",
+  "TXT_ENVIRONMENT": "Môi trường"
 }
