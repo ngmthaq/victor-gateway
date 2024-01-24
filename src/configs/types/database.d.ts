@@ -65,3 +65,7 @@ export type Request = {
 export type RequestWithResponse = Request & {
   response?: Response;
 };
+export type RequestCollections = Array<{
+  date: number;
+  requests: RequestWithResponse[];
+}>;

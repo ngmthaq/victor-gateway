@@ -90,3 +90,14 @@ export function getCurrentSeconds() {
 export function getLastDayOfCurrentMonth() {
   return dayjs().daysInMonth();
 }
+
+/**
+ * Convert milliseconds to format
+ *
+ * @param milliseconds
+ * @param format
+ * @returns
+ */
+export function convertMillisecondsToFormat(milliseconds: number, format: string = "DD/MM/YYYY") {
+  return dayjs(milliseconds).format(format);
+}

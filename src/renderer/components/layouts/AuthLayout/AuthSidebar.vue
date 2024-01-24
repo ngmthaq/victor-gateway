@@ -68,7 +68,7 @@ function handleLogout() {
           <span>{{ t(button.title) }}</span>
         </button>
       </div>
-      <div class="auth-sidebar-body-right">
+      <div class="auth-sidebar-body-right h-100">
         <AuthRequest />
       </div>
     </div>

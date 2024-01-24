@@ -21,7 +21,7 @@ const { t } = useI18n();
         </button>
         <button class="btn btn-sm btn-outline-secondary d-flex align-items-center gap-2">
           <i class="bi bi-download"></i>
-          <span class="fs-6">{{ t("Nhập dữ liệu truy vấn") }}</span>
+          <span class="fs-6">{{ t("TXT_IMPORT_REQUEST") }}</span>
         </button>
       </div>
     </div>

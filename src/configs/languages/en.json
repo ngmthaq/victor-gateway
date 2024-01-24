@@ -56,5 +56,6 @@
   "TXT_ADD_REQUEST": "Add new request",
   "TXT_IMPORT_REQUEST": "Import request data",
   "TXT_EXPORT_REQUEST": "Export request data",
-  "TXT_NO_REQUEST_SELECTED": "No requests selected"
+  "TXT_NO_REQUEST_SELECTED": "No requests selected",
+  "TXT_REFRESH_REQUEST_LIST": "Refresh request list"
 }
