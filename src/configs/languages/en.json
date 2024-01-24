@@ -51,5 +51,9 @@
   "TXT_NO_DATA": "No records found",
   "TXT_REQUEST": "Request",
   "TXT_ENVIRONMENT": "Environment",
-  "TXT_LOGOUT": "Logout"
+  "TXT_LOGOUT": "Logout",
+  "TXT_SEARCH": "Search",
+  "TXT_ADD_REQUEST": "Add new request",
+  "TXT_IMPORT_REQUEST": "Import request data",
+  "TXT_EXPORT_REQUEST": "Export request data"
 }

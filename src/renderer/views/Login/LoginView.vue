@@ -106,12 +106,10 @@ function handleFormValidation() {
               :placeholder="t('TXT_PASSWORD_PLACEHOLDER')"
               v-model="password"
             />
-            <span class="input-group-text p-0">
-              <button type="button" class="btn rounded-0" @click="handleToggleShowPassword">
-                <i class="bi bi-eye-slash" v-if="isShowPassword"></i>
-                <i class="bi bi-eye-fill" v-else></i>
-              </button>
-            </span>
+            <button class="btn btn-sm btn-outline-secondary" type="button" @click="handleToggleShowPassword">
+              <i class="bi bi-eye-slash" v-if="isShowPassword"></i>
+              <i class="bi bi-eye-fill" v-else></i>
+            </button>
           </div>
           <small class="text-danger" v-if="errorMessages.password">{{ t(errorMessages.password) }}</small>
         </div>

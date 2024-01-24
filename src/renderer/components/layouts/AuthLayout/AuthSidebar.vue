@@ -4,6 +4,7 @@ import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 import { PATH_REQUEST, PATH_ENVIRONMENT, PATH_LOGIN } from "@/configs/constants/path.const";
 import { LOCAL_STORAGE_KEYS } from "@/configs/constants/app.const";
+import AuthRequest from "./AuthRequest.vue";
 
 type LeftButtonType = {
   path: string;
@@ -46,9 +47,9 @@ function handleLogout() {
 <template>
   <div id="auth-sidebar">
     <div class="auth-sidebar-header">
-      <div>
+      <div class="d-flex align-items-center justify-content-start w-75">
         <i class="bi bi-person-circle"></i>
-        <span class="d-inline-block ms-2">{{ username }}</span>
+        <span class="d-inline-block ms-2 limit-1-line">{{ username }}</span>
       </div>
       <button class="btn btn-sm" :title="t('TXT_LOGOUT')" @click="handleLogout">
         <i class="bi bi-box-arrow-right"></i>
@@ -67,7 +68,9 @@ function handleLogout() {
           <span>{{ t(button.title) }}</span>
         </button>
       </div>
-      <div class="auth-sidebar-body-right"></div>
+      <div class="auth-sidebar-body-right">
+        <AuthRequest />
+      </div>
     </div>
   </div>
 </template>

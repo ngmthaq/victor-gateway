@@ -26,3 +26,13 @@ label {
 .cursor-pointer {
   cursor: pointer !important;
 }
+
+.form-control-no-box-shadow {
+  box-shadow: none !important;
+}
+
+.limit-1-line {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -145,12 +145,10 @@ watch(isCopied, (value) => {
               :placeholder="t('TXT_PASSWORD_PLACEHOLDER')"
               v-model="password"
             />
-            <span class="input-group-text p-0">
-              <button type="button" class="btn rounded-0" @click="handleToggleShowPassword">
-                <i class="bi bi-eye-slash" v-if="isShowPassword"></i>
-                <i class="bi bi-eye-fill" v-else></i>
-              </button>
-            </span>
+            <button class="btn btn-sm btn-outline-secondary" type="button" @click="handleToggleShowPassword">
+              <i class="bi bi-eye-slash" v-if="isShowPassword"></i>
+              <i class="bi bi-eye-fill" v-else></i>
+            </button>
           </div>
           <small class="text-danger" v-if="errorMessages.password">{{ t(errorMessages.password) }}</small>
         </div>
@@ -165,12 +163,14 @@ watch(isCopied, (value) => {
               :placeholder="t('TXT_PASSWORD_CONFIRMATION_LABEL')"
               v-model="passwordConfirmation"
             />
-            <span class="input-group-text p-0">
-              <button type="button" class="btn rounded-0" @click="handleToggleShowPasswordConfirmation">
-                <i class="bi bi-eye-slash" v-if="isShowPasswordConfirmation"></i>
-                <i class="bi bi-eye-fill" v-else></i>
-              </button>
-            </span>
+            <button
+              class="btn btn-sm btn-outline-secondary"
+              type="button"
+              @click="handleToggleShowPasswordConfirmation"
+            >
+              <i class="bi bi-eye-slash" v-if="isShowPasswordConfirmation"></i>
+              <i class="bi bi-eye-fill" v-else></i>
+            </button>
           </div>
           <small class="text-danger" v-if="errorMessages.passwordConfirmation">
             {{ t(errorMessages.passwordConfirmation) }}
@@ -180,12 +180,10 @@ watch(isCopied, (value) => {
           <label for="personal-key" class="form-label">{{ t("TXT_PERSONAL_KEY_LABEL") }}</label>
           <div class="input-group">
             <input disabled class="form-control" id="personal-key" maxlength="48" type="text" :value="personalKey" />
-            <span class="input-group-text p-0">
-              <button type="button" class="btn rounded-0" @click="handleCopyPersonalKey">
-                <i class="bi bi-clipboard-check text-success" v-if="isCopied"></i>
-                <i class="bi bi-copy" v-else></i>
-              </button>
-            </span>
+            <button class="btn btn-sm btn-outline-secondary" type="button" @click="handleCopyPersonalKey">
+              <i class="bi bi-clipboard-check" v-if="isCopied"></i>
+              <i class="bi bi-copy" v-else></i>
+            </button>
           </div>
           <small class="text-secondary">{{ t("TXT_COPY_PERSONAL_KEY_MSG") }}</small>
         </div>
