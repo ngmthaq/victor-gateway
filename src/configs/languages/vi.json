@@ -50,5 +50,6 @@
   "TXT_CONSOLE": "Bảng điều khiển",
   "TXT_NO_DATA": "Không có dữ liệu",
   "TXT_REQUEST": "Truy vấn",
-  "TXT_ENVIRONMENT": "Môi trường"
+  "TXT_ENVIRONMENT": "Môi trường",
+  "TXT_LOGOUT": "Đăng xuất"
 }

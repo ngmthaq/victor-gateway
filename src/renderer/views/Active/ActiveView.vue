@@ -5,6 +5,7 @@ import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { PATH_LOGIN } from "@/configs/constants/path.const";
 import { E2EE } from "@/renderer/plugins/encrypt.plugin";
+import { delay } from "@/renderer/plugins/common.plugin";
 import { useNotification } from "@/renderer/hooks/common/useNotification";
 import { useCircularLoading } from "@/renderer/hooks/common/useCircularLoading";
 import BaseLayout from "@/renderer/components/layouts/BaseLayout/BaseLayout.vue";
@@ -64,14 +65,15 @@ async function handleFinishSetup() {
       isInternet: isInternetMode.value,
     };
     loading.open();
+    await delay(3);
     await window.electron.db.query("SettingRepo", "insertSetting", payload);
     isOpenConfirmDialog.value = false;
     openAppNotification({ message: "TXT_ACTIVATE_SUCCESSFULLY", variant: "success" });
     router.replace(PATH_LOGIN.path);
-    loading.close();
   } catch (error) {
     console.error(error);
     openAppNotification({ message: "TXT_COMMON_ERROR", variant: "danger" });
+  } finally {
     loading.close();
   }
 }

@@ -2,8 +2,8 @@
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
-import { PATH_REQUEST, PATH_ENVIRONMENT } from "@/configs/constants/path.const";
-import { LOCAL_STORAGE_KEYS } from "../../../../configs/constants/app.const";
+import { PATH_REQUEST, PATH_ENVIRONMENT, PATH_LOGIN } from "@/configs/constants/path.const";
+import { LOCAL_STORAGE_KEYS } from "@/configs/constants/app.const";
 
 type LeftButtonType = {
   path: string;
@@ -36,13 +36,23 @@ const username = sessionStorage.getItem(LOCAL_STORAGE_KEYS.username);
 function handleChangePage(page: string) {
   router.push(page);
 }
+
+function handleLogout() {
+  window.sessionStorage.clear();
+  router.push(PATH_LOGIN.path);
+}
 </script>
 
 <template>
   <div id="auth-sidebar">
     <div class="auth-sidebar-header">
-      <i class="bi bi-person-circle"></i>
-      <span>{{ username }}</span>
+      <div>
+        <i class="bi bi-person-circle"></i>
+        <span class="d-inline-block ms-2">{{ username }}</span>
+      </div>
+      <button class="btn btn-sm" :title="t('TXT_LOGOUT')" @click="handleLogout">
+        <i class="bi bi-box-arrow-right"></i>
+      </button>
     </div>
     <div class="auth-sidebar-body">
       <div class="auth-sidebar-body-left">
@@ -73,7 +83,9 @@ function handleChangePage(page: string) {
       gap: 8px;
       display: flex;
       align-items: center;
+      justify-content: space-between;
       padding: 4px;
+      padding-left: 12px;
       border-bottom: 1px solid rgba($color: $gray-500, $alpha: 0.5);
       height: 34px;
       font-size: 14px;

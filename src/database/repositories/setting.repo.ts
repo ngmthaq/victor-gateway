@@ -18,9 +18,7 @@ export class SettingRepo extends BaseRepo {
       const statement = DB.prepare(sql, [configs.username, configs.password, configs.personalKey, configs.isInternet]);
       statement.run((error) => {
         if (error) reject(error);
-        setTimeout(() => {
-          resolve();
-        }, 3000);
+        resolve();
       });
     });
   }

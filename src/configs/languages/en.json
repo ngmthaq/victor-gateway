@@ -50,5 +50,6 @@
   "TXT_CONSOLE": "Console",
   "TXT_NO_DATA": "No records found",
   "TXT_REQUEST": "Request",
-  "TXT_ENVIRONMENT": "Environment"
+  "TXT_ENVIRONMENT": "Environment",
+  "TXT_LOGOUT": "Logout"
 }

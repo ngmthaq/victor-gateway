@@ -5,6 +5,7 @@ import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { PATH_REQUEST } from "@/configs/constants/path.const";
 import { LOCAL_STORAGE_KEYS } from "@/configs/constants/app.const";
+import { delay } from "@/renderer/plugins/common.plugin";
 import { useCircularLoading } from "@/renderer/hooks/common/useCircularLoading";
 import { useNotification } from "@/renderer/hooks/common/useNotification";
 import BaseLayout from "@/renderer/components/layouts/BaseLayout/BaseLayout.vue";
@@ -33,6 +34,7 @@ async function handleSubmit(event: Event) {
     event.preventDefault();
     if (handleFormValidation()) {
       loading.open();
+      await delay(3);
       const setting = await window.electron.db.query<Setting>("SettingRepo", "getSetting");
       if (setting.username === username.value && setting.password === btoa(password.value)) {
         window.sessionStorage.setItem(LOCAL_STORAGE_KEYS.username, username.value);
@@ -42,11 +44,11 @@ async function handleSubmit(event: Event) {
         errorMessages.value.username = "";
         errorMessages.value.password = "TXT_WRONG_USERNAME_PASSWORD";
       }
-      loading.close();
     }
   } catch (error) {
     console.error(error);
     openAppNotification({ message: "TXT_COMMON_ERROR", variant: "danger" });
+  } finally {
     loading.close();
   }
 }
