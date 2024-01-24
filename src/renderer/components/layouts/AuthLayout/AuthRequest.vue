@@ -4,11 +4,7 @@ import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
 
-const requests = ref<string[]>([
-  "Request 1",
-  "Request 2",
-  "Request 3",
-]);
+const requests = ref<string[]>(["Request 1", "Request 2", "Request 3"]);
 </script>
 
 <template>

@@ -197,24 +197,26 @@ export class E2EEGenerator {
    * @param {string} input
    * @param {string} masterKey
    * @param {string} personalKey
-   * @returns {string | null}
+   * @returns {Promise<string>}
    */
-  public encrypt(input: string, masterKey: string, personalKey: string = ""): string | null {
-    try {
-      const key = masterKey + personalKey;
-      if (!key) throw new Error("Key must not be empty");
-      if (key.match(this.keyRegex) === null)
-        throw new Error("Key must contain number and letter (a-z, A-Z) and must be more than 6 characters");
-      if (isNaN(parseInt(key[0]))) throw new Error("First character of key must be in number");
-      const k0 = encodeURI(input);
-      const k1 = btoa(k0);
-      const k2 = this.vigenereEncrypt(k1, key.match(this.vigenereKeyRegex).join(""));
-      const k3 = this.rowFenceEncrypt(k2, parseInt(key[0]));
-      return k3;
-    } catch (error) {
-      console.warn(error);
-      return null;
-    }
+  public encrypt(input: string, masterKey: string, personalKey: string = ""): Promise<string> {
+    return new Promise((resolve, reject) => {
+      try {
+        const key = masterKey + personalKey;
+        if (!key) throw new Error("Key must not be empty");
+        if (key.match(this.keyRegex) === null)
+          throw new Error("Key must contain number and letter (a-z, A-Z) and must be more than 6 characters");
+        if (isNaN(parseInt(key[0]))) throw new Error("First character of key must be in number");
+        const k0 = encodeURI(input);
+        const k1 = btoa(k0);
+        const k2 = this.vigenereEncrypt(k1, key.match(this.vigenereKeyRegex).join(""));
+        const k3 = this.rowFenceEncrypt(k2, parseInt(key[0]));
+        resolve(k3);
+      } catch (error) {
+        console.error(error);
+        reject(error);
+      }
+    });
   }
 
   /**
@@ -223,24 +225,26 @@ export class E2EEGenerator {
    * @param {string} input
    * @param {string} masterKey
    * @param {string} personalKey
-   * @returns {string | null}
+   * @returns {Promise<string>}
    */
-  public decrypt(input: string, masterKey: string, personalKey: string = ""): string | null {
-    try {
-      const key = masterKey + personalKey;
-      if (!key) throw new Error("Key must not be empty");
-      if (key.match(this.keyRegex) === null)
-        throw new Error("Key must contain number and letter (a-z, A-Z) and must be more than 6 characters");
-      if (isNaN(parseInt(key[0]))) throw new Error("First character of key must be in number");
-      const k0 = this.rowFenceDecrypt(input, parseInt(key[0]));
-      const k1 = this.vigenereDecrypt(k0, key.match(this.vigenereKeyRegex).join(""));
-      const k2 = atob(k1);
-      const k3 = decodeURI(k2);
-      return k3;
-    } catch (error) {
-      console.warn(error);
-      return null;
-    }
+  public decrypt(input: string, masterKey: string, personalKey: string = ""): Promise<string> {
+    return new Promise((resolve, reject) => {
+      try {
+        const key = masterKey + personalKey;
+        if (!key) throw new Error("Key must not be empty");
+        if (key.match(this.keyRegex) === null)
+          throw new Error("Key must contain number and letter (a-z, A-Z) and must be more than 6 characters");
+        if (isNaN(parseInt(key[0]))) throw new Error("First character of key must be in number");
+        const k0 = this.rowFenceDecrypt(input, parseInt(key[0]));
+        const k1 = this.vigenereDecrypt(k0, key.match(this.vigenereKeyRegex).join(""));
+        const k2 = atob(k1);
+        const k3 = decodeURI(k2);
+        resolve(k3);
+      } catch (error) {
+        console.error(error);
+        reject(error);
+      }
+    });
   }
 
   /**

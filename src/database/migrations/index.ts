@@ -2,6 +2,8 @@ import { app } from "electron";
 import { DB_VERSION, DB_HELPERS } from "../configs";
 import { VersionRepo } from "../repositories/version.repo";
 import { SettingRepo } from "../repositories/setting.repo";
+import { RequestRepo } from "../repositories/request.repo";
+import { ResponseRepo } from "../repositories/response.repo";
 
 export async function migrate() {
   try {
@@ -11,10 +13,14 @@ export async function migrate() {
     // Repositories
     const versionRepo = new VersionRepo();
     const settingRepo = new SettingRepo();
+    const requestRepo = new RequestRepo();
+    const responseRepo = new ResponseRepo();
 
     // Create table if not exist
     await versionRepo.Table.createTable();
     await settingRepo.Table.createTable();
+    await requestRepo.Table.createTable();
+    await responseRepo.Table.createTable();
 
     // Migration Logic
     const currentDatabaseVersion = await versionRepo.getVersion();
