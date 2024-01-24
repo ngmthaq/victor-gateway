@@ -1,7 +1,7 @@
-import { Setting } from "@/configs/types/database";
-import { BaseRepo } from "./base.repo";
-import { SettingTable } from "../tables/setting.table";
+import type { Setting } from "@/configs/types/database";
 import { DB } from "../configs";
+import { SettingTable } from "../tables/setting.table";
+import { BaseRepo } from "./base.repo";
 
 export class SettingRepo extends BaseRepo {
   public Table: SettingTable = new SettingTable();

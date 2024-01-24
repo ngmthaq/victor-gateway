@@ -1,5 +1,5 @@
-import Store from "electron-store";
 import type { ElectronRuntimeConfigType } from "@/configs/types/electron";
+import Store from "electron-store";
 
 /**
  * Electron localStorage

@@ -1,4 +1,4 @@
-import { DatabaseColumnType } from "@/configs/types/database";
+import type { DatabaseColumnType } from "@/configs/types/database";
 import { DB } from "@/database/configs";
 
 export abstract class BaseTable {

@@ -1,5 +1,5 @@
-import { ELECTRON_EVENTS } from "@/configs/constants/event.const";
 import { ipcRenderer } from "electron";
+import { ELECTRON_EVENTS } from "@/configs/constants/event.const";
 
 export const localStorage = {
   get: (key: string) => ipcRenderer.invoke(ELECTRON_EVENTS.getLocalStorage, key),

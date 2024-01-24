@@ -1,4 +1,4 @@
-import { DatabaseColumnType, VersionColumns } from "@/configs/types/database";
+import type { DatabaseColumnType, VersionColumns } from "@/configs/types/database";
 import { BaseTable } from "./base.table";
 
 export class VersionTable extends BaseTable {
