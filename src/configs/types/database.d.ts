@@ -17,6 +17,26 @@ export type Setting = {
   isInternet: boolean;
 };
 
+export type ResponseColumns =
+  | "uid"
+  | "requestUid"
+  | "masterKey"
+  | "data"
+  | "status"
+  | "statusText"
+  | "headers"
+  | "createdAt";
+export type Response = {
+  uid: string;
+  requestUid: string;
+  masterKey: string;
+  data: Record<string, string>;
+  status: number;
+  statusText: string;
+  headers: Record<string, string>;
+  createdAt: number;
+};
+
 export type RequestColumns =
   | "uid"
   | "masterKey"
@@ -42,23 +62,6 @@ export type Request = {
   createdAt: number;
   updatedAt: number;
 };
-
-export type ResponseColumns =
-  | "uid"
-  | "requestUid"
-  | "masterKey"
-  | "data"
-  | "status"
-  | "statusText"
-  | "headers"
-  | "createdAt";
-export type Response = {
-  uid: string;
-  requestUid: string;
-  masterKey: string;
-  data: Record<string, string>;
-  status: number;
-  statusText: string;
-  headers: Record<string, string>;
-  createdAt: number;
+export type RequestWithResponse = Request & {
+  response?: Response;
 };

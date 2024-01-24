@@ -22,13 +22,13 @@ const leftButtons = ref<LeftButtonType[]>([
     path: PATH_REQUEST.path,
     title: "TXT_REQUEST",
     icon: "bi bi-collection",
-    isActive: route.path === PATH_REQUEST.path,
+    isActive: route.path.startsWith(PATH_REQUEST.path),
   },
   {
     path: PATH_ENVIRONMENT.path,
     title: "TXT_ENVIRONMENT",
     icon: "bi bi-box",
-    isActive: route.path === PATH_ENVIRONMENT.path,
+    isActive: route.path.startsWith(PATH_ENVIRONMENT.path),
   },
 ]);
 

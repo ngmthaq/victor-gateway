@@ -36,3 +36,7 @@ label {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.user-select-none {
+  user-select: none !important;
+}

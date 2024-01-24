@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { API_HTTP_STATUS } from "@/configs/constants/api.const";
+import type { RequestWithResponse } from "@/configs/types/database";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
 
-const requests = ref<string[]>(["Request 1", "Request 2", "Request 3"]);
+const requests = ref<RequestWithResponse[]>([]);
 </script>
 
 <template>
@@ -29,10 +31,19 @@ const requests = ref<string[]>(["Request 1", "Request 2", "Request 3"]);
       <a
         v-for="(request, index) in requests"
         :key="index"
-        :title="request"
-        class="custom-group-item py-1 px-2 list-group-item list-group-item-action limit-1-line"
+        :title="request.name"
+        class="py-1 px-2 list-group-item list-group-item-action custom-group-item"
       >
-        {{ request }}
+        <span class="text-success" v-if="request.response && request.response.status === API_HTTP_STATUS.OK">
+          <i class="bi bi-check-circle"></i>
+        </span>
+        <span class="text-danger" v-else-if="request.response && request.response.status !== API_HTTP_STATUS.OK">
+          <i class="bi bi-exclamation-circle"></i>
+        </span>
+        <span class="text-primary" v-else>
+          <i class="bi bi-arrow-repeat"></i>
+        </span>
+        <span class="limit-1-line">{{ request.name }}</span>
       </a>
     </div>
     <div class="no-data" v-else>
@@ -45,6 +56,10 @@ const requests = ref<string[]>(["Request 1", "Request 2", "Request 3"]);
 .custom-group-item {
   font-size: 12px;
   user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
   cursor: pointer;
 }
 
