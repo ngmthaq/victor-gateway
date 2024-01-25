@@ -35,26 +35,10 @@ const request = ref<Request>({
 });
 
 const requestNavs = ref<RequestNavType[]>([
-  {
-    id: 1,
-    title: "Params",
-    i18n: "",
-  },
-  {
-    id: 2,
-    title: "FormData",
-    i18n: "",
-  },
-  {
-    id: 3,
-    title: "Headers",
-    i18n: "",
-  },
-  {
-    id: 4,
-    title: "",
-    i18n: "TXT_SETTING",
-  },
+  { id: 1, title: "Params", i18n: "" },
+  { id: 2, title: "FormData", i18n: "" },
+  { id: 3, title: "Headers", i18n: "" },
+  { id: 4, title: "", i18n: "TXT_SETTING" },
 ]);
 
 onBeforeMount(async () => {
