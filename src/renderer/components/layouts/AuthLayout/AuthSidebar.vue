@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
-import { PATH_REQUEST, PATH_ENVIRONMENT, PATH_LOGIN } from "@/configs/constants/path.const";
+import { PATH_REQUEST, PATH_ENVIRONMENT, PATH_LOGIN, PATH_BACKUP } from "@/configs/constants/path.const";
 import { LOCAL_STORAGE_KEYS } from "@/configs/constants/app.const";
 import AuthRequest from "./AuthRequest.vue";
 
@@ -29,6 +29,12 @@ const leftButtons = ref<LeftButtonType[]>([
     title: "TXT_ENVIRONMENT",
     icon: "bi bi-box",
     isActive: route.path.startsWith(PATH_ENVIRONMENT.path),
+  },
+  {
+    path: PATH_BACKUP.path,
+    title: "TXT_BACKUP_AND_RESTORE",
+    icon: "bi bi-database-fill-gear",
+    isActive: route.path.startsWith(PATH_BACKUP.path),
   },
 ]);
 
@@ -65,7 +71,7 @@ function handleLogout() {
           class="btn d-flex flex-column align-items-center justify-content-center"
         >
           <i :class="button.icon"></i>
-          <span>{{ t(button.title) }}</span>
+          <span style="white-space: pre-line">{{ t(button.title) }}</span>
         </button>
       </div>
       <div class="auth-sidebar-body-right h-100">

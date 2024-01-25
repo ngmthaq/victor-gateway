@@ -10,6 +10,7 @@ import LoginViewVue from "@/renderer/views/Login/LoginView.vue";
 import RequestViewVue from "@/renderer/views/Request/RequestView.vue";
 import RequestCreateViewVue from "@/renderer/views/Request/RequestCreateView.vue";
 import EnvironmentViewVue from "@/renderer/views/Environment/EnvironmentView.vue";
+import BackupViewVue from "@/renderer/views/Backup/BackupView.vue";
 
 export const PATH_ACTIVE: RouteRecordRaw = {
   path: "/active",
@@ -34,4 +35,9 @@ export const PATH_CREATE_REQUEST: RouteRecordRaw = {
 export const PATH_ENVIRONMENT: RouteRecordRaw = {
   path: "/environment",
   component: EnvironmentViewVue,
+};
+
+export const PATH_BACKUP: RouteRecordRaw = {
+  path: "/backup",
+  component: BackupViewVue,
 };

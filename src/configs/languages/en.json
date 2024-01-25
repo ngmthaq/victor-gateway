@@ -60,5 +60,6 @@
   "TXT_REFRESH_REQUEST_LIST": "Refresh request list",
   "TXT_REQUEST_NAME_PLACEHOLDER": "Enter request name",
   "TXT_SAVE": "Save",
-  "TXT_SAVE_AND_FETCH": "Save & Fetch"
+  "TXT_SAVE_AND_FETCH": "Save & Fetch",
+  "TXT_BACKUP_AND_RESTORE": "Backup \n Restore"
 }

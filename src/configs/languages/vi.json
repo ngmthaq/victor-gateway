@@ -60,5 +60,6 @@
   "TXT_REFRESH_REQUEST_LIST": "Làm mới danh sách truy vấn",
   "TXT_REQUEST_NAME_PLACEHOLDER": "Nhập tên truy vấn",
   "TXT_SAVE": "Lưu",
-  "TXT_SAVE_AND_FETCH": "Lưu & Thực hiện truy vấn"
+  "TXT_SAVE_AND_FETCH": "Lưu & Thực hiện truy vấn",
+  "TXT_BACKUP_AND_RESTORE": "Sao lưu \n Khôi phục"
 }

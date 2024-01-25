@@ -124,16 +124,16 @@ onBeforeMount(async () => {
       </div>
     </div>
     <div class="row">
-      <div class="col-12" v-show="route.query.tab === requestNavs[0].id.toString()">
+      <div class="col-12 py-2" v-show="route.query.tab === requestNavs[0].id.toString()">
         <RequestParamTableComponent />
       </div>
-      <div class="col-12" v-show="route.query.tab === requestNavs[1].id.toString()">
+      <div class="col-12 py-2" v-show="route.query.tab === requestNavs[1].id.toString()">
         <RequestFormDataTableComponent />
       </div>
-      <div class="col-12" v-show="route.query.tab === requestNavs[2].id.toString()">
+      <div class="col-12 py-2" v-show="route.query.tab === requestNavs[2].id.toString()">
         <RequestHeaderTableComponent />
       </div>
-      <div class="col-12" v-show="route.query.tab === requestNavs[3].id.toString()">
+      <div class="col-12 py-2" v-show="route.query.tab === requestNavs[3].id.toString()">
         <RequestSettingTableComponent />
       </div>
     </div>
