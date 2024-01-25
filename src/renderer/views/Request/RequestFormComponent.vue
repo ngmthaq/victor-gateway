@@ -7,6 +7,10 @@ import { PATH_LOGIN } from "@/configs/constants/path.const";
 import { generateUUID } from "@/renderer/plugins/str.plugin";
 import { E2EE } from "@/renderer/plugins/encrypt.plugin";
 import { useCircularLoading } from "@/renderer/hooks/common/useCircularLoading";
+import RequestParamTableComponent from "./RequestParamTableComponent.vue";
+import RequestFormDataTableComponent from "./RequestFormDataTableComponent.vue";
+import RequestHeaderTableComponent from "./RequestHeaderTableComponent.vue";
+import RequestSettingTableComponent from "./RequestSettingTableComponent.vue";
 
 type RequestNavType = {
   id: number;
@@ -117,6 +121,20 @@ onBeforeMount(async () => {
             </RouterLink>
           </li>
         </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12" v-show="route.query.tab === requestNavs[0].id.toString()">
+        <RequestParamTableComponent />
+      </div>
+      <div class="col-12" v-show="route.query.tab === requestNavs[1].id.toString()">
+        <RequestFormDataTableComponent />
+      </div>
+      <div class="col-12" v-show="route.query.tab === requestNavs[2].id.toString()">
+        <RequestHeaderTableComponent />
+      </div>
+      <div class="col-12" v-show="route.query.tab === requestNavs[3].id.toString()">
+        <RequestSettingTableComponent />
       </div>
     </div>
   </div>
