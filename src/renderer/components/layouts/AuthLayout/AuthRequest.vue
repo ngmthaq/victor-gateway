@@ -2,13 +2,14 @@
 import type { RequestCollections } from "@/configs/types/database";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { API_HTTP_STATUS } from "@/configs/constants/api.const";
 import { PATH_CREATE_REQUEST } from "@/configs/constants/path.const";
 import { convertMillisecondsToFormat } from "@/renderer/plugins/datetime.plugin";
 
 const { t } = useI18n();
 const router = useRouter();
+const route = useRoute();
 
 const requestCollections = ref<RequestCollections>([]);
 
@@ -25,7 +26,13 @@ function handleOpenCreateRequestPage() {
         class="form-control form-control-sm form-control-no-box-shadow"
         :placeholder="t('TXT_SEARCH')"
       />
-      <button class="btn btn-sm" type="button" :title="t('TXT_ADD_REQUEST')" @click="handleOpenCreateRequestPage">
+      <button
+        class="btn btn-sm"
+        type="button"
+        :title="t('TXT_ADD_REQUEST')"
+        :disabled="route.path === PATH_CREATE_REQUEST.path"
+        @click="handleOpenCreateRequestPage"
+      >
         <i class="bi bi-plus-lg"></i>
       </button>
       <button class="btn btn-sm" type="button" :title="t('TXT_IMPORT_REQUEST')">
@@ -123,5 +130,10 @@ function handleOpenCreateRequestPage() {
   &::-webkit-scrollbar-thumb:hover {
     background: $gray-400;
   }
+}
+
+.btn:disabled {
+  border-color: transparent;
+  opacity: 0.5;
 }
 </style>

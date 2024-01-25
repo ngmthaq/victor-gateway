@@ -61,5 +61,6 @@
   "TXT_REQUEST_NAME_PLACEHOLDER": "Enter request name",
   "TXT_SAVE": "Save",
   "TXT_SAVE_AND_FETCH": "Save & Fetch",
-  "TXT_BACKUP_AND_RESTORE": "Backup \n Restore"
+  "TXT_BACKUP_AND_RESTORE": "Backup \n Restore",
+  "TXT_CONFIRM_BEFORE_ROUTE_LEAVE": "Your data may be lost, are you sure you want to take this action?"
 }

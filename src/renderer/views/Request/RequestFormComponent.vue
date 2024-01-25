@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import type { Request, Setting } from "@/configs/types/database";
 import { ref, onBeforeMount } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import { useRouter, useRoute, onBeforeRouteLeave } from "vue-router";
 import { useI18n } from "vue-i18n";
+import lodash from "lodash";
 import { PATH_LOGIN } from "@/configs/constants/path.const";
 import { generateUUID } from "@/renderer/plugins/str.plugin";
 import { E2EE } from "@/renderer/plugins/encrypt.plugin";
+import { getCurrentMilliseconds } from "@/renderer/plugins/datetime.plugin";
 import { useCircularLoading } from "@/renderer/hooks/common/useCircularLoading";
+import ConfirmDialog from "@/renderer/components/common/ConfirmDialog.vue";
 import RequestParamTableComponent from "./RequestParamTableComponent.vue";
 import RequestFormDataTableComponent from "./RequestFormDataTableComponent.vue";
 import RequestHeaderTableComponent from "./RequestHeaderTableComponent.vue";
@@ -18,25 +21,37 @@ type RequestNavType = {
   i18n: string;
 };
 
+const props = defineProps<{
+  requestData?: Request;
+}>();
+
+const emits = defineEmits<{
+  (event: "save", request: Request): void;
+  (event: "fetch", request: Request): void;
+}>();
+
 const loading = useCircularLoading();
 const router = useRouter();
 const route = useRoute();
 const { t } = useI18n();
 
+const nextRoute = ref<string | null>(null);
 const setting = ref<Setting | null>(null);
 
-const request = ref<Request>({
-  uid: generateUUID(),
-  masterKey: E2EE.generateMasterKey(),
-  name: "",
-  url: "",
-  method: "GET",
-  headers: {},
-  data: {},
-  timeout: 0,
-  createdAt: 0,
-  updatedAt: 0,
+const originalRequest = ref<Request>({
+  uid: props.requestData?.uid || generateUUID(),
+  masterKey: props.requestData?.masterKey || E2EE.generateMasterKey(),
+  name: props.requestData?.name || "",
+  url: props.requestData?.url || "",
+  method: props.requestData?.method || "GET",
+  headers: props.requestData?.headers || {},
+  data: props.requestData?.data || {},
+  timeout: props.requestData?.timeout || 30000,
+  createdAt: props.requestData?.createdAt || 0,
+  updatedAt: props.requestData?.updatedAt || 0,
 });
+
+const request = ref<Request>(lodash.cloneDeep(originalRequest.value));
 
 const requestNavs = ref<RequestNavType[]>([
   { id: 1, title: "Params", i18n: "" },
@@ -44,6 +59,39 @@ const requestNavs = ref<RequestNavType[]>([
   { id: 3, title: "Headers", i18n: "" },
   { id: 4, title: "", i18n: "TXT_SETTING" },
 ]);
+
+function handleNextRoute() {
+  request.value = lodash.cloneDeep(originalRequest.value);
+  router.push(nextRoute.value);
+  nextRoute.value = null;
+}
+
+function handleStayRoute() {
+  nextRoute.value = null;
+}
+
+function handleUpdateTimestamp() {
+  request.value.createdAt = getCurrentMilliseconds();
+  request.value.updatedAt = getCurrentMilliseconds();
+}
+
+function handleSave() {
+  handleUpdateTimestamp();
+  emits("save", request.value);
+}
+
+function handleFetch() {
+  handleUpdateTimestamp();
+  emits("fetch", request.value);
+}
+
+onBeforeRouteLeave((to, from, next) => {
+  if (lodash.isEqual(originalRequest.value, request.value)) {
+    next();
+  } else {
+    nextRoute.value = to.path;
+  }
+});
 
 onBeforeMount(async () => {
   try {
@@ -91,7 +139,7 @@ onBeforeMount(async () => {
             placeholder="https://example.com.vn"
             v-model="request.url"
           />
-          <button class="btn btn-sm btn-primary save-button">{{ t("TXT_SAVE") }}</button>
+          <button class="btn btn-sm btn-primary save-button" @click="handleSave">{{ t("TXT_SAVE") }}</button>
           <button
             type="button"
             class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split"
@@ -101,7 +149,9 @@ onBeforeMount(async () => {
           />
           <ul class="dropdown-menu dropdown-menu-end p-1" v-if="setting && setting.isInternet">
             <li>
-              <button class="btn btn-sm btn-outline-secondary w-100">{{ t("TXT_SAVE_AND_FETCH") }}</button>
+              <button class="btn btn-sm btn-outline-secondary w-100" @click="handleFetch">
+                {{ t("TXT_SAVE_AND_FETCH") }}
+              </button>
             </li>
           </ul>
         </div>
@@ -137,6 +187,13 @@ onBeforeMount(async () => {
         <RequestSettingTableComponent />
       </div>
     </div>
+    <ConfirmDialog
+      id="confirm-before-leave-request-form"
+      :open="Boolean(nextRoute)"
+      :message="t('TXT_CONFIRM_BEFORE_ROUTE_LEAVE')"
+      @accept="handleNextRoute"
+      @deny="handleStayRoute"
+    />
   </div>
 </template>
 
