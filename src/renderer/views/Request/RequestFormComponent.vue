@@ -1,18 +1,26 @@
 <script setup lang="ts">
 import type { Request, Setting } from "@/configs/types/database";
 import { ref, onBeforeMount } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { PATH_LOGIN } from "@/configs/constants/path.const";
 import { generateUUID } from "@/renderer/plugins/str.plugin";
 import { E2EE } from "@/renderer/plugins/encrypt.plugin";
 import { useCircularLoading } from "@/renderer/hooks/common/useCircularLoading";
 
+type RequestNavType = {
+  id: number;
+  title: string;
+  i18n: string;
+};
+
 const loading = useCircularLoading();
 const router = useRouter();
+const route = useRoute();
 const { t } = useI18n();
 
 const setting = ref<Setting | null>(null);
+
 const request = ref<Request>({
   uid: generateUUID(),
   masterKey: E2EE.generateMasterKey(),
@@ -26,13 +34,32 @@ const request = ref<Request>({
   updatedAt: 0,
 });
 
-// const params = computed<Record<string, string>>(() => {
-//   const [, searchParams] = request.value.url.split("?");
-//   return convertSearchParamStringToObject(searchParams);
-// });
+const requestNavs = ref<RequestNavType[]>([
+  {
+    id: 1,
+    title: "Params",
+    i18n: "",
+  },
+  {
+    id: 2,
+    title: "FormData",
+    i18n: "",
+  },
+  {
+    id: 3,
+    title: "Headers",
+    i18n: "",
+  },
+  {
+    id: 4,
+    title: "",
+    i18n: "TXT_SETTING",
+  },
+]);
 
 onBeforeMount(async () => {
   try {
+    if (!route.query.tab) router.replace({ query: { tab: requestNavs.value[0].id } });
     loading.open();
     const accountSetting = await window.electron.db.query<Setting>("SettingRepo", "getSetting");
     setting.value = accountSetting;
@@ -95,17 +122,15 @@ onBeforeMount(async () => {
     <div class="row">
       <div class="col-12">
         <ul class="nav nav-underline">
-          <li class="nav-item">
-            <a class="nav-link custom-nav-link active">Params</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link custom-nav-link">FormData</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link custom-nav-link">Headers</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link custom-nav-link">{{ t("TXT_SETTING") }}</a>
+          <li class="nav-item" v-for="nav in requestNavs" :key="nav.id">
+            <RouterLink
+              replace
+              class="nav-link custom-nav-link"
+              :to="{ query: { tab: nav.id } }"
+              :class="{ active: route.query.tab === nav.id.toString() }"
+            >
+              {{ nav.title || t(nav.i18n) }}
+            </RouterLink>
           </li>
         </ul>
       </div>
@@ -145,6 +170,7 @@ onBeforeMount(async () => {
 .custom-nav-link {
   font-size: 12px;
   cursor: pointer;
+  font-weight: 400 !important;
 }
 
 .save-button {
