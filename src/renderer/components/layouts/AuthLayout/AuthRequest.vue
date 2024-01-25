@@ -2,23 +2,30 @@
 import type { RequestCollections } from "@/configs/types/database";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
+import { useRouter } from "vue-router";
 import { API_HTTP_STATUS } from "@/configs/constants/api.const";
+import { PATH_CREATE_REQUEST } from "@/configs/constants/path.const";
 import { convertMillisecondsToFormat } from "@/renderer/plugins/datetime.plugin";
 
 const { t } = useI18n();
+const router = useRouter();
 
 const requestCollections = ref<RequestCollections>([]);
+
+function handleOpenCreateRequestPage() {
+  router.push(PATH_CREATE_REQUEST.path);
+}
 </script>
 
 <template>
   <div class="requests h-100">
     <form class="d-flex align-items-center justify-content-center gap-1 custom-form">
       <input
-        type="text"
+        type="search"
         class="form-control form-control-sm form-control-no-box-shadow"
         :placeholder="t('TXT_SEARCH')"
       />
-      <button class="btn btn-sm" type="button" :title="t('TXT_ADD_REQUEST')">
+      <button class="btn btn-sm" type="button" :title="t('TXT_ADD_REQUEST')" @click="handleOpenCreateRequestPage">
         <i class="bi bi-plus-lg"></i>
       </button>
       <button class="btn btn-sm" type="button" :title="t('TXT_IMPORT_REQUEST')">
