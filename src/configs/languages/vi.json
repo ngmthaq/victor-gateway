@@ -57,5 +57,8 @@
   "TXT_IMPORT_REQUEST": "Nhập dữ liệu truy vấn",
   "TXT_EXPORT_REQUEST": "Xuất dữ liệu truy vấn",
   "TXT_NO_REQUEST_SELECTED": "Không có truy vấn nào được chọn",
-  "TXT_REFRESH_REQUEST_LIST": "Làm mới danh sách truy vấn"
+  "TXT_REFRESH_REQUEST_LIST": "Làm mới danh sách truy vấn",
+  "TXT_REQUEST_NAME_PLACEHOLDER": "Nhập tên truy vấn",
+  "TXT_SAVE": "Lưu",
+  "TXT_SAVE_AND_FETCH": "Lưu & Thực hiện truy vấn"
 }

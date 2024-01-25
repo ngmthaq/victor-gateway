@@ -57,5 +57,8 @@
   "TXT_IMPORT_REQUEST": "Import request data",
   "TXT_EXPORT_REQUEST": "Export request data",
   "TXT_NO_REQUEST_SELECTED": "No requests selected",
-  "TXT_REFRESH_REQUEST_LIST": "Refresh request list"
+  "TXT_REFRESH_REQUEST_LIST": "Refresh request list",
+  "TXT_REQUEST_NAME_PLACEHOLDER": "Enter request name",
+  "TXT_SAVE": "Save",
+  "TXT_SAVE_AND_FETCH": "Save & Fetch"
 }
