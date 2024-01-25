@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import type { Request, Setting } from "@/configs/types/database";
 import { ref, onBeforeMount } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
-import { Setting } from "@/configs/types/database";
 import { PATH_LOGIN } from "@/configs/constants/path.const";
+import { generateUUID } from "@/renderer/plugins/str.plugin";
+import { E2EE } from "@/renderer/plugins/encrypt.plugin";
 import { useCircularLoading } from "@/renderer/hooks/common/useCircularLoading";
 
 const loading = useCircularLoading();
@@ -11,6 +13,23 @@ const router = useRouter();
 const { t } = useI18n();
 
 const setting = ref<Setting | null>(null);
+const request = ref<Request>({
+  uid: generateUUID(),
+  masterKey: E2EE.generateMasterKey(),
+  name: "",
+  url: "",
+  method: "GET",
+  headers: {},
+  data: {},
+  timeout: 0,
+  createdAt: 0,
+  updatedAt: 0,
+});
+
+// const params = computed<Record<string, string>>(() => {
+//   const [, searchParams] = request.value.url.split("?");
+//   return convertSearchParamStringToObject(searchParams);
+// });
 
 onBeforeMount(async () => {
   try {
@@ -38,19 +57,25 @@ onBeforeMount(async () => {
             class="form-control form-control-sm custom-request-name"
             maxlength="32"
             :placeholder="t('TXT_REQUEST_NAME_PLACEHOLDER')"
+            v-model="request.name"
           />
         </div>
       </div>
       <div class="col-12">
         <div class="input-group input-group-sm">
-          <select class="form-select form-select-sm custom-selection">
+          <select class="form-select form-select-sm custom-selection" v-model="request.method">
             <option value="GET">GET</option>
             <option value="POST">POST</option>
             <option value="PUT">PUT</option>
             <option value="PATCH">PATCH</option>
             <option value="DELETE">DELETE</option>
           </select>
-          <input type="text" class="form-control form-control-sm" placeholder="https://example.com.vn" />
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            placeholder="https://example.com.vn"
+            v-model="request.url"
+          />
           <button class="btn btn-sm btn-primary save-button">{{ t("TXT_SAVE") }}</button>
           <button
             type="button"

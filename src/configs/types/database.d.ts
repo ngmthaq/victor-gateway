@@ -44,7 +44,6 @@ export type RequestColumns =
   | "url"
   | "method"
   | "headers"
-  | "params"
   | "data"
   | "timeout"
   | "createdAt"
@@ -56,7 +55,6 @@ export type Request = {
   url: string;
   method: string;
   headers: Record<string, string>;
-  params: Record<string, string>;
   data: Record<string, string>;
   timeout: number;
   createdAt: number;

@@ -41,12 +41,6 @@ export class RequestTable extends BaseTable {
       attributes: "",
     },
 
-    params: {
-      name: "params",
-      type: "TEXT",
-      attributes: "",
-    },
-
     data: {
       name: "data",
       type: "TEXT",
