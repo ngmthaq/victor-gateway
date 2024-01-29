@@ -62,5 +62,10 @@
   "TXT_SAVE": "Save",
   "TXT_SAVE_AND_FETCH": "Save & Fetch",
   "TXT_BACKUP_AND_RESTORE": "Backup \n Restore",
-  "TXT_CONFIRM_BEFORE_ROUTE_LEAVE": "Your data may be lost, are you sure you want to take this action?"
+  "TXT_CONFIRM_BEFORE_ROUTE_LEAVE": "Your data may be lost, are you sure you want to take this action?",
+  "TXT_REQUEST_PARAM_KEY": "Key",
+  "TXT_REQUEST_PARAM_VALUE": "Value",
+  "TXT_ACTIONS": "Actions",
+  "TXT_ADD_NEW_ROW": "Add new row",
+  "TXT_DELETE": "Delete"
 }

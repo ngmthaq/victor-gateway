@@ -4,7 +4,7 @@
  * @param length
  * @returns string
  */
-export function randomStr(length: number) {
+export function randomStr(length: number): string {
   let result = "";
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   const charactersLength = characters.length;
@@ -36,7 +36,7 @@ export function isJsonString(string: any): boolean {
  *
  * @returns string
  */
-export function generateUUID() {
+export function generateUUID(): string {
   // Timestamp
   let d = new Date().getTime();
   // Time in microseconds since page-load or 0 if unsupported
@@ -57,10 +57,48 @@ export function generateUUID() {
   });
 }
 
-export function convertSearchParamStringToObject(urlSearchParams: string) {
+/**
+ * Convert search params string to object
+ *
+ * @param urlSearchParams
+ * @returns
+ */
+export function convertSearchParamStringToObject(urlSearchParams: string): Record<string, string> {
   return Object.fromEntries(new URLSearchParams(urlSearchParams).entries());
 }
 
-export function convertSearchParamObjectToString(urlSearchParams: Record<string, string>) {
+/**
+ * Convert search params string to array
+ *
+ * @param urlSearchParams
+ * @returns
+ */
+export function convertSearchParamStringToArray(urlSearchParams: string): Array<{ key: string; value: string }> {
+  const params = convertSearchParamStringToObject(urlSearchParams);
+  return Object.entries(params).map(([key, value]) => ({ key, value }));
+}
+
+/**
+ * Convert search param object to string
+ *
+ * @param urlSearchParams
+ * @returns
+ */
+export function convertSearchParamObjectToString(urlSearchParams: Record<string, string>): string {
   return new URLSearchParams(urlSearchParams).toString();
+}
+
+/**
+ * Convert search param array to string
+ *
+ * @param urlSearchParams
+ * @returns
+ */
+export function convertSearchParamArrayToString(urlSearchParams: Array<{ key: string; value: string }>): string {
+  return new URLSearchParams(
+    urlSearchParams.reduce((paramObject: any, currentParam) => {
+      paramObject[currentParam.key] = currentParam.value;
+      return paramObject;
+    }, {}),
+  ).toString();
 }

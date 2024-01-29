@@ -5,7 +5,7 @@ import { useRouter, useRoute, onBeforeRouteLeave } from "vue-router";
 import { useI18n } from "vue-i18n";
 import lodash from "lodash";
 import { PATH_LOGIN } from "@/configs/constants/path.const";
-import { generateUUID } from "@/renderer/plugins/str.plugin";
+import { generateUUID, convertSearchParamStringToArray } from "@/renderer/plugins/str.plugin";
 import { E2EE } from "@/renderer/plugins/encrypt.plugin";
 import { getCurrentMilliseconds } from "@/renderer/plugins/datetime.plugin";
 import { useCircularLoading } from "@/renderer/hooks/common/useCircularLoading";
@@ -14,6 +14,7 @@ import RequestParamTableComponent from "./RequestParamTableComponent.vue";
 import RequestFormDataTableComponent from "./RequestFormDataTableComponent.vue";
 import RequestHeaderTableComponent from "./RequestHeaderTableComponent.vue";
 import RequestSettingTableComponent from "./RequestSettingTableComponent.vue";
+import { convertSearchParamArrayToString } from "../../plugins/str.plugin";
 
 type RequestNavType = {
   id: number;
@@ -83,6 +84,13 @@ function handleSave() {
 function handleFetch() {
   handleUpdateTimestamp();
   emits("fetch", request.value);
+}
+
+function handleAddParams(param: { key: string; value: string }) {
+  const [url, searchParams] = request.value.url.split("?");
+  const params = convertSearchParamStringToArray(searchParams);
+  params.push(param);
+  request.value.url = url + "?" + convertSearchParamArrayToString(params);
 }
 
 onBeforeRouteLeave((to, from, next) => {
@@ -175,7 +183,7 @@ onBeforeMount(async () => {
     </div>
     <div class="row">
       <div class="col-12 py-2" v-show="route.query.tab === requestNavs[0].id.toString()">
-        <RequestParamTableComponent />
+        <RequestParamTableComponent :url="request.url" @add="handleAddParams" />
       </div>
       <div class="col-12 py-2" v-show="route.query.tab === requestNavs[1].id.toString()">
         <RequestFormDataTableComponent />

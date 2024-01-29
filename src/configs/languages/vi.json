@@ -62,5 +62,10 @@
   "TXT_SAVE": "Lưu",
   "TXT_SAVE_AND_FETCH": "Lưu & Thực hiện truy vấn",
   "TXT_BACKUP_AND_RESTORE": "Sao lưu \n Khôi phục",
-  "TXT_CONFIRM_BEFORE_ROUTE_LEAVE": "Dữ liệu của bạn có thể mất, bạn có chắc chắn muốn thực hiện hành động này?"
+  "TXT_CONFIRM_BEFORE_ROUTE_LEAVE": "Dữ liệu của bạn có thể mất, bạn có chắc chắn muốn thực hiện hành động này?",
+  "TXT_REQUEST_PARAM_KEY": "Chỉ mục",
+  "TXT_REQUEST_PARAM_VALUE": "Giá trị",
+  "TXT_ACTIONS": "Hành động",
+  "TXT_ADD_NEW_ROW": "Thêm dòng mới",
+  "TXT_DELETE": "Xoá"
 }
