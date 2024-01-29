@@ -7,8 +7,8 @@ const props = defineProps<AppTableType<unknown, unknown, unknown>>();
 
 const emits = defineEmits<{
   (event: "addRow"): void;
-  (event: "change", row: unknown, index: number): void;
-  (event: "clickAction", key: string, row: unknown, index: number): void;
+  (event: "change", key: string, value: string, index: number): void;
+  (event: "clickAction", key: string, index: number): void;
 }>();
 
 const { t } = useI18n();
@@ -26,12 +26,14 @@ function handleAddRow() {
   emits("addRow");
 }
 
-function handleClickAction(key: string, row: unknown, index: number) {
-  emits("clickAction", key, row, index);
+function handleClickAction(key: string, index: number) {
+  emits("clickAction", key, index);
 }
 
-function handleChange(row: unknown, index: number) {
-  emits("change", row, index);
+function handleChange(e: Event, index: number) {
+  const key = (e.target as HTMLInputElement).name;
+  const value = (e.target as HTMLInputElement).value;
+  emits("change", key, value, index);
 }
 </script>
 
@@ -62,9 +64,10 @@ function handleChange(row: unknown, index: number) {
           <input
             type="text"
             class="normalize-input"
+            :name="(header as any).key"
             :value="(row as any)[(header as any).key]"
             :disabled="Boolean(props.disable)"
-            @input="(e) => handleChange({ ...(row as any), [(header as any).key]: (e.target as any).value }, rIndex)"
+            @input="(e) => handleChange(e, rIndex)"
           />
         </td>
         <td style="text-align: center" scope="col" v-if="isHasActions">
@@ -75,7 +78,7 @@ function handleChange(row: unknown, index: number) {
               :key="index"
               :disabled="Boolean(props.disable)"
               :title="action.title || t(action.i18n)"
-              @click="() => handleClickAction(action.key as any, row, index)"
+              @click="() => handleClickAction(action.key as any, rIndex)"
             >
               <i :class="`${action.icon}`"></i>
             </button>
@@ -111,13 +114,13 @@ td {
 
 .normalize-input {
   background-color: transparent;
-  transition: all 0.1s linear;
   border: none;
   outline: none;
   width: 100%;
   height: 100%;
   font-size: 12px;
   padding: 2px 8px;
+  border-radius: 2px;
 }
 
 .btn-table-footer {

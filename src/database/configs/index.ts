@@ -1,7 +1,7 @@
 import path from "node:path";
+import fs from "node:fs";
 import { verbose } from "sqlite3";
 import { name } from "~/package.json";
-import tables from "../tables/_tables";
 
 export const DB_VERSION = 1;
 
@@ -44,20 +44,9 @@ export const DB_HELPERS = {
 
   drop: async function (): Promise<void> {
     return new Promise((resolve, reject) => {
-      DB.exec("PRAGMA foreign_keys = OFF", (error) => {
+      fs.unlink(DB_PATH, (error) => {
         if (error) reject(error);
-        Promise.all(Object.values(tables).map((Table) => new Table().dropTable()))
-          .then(() => {
-            DB.exec("PRAGMA foreign_keys = ON", (error) => {
-              if (error) reject(error);
-              resolve();
-            });
-          })
-          .catch((error1: any) => {
-            DB.exec("PRAGMA foreign_keys = ON", (error2) => {
-              reject({ error1, error2 });
-            });
-          });
+        resolve();
       });
     });
   },

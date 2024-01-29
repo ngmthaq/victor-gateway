@@ -1,35 +1,26 @@
 import { app } from "electron";
 import { DB_VERSION, DB_HELPERS } from "../configs";
-import { VersionRepo } from "../repositories/version.repo";
-import { SettingRepo } from "../repositories/setting.repo";
-import { RequestRepo } from "../repositories/request.repo";
-import { ResponseRepo } from "../repositories/response.repo";
+import Repositories from "../repositories/all.repo";
 
 export async function migrate() {
   try {
     // Begin Transaction
     await DB_HELPERS.begin();
 
-    // Repositories
-    const versionRepo = new VersionRepo();
-    const settingRepo = new SettingRepo();
-    const requestRepo = new RequestRepo();
-    const responseRepo = new ResponseRepo();
-
     // Create table if not exist
-    await versionRepo.Table.createTable();
-    await settingRepo.Table.createTable();
-    await requestRepo.Table.createTable();
-    await responseRepo.Table.createTable();
+    await Repositories.VersionRepo.Table.createTable();
+    await Repositories.SettingRepo.Table.createTable();
+    await Repositories.RequestRepo.Table.createTable();
+    await Repositories.ResponseRepo.Table.createTable();
 
     // Migration Logic
-    const currentDatabaseVersion = await versionRepo.getVersion();
+    const currentDatabaseVersion = await Repositories.VersionRepo.getVersion();
     if (currentDatabaseVersion === undefined) {
       // Setup for new device
-      await versionRepo.insertVersion(DB_VERSION);
+      await Repositories.VersionRepo.insertVersion(DB_VERSION);
     } else {
       // Setup for each new version
-      await versionRepo.updateVersion(DB_VERSION);
+      await Repositories.VersionRepo.updateVersion(DB_VERSION);
     }
 
     // Commit Transaction

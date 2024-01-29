@@ -1,6 +1,6 @@
 import { BrowserWindow, ipcMain } from "electron";
+import repositories from "@/database/repositories/all.repo";
 import { ELECTRON_EVENTS } from "@/configs/constants/event.const";
-import repositories from "@/database/repositories/_repositories";
 import { runtimeConfigs } from "./runtime.service";
 
 /**

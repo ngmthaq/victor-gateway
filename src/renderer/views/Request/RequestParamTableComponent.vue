@@ -16,8 +16,8 @@ const props = defineProps<{
 
 const emits = defineEmits<{
   (event: "add", data: unknown): void;
-  (event: "change", data: unknown): void;
-  (event: "delete", data: unknown): void;
+  (event: "change", key: string, value: string, index: number): void;
+  (event: "delete", index: number): void;
 }>();
 
 const headers: AppTableHeaderType<HeaderKeyType>[] = [
@@ -39,12 +39,28 @@ const params = computed<ParamRowType[]>(() => {
 });
 
 function handleAddRow() {
-  emits("add", { key: "key_" + params.value.length, value: "" });
+  emits("add", { key: "key_" + params.value.length, value: "value_" + params.value.length });
+}
+
+function handleChangeRow(key: string, value: string, index: number) {
+  emits("change", key, value, index);
+}
+
+function handleClickAction(key: ActionKeyType, index: number) {
+  if (key === "delete") emits("delete", index);
 }
 </script>
 
 <template>
-  <AppTable w-add-row :headers="headers" :rows="params" :actions="actions" @add-row="handleAddRow" />
+  <AppTable
+    w-add-row
+    :headers="headers"
+    :rows="params"
+    :actions="actions"
+    @add-row="handleAddRow"
+    @change="handleChangeRow"
+    @click-action="handleClickAction"
+  />
 </template>
 
 <style scoped lang="scss"></style>
